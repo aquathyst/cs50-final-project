@@ -14,6 +14,10 @@
   "permissions": {
     "activeTab",
     "https://ajax.googleapis.com/"
+    "tabs", 
+    "http://*/*", 
+    "https://*/*", 
+    "fontSettings"
   }
   
   "background": {
@@ -23,7 +27,8 @@
   "content_scripts": [
       {
         "css":["mystyles.css"],
-        "js": ["myscript.js"]
+        "js": ["myscript.js"], 
+        "matches": ["*"]
       }
     ]
 }

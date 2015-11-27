@@ -1,3 +1,8 @@
+/*
+  AlphaText
+  Stylesheet for popup.html
+*/
+
 body{
   overflow:hidden;
   margin:0 auto;
@@ -7,7 +12,7 @@ body{
   font-family:"Roboto",Helvetica,Arial,sans-serif;
   font-size:100%;
   width:600px;
-  height:300px;
+  height:200px;
 }
 
 /* Texts */
@@ -25,37 +30,46 @@ h1{
 /* General styles */
 #buttons{
   margin:0 auto;
-  height:200px;
+  height:150px;
   width:500px;
   color:#FFFFFF;
   display:inline;
+  overflow-y:auto;
 }
-#buttons>div{
-  margin:2%;
+#buttons td>div{
   display:flex;
   align-items:center;
   justify-content:center;
+  float:left;
+  border:white solid;
+  border-width:1px 0px 1px 0px;
+  width:100%;
+}
+table,tr{
+  height:100%;
+}
+td{
+  height:100%;
+  width:25%;
+  margin:0;
+  padding:0;
+  border:0px;
 }
 #buttons .big{
   height:100%;
-  width:25%;
 }
 #buttons .mid{
   height:50%;
-  width:25%;
 }
 #buttons .small{
-  height:40%;
-  width:12.5%;
+  height:19.5%;
 }
 #buttons .smaller{
-  height:25%;
-  width:25%;
+  height:26%;
 }
 
 /* Button contents */
 #buttons img{
-  margin:0 auto;
   width:80px;
   display:block;
 }
@@ -64,6 +78,9 @@ h1{
 }
 #buttons p{
   display:block;
+}
+#profilecol img,#profilecol p{
+  float:left;
 }
 
 /* Each button */
@@ -75,6 +92,9 @@ h1{
 }
 #savepage{
   background-color:#F39372;
+}
+#unsavepage{
+  background-color:#D37352;
 }
 #defaultprofile,#profile1,#profile2,#profile3{
   background-color:#F9CF1F;
@@ -91,8 +111,8 @@ h1{
   background-color:#DFAC00;
 }
 .sectionhead{
-  height:20%;
-  width:25%;
+  height:22%;
+  width:100%;
 }
 .sectionhead p{
   font-size:120%;

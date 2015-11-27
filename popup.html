@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>AlphaText--Quick Control Panel</title>
@@ -11,53 +11,65 @@
     <!--Button array-->
     <div id="buttons">
       <!--Main buttons-->
-      <div class="big" id="onoff"><div class="contents"><img src="images/onoff.png"/><p> </p></div></div>
-      <div class="mid" id="options"><div class="contents"><img src="images/options.png"/><p>Options</p></div></div>
-      <div class="mid" id="savepage"><div class="contents"><img src="images/save.png"/><p> </p></div></div>
+      <table><tr>
+        
+        <td>
+          <div class="big" id="onoff"><div class="contents"><img src="images/onoff.png"/><p> </p></div></div>
+        </td>
 
-      <!--Profiles-->
-      <div class="sectionhead" id="profhead"><p>Profiles</p></div>
-      <div class="small" id="defaultprofile"><div class="contents"><img src="images/profile.png" class="profim"/><p>Default</p></div></div>
-      <div class="small" id="profile1"><div class="contents"><img src="images/profile.png" class="profim"/><p>Profile 1</p></div></div>
-      <div class="small" id="profile2"><div class="contents"><img src="images/profile.png" class="profim"/><p>Profile 2</p></div></div>
-      <div class="small" id="profile3"><div class="contents"><img src="images/profile.png" class="profim"/><p>Profile 3</p></div></div>
+        <td>
+          <div class="mid" id="options"><div class="contents"><img src="images/options.png"/><p>Options</p></div></div>
+          <div class="mid" id="savepage"><div class="contents"><img src="images/save.png"/><p> </p></div></div>
+        </td>
 
-      <!--Quick styles-->
-      <div class="sectionhead" id="qshead"><p>Quick Styles</p></div>
-      <div class="smaller quickstyles"><div class="contents">
-        Font Size: 
-        <select id="fontsize">
-          <option value="14px">14</option>
-          <option value="14px">16</option>
-          <option value="14px">18</option>
-          <option value="14px">20</option>
-          <option value="14px">24</option>
-          <option value="14px">28</option>
-        </select>
-      </div></div>
-      <div class="smaller quickstyles"><div class="contents">
-        Font Style:
-        <select id="fontstyle">
-          <option value="14px">14</option>
-          <option value="14px">16</option>
-          <option value="14px">18</option>
-          <option value="14px">20</option>
-          <option value="14px">24</option>
-          <option value="14px">28</option>
-        </select>
-      </div></div>
-      <div class="smaller quickstyles"><div class="contents">
-        Line Height:
-        <select id="lineheight"> 
-          <option value="14px">14</option>
-          <option value="14px">16</option>
-          <option value="14px">18</option>
-          <option value="14px">20</option>
-          <option value="14px">24</option>
-          <option value="14px">28</option>
-        </select>
-      </div></div>
-    </div>
+        <!--Profiles-->
+        <td id="profilecol">
+          <div class="sectionhead" id="profhead"><p>Profiles</p></div>
+          <div class="small" id="profile1"><div class="contents"><img src="images/profile.png" class="profim"/><p>Profile 1</p></div></div>
+          <div class="small" id="profile2"><div class="contents"><img src="images/profile.png" class="profim"/><p>Profile 2</p></div></div>
+          <div class="small" id="profile3"><div class="contents"><img src="images/profile.png" class="profim"/><p>Profile 3</p></div></div>
+          <div class="small" id="defaultprofile"><div class="contents"><img src="images/profile.png" class="profim"/><p>Default</p></div></div>
+        </td>
+
+        <!--Quick styles-->
+        <td>
+          <div class="sectionhead" id="qshead"><p>Quick Styles</p></div>
+          <div class="smaller quickstyles"><div class="contents">
+            Font Size: 
+            <select id="fontsize">
+              <option value="14px">14</option>
+              <option value="14px">16</option>
+              <option value="14px">18</option>
+              <option value="14px">20</option>
+              <option value="14px">24</option>
+              <option value="14px">28</option>
+            </select>
+          </div></div>
+          <div class="smaller quickstyles"><div class="contents">
+            Font Style: 
+            <select id="fontstyle">
+              <option value="14px">14</option>
+              <option value="14px">16</option>
+              <option value="14px">18</option>
+              <option value="14px">20</option>
+              <option value="14px">24</option>
+              <option value="14px">28</option>
+            </select>
+          </div></div>
+          <div class="smaller quickstyles"><div class="contents">
+            Line Height: 
+            <select id="lineheight"> 
+              <option value="14px">14</option>
+              <option value="14px">16</option>
+              <option value="14px">18</option>
+              <option value="14px">20</option>
+              <option value="14px">24</option>
+              <option value="14px">28</option>
+            </select>
+          </div></div>
+        </div>
+      </tr></table>
+    </td>
 
     <!-- Status text -->
     <p id="status"></p>

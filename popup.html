@@ -1,18 +1,18 @@
 <!doctype html>
 <html>
   <head>
-    <title>Set Page Font Popup</title>
+    <title>AlphaText—Quick Control Panel</title>
     <style>
-    body {
-      overflow: hidden;
-      margin: 0px;
-      padding: 0px;
-      background: white;
-    }
+      body {
+        overflow: hidden;
+        margin:0px;
+        padding:0px;
+        background: white;
+      }
 
-    div:first-child {
-      margin-top: 0px;
-    }
+      div:first-child {
+        margin-top: 0px;
+      }
       body{
         font-family:"Roboto",Arial,sans-serif;
         font-size:100%;
@@ -69,55 +69,37 @@
         color:#AA2222;
         text-align:center;
       }
-    </style>
-    <style>
-    div {
-      cursor: pointer;
-      text-align: center;
-      padding: 1px 3px;
-      font-family: sans-serif;
-      font-size: 1.0em;
-      width: 100px;
-      margin-top: 1px;
-      background: #cccccc;
-    }
-    div:hover {
-      background: #aaaaaa;
-    }
-    #red {
-      border: 1px solid red;
-      color: red;
-    }
-    #blue {
-      border: 1px solid blue;
-      color: blue;
-    }
-    #green {
-      border: 1px solid green;
-      color: green;
-    }
+      </style>
+      <style>
+      div {
+        cursor: pointer;
+        text-align: center;
+        padding: 1px 3px;
+        font-family: sans-serif;
+        font-size: 1.0em;
+        width: 100px;
+        margin-top: 1px;
+        background: #cccccc;
+      }
+      div:hover {
+        background: #aaaaaa;
+      }
+      #red {
+        border: 1px solid red;
+        color: red;
+      }
+      #blue {
+        border: 1px solid blue;
+        color: blue;
+      }
+      #green {
+        border: 1px solid green;
+        color: green;
+      }
     </style>
     <script src="popup.js"></script>
   </head>
   <body>
-  <select id="font size">
-    <option value="14px">14</option>
-    <option value="14px">16</option>
-    <option value="14px">18</option>
-    <option value="14px">20</option>
-    <option value="14px">24</option>
-    <option value="14px">28</option>
-  </select>
-  <!--
-    <div id="14px">14</div>
-    <div id="16px">16</div>
-    <div id="18px">18</div>
-    <div id="20px">20</div>
-    <div id="24px">24</div>
-    <div id="28px">28</div>
-  -->  
-    dropdown menu and then button to submit 
-
     <h1>Alpha Text Control Panel</h1>
     <!--button array-->
     <div id="buttons">
@@ -125,7 +107,7 @@
       <button class="big" id="onoff"><img src="images/onoff.png"/><p> </p></button>
       <button class="big" if="options"><img src="images/options.png"/><p>Options</p></button>
 
-      <!--profiles-->
+      <!--Profiles-->
       <div id="profiles">Profiles</div>
       <button class="small" if="defaultprofile"><img src="images/profile.png"/><p>Default</p></button>
       <button class="small" if="profile1"><img src="images/profile.png"/><p>#1</p></button>
@@ -134,6 +116,25 @@
 
       <button class="big" id="savepage"><img src="images/save.png"/><p> </p></button>
 
+      <!--Quick styles-->
+      <select id="font size">
+        <option value="14px">14</option>
+        <option value="14px">16</option>
+        <option value="14px">18</option>
+        <option value="14px">20</option>
+        <option value="14px">24</option>
+        <option value="14px">28</option>
+      </select>
+      <!--
+        <div id="14px">14</div>
+        <div id="16px">16</div>
+        <div id="18px">18</div>
+        <div id="20px">20</div>
+        <div id="24px">24</div>
+        <div id="28px">28</div>
+      -->  
+      dropdown menu and then button to submit 
+     
     </div>
     <p id="status"></p>
   </body>

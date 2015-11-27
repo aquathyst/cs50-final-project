@@ -9,6 +9,7 @@
     "default_icon": "icon.png",
     "default_popup": "popup.html",
     "default_title": "AlphaText"
+<<<<<<< HEAD
   }, 
   
   "permissions": [
@@ -20,3 +21,25 @@
     "fontSettings"
   ]
 }
+=======
+  },
+  
+  "background": {
+    "scripts": ["eventPage.js"],
+    "persistent": false
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["http://www.google.com/*"],
+      "css": ["mystyles.css"],
+      "js": ["jquery.js", "myscript.js"]
+    }
+  ],
+  
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
+>>>>>>> 506ae7afa51925710d43aadae871e6ac5504ddb0

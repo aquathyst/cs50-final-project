@@ -12,7 +12,7 @@ function click(e) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var fontsize = document.getElementById("font size");
+  var fontsize = document.getElementById("fontsize");
   var size = fontsize.length;
   for (var i = 0; i < size; i++) {
     fontsize.options[i].addEventListener('click', click);

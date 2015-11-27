@@ -6,14 +6,15 @@
 function click(e) {
 
   chrome.tabs.executeScript(null,
-      {code:"document.body.style.fontSize = '" + e.target.id + "'"});
+      {code:"document.body.style.fontSize = '" + e.target.value + "'"});
   window.close();
 
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var divs = document.querySelectorAll('div');
-  for (var i = 0; i < divs.length; i++) {
-    divs[i].addEventListener('click', click);
+  var fontsize = document.getElementById("font size");
+  var size = fontsize.length;
+  for (var i = 0; i < size; i++) {
+    fontsize.options[i].addEventListener('click', click);
   }
 });

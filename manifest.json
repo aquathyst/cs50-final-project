@@ -11,6 +11,19 @@
     "default_title": "AlphaText"
   }, 
   
+  "background": {
+    "scripts": ["eventPage.js"],
+    "persistent": false
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["http://www.google.com/*"],
+      "css": ["mystyles.css"],
+      "js": ["jquery.js", "myscript.js"]
+    }
+  ],
+  
   "permissions": [
     "activeTab",
     "https://ajax.googleapis.com/",
@@ -20,4 +33,3 @@
     "fontSettings"
   ]
 }
-

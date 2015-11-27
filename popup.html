@@ -8,16 +8,66 @@
   <head>
     <title>Alpha Text</title>
     <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
+      body{
+        font-family:"Roboto",Arial,sans-serif;
+        font-size:100%;
       }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
+      h1{
+        font-size:120%;
+        color:#AAAAAA;
+        text-align:center;
+      }
+      #buttons{
+        margin:0 auto;
+      }
+      #buttons a{
+        color:#FFFFFF;
+        margin:2%;
+        display:;
+      }
+      #buttons .big{
+        height:100%;
+        width:25%;
+      }
+      #buttons .small{
+        height:40%;
+        width:12.5%;
+      }
+      #onoff{
+        background-color:;
+      }
+      #options{
+        background-color:;
+      }
+      #profiles{
+        height:20%;
+        width:25%;
+        background-color:#AAAAAA;
+        color:#222222;
+        text-align:center;
+        margin:2%;
+        display:;
+
+      }
+      #defaultprofile{
+        background-color:;
+      }
+      #profile1{
+        background-color:;
+      }
+      #profile2{
+        background-color:;
+      }
+      #profile3{
+        background-color:;
+      }
+      #savepage{
+        background-color:;
+      }
+      #status{
+        font-size:50%;
+        color:#AA2222;
+        text-align:center;
       }
     </style>
 
@@ -30,8 +80,24 @@
     <script src="popup.js"></script>
   </head>
   <body>
-    <div id="status"></div>
-    <img id="image-result" hidden>
+    <h1>Alpha Text Control Panel</h1>
+    <!--button array-->
+    <div id="buttons">
+
+      <a class="big" id="onoff"></a>
+      <a class="big" if="options">Options</a>
+
+      <!--profiles-->
+      <div id="profiles">Profiles</div>
+      <a class="small" if="defaultprofile">Default</a>
+      <a class="small" if="profile1">#1</a>
+      <a class="small" if="profile2">#1</a>
+      <a class="small" if="profile3">#1</a>
+
+      <a class="big" id="savepage"></a>
+
+    </div>
+    <p id="status"></p>
   </body>
 </html>
 

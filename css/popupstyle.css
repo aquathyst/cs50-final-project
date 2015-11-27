@@ -44,6 +44,12 @@ h1{
   border:white solid;
   border-width:1px 0px 1px 0px;
   width:100%;
+  -o-transition:background-color 0.1s linear;
+  -moz-transition:background-color 0.1s linear;
+  -khtml-transition:background-color 0.1s linear;
+  -webkit-transition:background-color 0.1s linear;
+  -ms-transition:background-color 0.1s linear;
+  transition:background-color 0.1s linear;
 }
 table,tr{
   height:100%;
@@ -84,23 +90,47 @@ td{
 }
 
 /* Each button */
-#onoff{
+#on{
   background-color:#D5B47D;
+}
+#on:hover{
+  background-color:#AAAAAA;
+}
+#off{
+  background-color:#D5B47D;
+}
+#off:hover{
+  background-color:#AAAAAA;
 }
 #options{
   background-color:#999999;
 }
+#options:hover{
+  background-color:#AAAAAA;
+}
 #savepage{
   background-color:#F39372;
+}
+#savepage:hover{
+  background-color:#AAAAAA;
 }
 #unsavepage{
   background-color:#D37352;
 }
+#unsavepage:hover{
+  background-color:#AAAAAA;
+}
 #defaultprofile,#profile1,#profile2,#profile3{
   background-color:#F9CF1F;
 }
+#defaultprofile:hover,#profile1:hover,#profile2:hover,#profile3:hover{
+  background-color:#AAAAAA;
+}
 .quickstyles{
   background-color:#FFCC00;
+}
+.quickstyles:hover{
+  background-color:#AAAAAA;
 }
 
 /* Button section heads */

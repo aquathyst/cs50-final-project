@@ -3,60 +3,66 @@
   <head>
     <title>AlphaText—Quick Control Panel</title>
     <style>
-      body {
-        overflow: hidden;
+      /* General */
+      body{
+        overflow:hidden;
         margin:0px;
         padding:0px;
-        background: white;
-      }
-
-      div:first-child {
-        margin-top: 0px;
-      }
-      body{
-        font-family:"Roboto",Arial,sans-serif;
+        background:white;
+        text-align:center;
+        font-family:"Roboto",Helvetica,Arial,sans-serif;
         font-size:100%;
       }
+      div:first-child{
+        margin-top:0px;
+      }
+      
+      /* Texts */
       h1{
         font-size:120%;
         color:#AAAAAA;
-        text-align:center;
+        font-weight:normal;
       }
+      #status{
+        font-size:50%;
+        color:#AA2222;
+      }
+      
+      /* Buttons */
+      /* General styles */
       #buttons{
         margin:0 auto;
-      }
-      #buttons button{
+        height:200px;
+        width:500px;
         color:#FFFFFF;
+      }
+      #buttons div{
         margin:2%;
         display:inline-block;
       }
       #buttons .big{
         height:100%;
-        width:25%;
+        width:20%;
       }
       #buttons .small{
         height:40%;
-        width:12.5%;
+        width:10%;
       }
-      button img{
+      #buttons .smaller{
+        height:25%;
+        width:20%;
+      }
+      #buttons img{
         margin:0 auto;
+        width:80%;
       }
-      button p{
-        text-align:center;
-      }
+
+      /* Each button */
       #onoff{
         background-color:#A5994D;
       }
       #options{
         background-color:#999999;
-      }
-      #profiles{
-        height:20%;
-        width:25%;
-        background-color:#AAAAAA;
-        color:#222222;
-        text-align:center;
-        margin:2%;
       }
       #defaultprofile,#profile1,#profile2,#profile3{
         background-color:#F9CF1F;
@@ -64,13 +70,27 @@
       #savepage{
         background-color:#F39372;
       }
-      #status{
-        font-size:50%;
-        color:#AA2222;
-        text-align:center;
+      #quickstyles{
+        background-color:#FFCC00;
       }
-      </style>
-      <style>
+
+      /* Button section heads */
+      #profhead{
+        height:20%;
+        width:20%;
+        background-color:#AAAAAA;
+        color:#222222;
+      }
+      #qshead{
+        height:20%;
+        width:20%;
+        background-color:#AAAAAA;
+        color:#222222;
+      }
+
+
+    </style>
+    <style>
       div {
         cursor: pointer;
         text-align: center;
@@ -100,41 +120,54 @@
     <script src="popup.js"></script>
   </head>
   <body>
-    <h1>Alpha Text Control Panel</h1>
-    <!--button array-->
+    <h1>AlphaText Control Panel</h1>
+    
+    <!--Button array-->
     <div id="buttons">
-
-      <button class="big" id="onoff"><img src="images/onoff.png"/><p> </p></button>
-      <button class="big" if="options"><img src="images/options.png"/><p>Options</p></button>
+      <!--Main buttons-->
+      <div class="big" id="onoff"><img src="images/onoff.png"/><p> </p></div>
+      <div class="big" id="options"><img src="images/options.png"/><p>Options</p></div>
+      <div class="big" id="savepage"><img src="images/save.png"/><p> </p></div>
 
       <!--Profiles-->
-      <div id="profiles">Profiles</div>
-      <button class="small" if="defaultprofile"><img src="images/profile.png"/><p>Default</p></button>
-      <button class="small" if="profile1"><img src="images/profile.png"/><p>#1</p></button>
-      <button class="small" if="profile2"><img src="images/profile.png"/><p>#2</p></button>
-      <button class="small" if="profile3"><img src="images/profile.png"/><p>#3</p></button>
-
-      <button class="big" id="savepage"><img src="images/save.png"/><p> </p></button>
+      <div id="profhead">Profiles</div>
+      <div class="small" id="defaultprofile"><img src="images/profile.png"/><p>Default</p></div>
+      <div class="small" id="profile1"><img src="images/profile.png"/><p>Profile 1</p></div>
+      <div class="small" id="profile2"><img src="images/profile.png"/><p>Profile 2</p></div>
+      <div class="small" id="profile3"><img src="images/profile.png"/><p>Profile 3</p></div>
 
       <!--Quick styles-->
-      <select id="font size">
-        <option value="14px">14</option>
-        <option value="14px">16</option>
-        <option value="14px">18</option>
-        <option value="14px">20</option>
-        <option value="14px">24</option>
-        <option value="14px">28</option>
-      </select>
-      <!--
-        <div id="14px">14</div>
-        <div id="16px">16</div>
-        <div id="18px">18</div>
-        <div id="20px">20</div>
-        <div id="24px">24</div>
-        <div id="28px">28</div>
-      -->  
-      dropdown menu and then button to submit 
-     
+      <div id="qshead">Quick Styles</div>
+      <div class="smaller">
+        <select id="fontsize">
+          <option value="14px">14</option>
+          <option value="14px">16</option>
+          <option value="14px">18</option>
+          <option value="14px">20</option>
+          <option value="14px">24</option>
+          <option value="14px">28</option>
+        </select>
+      </div>
+      <div class="smaller">
+        <select id="fontstyle">
+          <option value="14px">14</option>
+          <option value="14px">16</option>
+          <option value="14px">18</option>
+          <option value="14px">20</option>
+          <option value="14px">24</option>
+          <option value="14px">28</option>
+        </select>
+      </div>
+      <div class="smaller">
+        <select id="lineheight">
+          <option value="14px">14</option>
+          <option value="14px">16</option>
+          <option value="14px">18</option>
+          <option value="14px">20</option>
+          <option value="14px">24</option>
+          <option value="14px">28</option>
+        </select>
+      </div>
     </div>
     <p id="status"></p>
   </body>

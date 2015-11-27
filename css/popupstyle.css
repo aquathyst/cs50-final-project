@@ -30,8 +30,11 @@ h1{
   color:#FFFFFF;
   display:inline;
 }
-#buttons div{
+#buttons>div{
   margin:2%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 #buttons .big{
   height:100%;
@@ -53,13 +56,14 @@ h1{
 /* Button contents */
 #buttons img{
   margin:0 auto;
-  width:60%;
+  width:80px;
   display:block;
-  vertical-align:middle;
+}
+#buttons .profim{
+  width:50px;
 }
 #buttons p{
   display:block;
-  vertical-align:middle;
 }
 
 /* Each button */
@@ -89,8 +93,8 @@ h1{
 .sectionhead{
   height:20%;
   width:25%;
-  line-height:20%;
 }
 .sectionhead p{
-  font-size:150%;
+  font-size:120%;
+  font-weight:bold;
 }

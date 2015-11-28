@@ -1,8 +1,3 @@
-// Copyright (c) 2012 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-
 function click(e) {
 
   chrome.tabs.executeScript(null,
@@ -18,3 +13,38 @@ document.addEventListener('DOMContentLoaded', function () {
     fontsize.options[i].addEventListener('click', click);
   }
 });
+
+
+
+
+
+
+
+var onoff='off';
+
+/* Swtich on or off */
+function switch(){
+	if(onoff==='on'){
+		onoff='off';
+	}
+	else{
+		onoff='on';
+
+	}
+}
+
+/* Adapt and inject a style profile */
+function adoptp(profile){
+	switch(profile){
+		case 'd':
+		;
+		case 1;
+		;
+		case 2:
+		;
+		case 3:
+		;
+		default:
+		;
+	}
+}

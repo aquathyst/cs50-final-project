@@ -9,7 +9,7 @@ body{
   padding:0px;
   background:white;
   text-align:center;
-  font-family:"Roboto",Helvetica,Arial,sans-serif;
+  font-family:'Roboto',Helvetica,Arial,sans-serif;
   font-size:100%;
   width:600px;
   height:200px;
@@ -17,7 +17,7 @@ body{
 
 /* Texts */
 h1{
-  font-size:120%;
+  font-size:140%;
   color:#AAAAAA;
   font-weight:normal;
 }
@@ -44,12 +44,12 @@ h1{
   border:white solid;
   border-width:1px 0px 1px 0px;
   width:100%;
-  -o-transition:background-color 0.1s linear;
-  -moz-transition:background-color 0.1s linear;
-  -khtml-transition:background-color 0.1s linear;
-  -webkit-transition:background-color 0.1s linear;
-  -ms-transition:background-color 0.1s linear;
-  transition:background-color 0.1s linear;
+  -o-transition:background-color 0.2s linear;
+  -moz-transition:background-color 0.2s linear;
+  -khtml-transition:background-color 0.2s linear;
+  -webkit-transition:background-color 0.2s linear;
+  -ms-transition:background-color 0.2s linear;
+  transition:background-color 0.2s linear;
 }
 table,tr{
   height:100%;
@@ -67,10 +67,10 @@ td{
 #buttons .mid{
   height:50%;
 }
-#buttons .small{
+#buttons .smaller{
   height:19.5%;
 }
-#buttons .smaller{
+#buttons .small{
   height:26%;
 }
 
@@ -78,6 +78,7 @@ td{
 #buttons img{
   width:80px;
   display:block;
+  margin:0 auto;
 }
 #buttons .profim{
   width:50px;
@@ -91,46 +92,70 @@ td{
 
 /* Each button */
 #on{
-  background-color:#D5B47D;
+  background-color:#7AB947;
 }
 #on:hover{
-  background-color:#AAAAAA;
+  background-color:#8EC462;
 }
+#on:active{
+  background-color:#5D8D35;
+}
+
 #off{
-  background-color:#D5B47D;
+  background-color:#CC6F6C;
 }
 #off:hover{
-  background-color:#AAAAAA;
+  background-color:#D48784;
 }
+#off:active{
+  background-color:#BD4743;
+}
+
 #options{
-  background-color:#999999;
+  background-color:#868686;
 }
 #options:hover{
-  background-color:#AAAAAA;
+  background-color:#9C9C9C;
 }
+#options:active{
+  background-color:#5A5A5A;
+}
+
 #savepage{
-  background-color:#F39372;
+  background-color:#64B5D8;
 }
 #savepage:hover{
-  background-color:#AAAAAA;
+  background-color:#81C3DF;
 }
+#savepage:active{
+  background-color:#2D8BB3;
+}
+
 #unsavepage{
-  background-color:#D37352;
+  background-color:#3051A4;
 }
 #unsavepage:hover{
-  background-color:#AAAAAA;
+  background-color:#4B6DCB;
 }
+#unsavepage:active{
+  background-color:#253C7D;
+}
+
 #defaultprofile,#profile1,#profile2,#profile3{
-  background-color:#F9CF1F;
+  background-color:#DBB743;
 }
 #defaultprofile:hover,#profile1:hover,#profile2:hover,#profile3:hover{
-  background-color:#AAAAAA;
+  background-color:#E2C568;
 }
+#defaultprofile:active,#profile1:active,#profile2:active,#profile3:active{
+  background-color:#B89624;
+}
+
 .quickstyles{
-  background-color:#FFCC00;
+  background-color:#73BDAC;
 }
 .quickstyles:hover{
-  background-color:#AAAAAA;
+  background-color:#5ECEBB;
 }
 
 /* Button section heads */
@@ -138,7 +163,7 @@ td{
   background-color:#D9AF0F;
 }
 #qshead{
-  background-color:#DFAC00;
+  background-color:#40625B;
 }
 .sectionhead{
   height:22%;

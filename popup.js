@@ -22,7 +22,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+var url=chrome.tabs.Tab.url;
+var domain=false;
 
+function getdomain(url){
+	if(url.indexOf('/'))
+	if(url.indexOf("http://")!==-1)
+	{
+		domain=
+	}
+	else if(url.indexOf("https://")!==-1)
+	{
+		domain=
+	}
+	else
+	{
+		return false;
+	}
+}
+
+chrome.tabs.query(url,)
 
 /* On-off switch scripts */
 var onoff=false;
@@ -32,7 +51,7 @@ function checkonoff(){
 	{
 		document.getElementById('on').id='off';
 	}
-	
+
 }
 
 function showonofftext(){

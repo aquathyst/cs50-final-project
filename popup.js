@@ -12,7 +12,7 @@ function click(e) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var fontsize = document.getElementById("fontsize");
+  var fontsize = $("#fontsize");
   var size = fontsize.length;
   for (var i = 0; i < size; i++) {
     fontsize.options[i].addEventListener('click', click);
@@ -21,19 +21,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
+/* Get url and domain of website */
 var url=chrome.tabs.Tab.url;
 var domain=false;
 
 function getdomain(url){
-	if(url.indexOf('/'))
-	if(url.indexOf("http://")!==-1)
+	var end=url.indexOf('/',8)
+	if(end!==-1)
 	{
-		domain=
-	}
-	else if(url.indexOf("https://")!==-1)
-	{
-		domain=
+		if(url.indexOf("http://")!==-1)
+		{
+			domain=url.substring(7,end);
+		}
+		else if(url.indexOf("https://")!==-1)
+		{
+			domain=url.substring(8,end);
+		}
+		else
+		{
+			return false;
+		}
 	}
 	else
 	{
@@ -41,7 +48,7 @@ function getdomain(url){
 	}
 }
 
-chrome.tabs.query(url,)
+
 
 /* On-off switch scripts */
 var onoff=false;
@@ -49,7 +56,7 @@ var onoff=false;
 function checkonoff(){
 	if(onoff===true)
 	{
-		document.getElementById('on').id='off';
+		$("#on").id='off';
 	}
 
 }
@@ -57,36 +64,37 @@ function checkonoff(){
 function showonofftext(){
 	if(onoff===true)
 	{
-		document.getElementById('onofftext').innerHTML='Switch off';
+		$("#onofftext").innerHTML='Switch off';
 	}
 	else
 	{
-		document.getElementById('onofftext').innerHTML='Switch on';
+		$("#onofftext").innerHTML='Switch on';
 	}
 }
 
 function switch(){
 	if(onoff===true){
 		onoff=false;
-		
-		document.getElementById('on').id='off';
+		$("#on").id='off';
 
 	}
 	else{
 		onoff=true;
-		document.getElementById('off').id='on';
+		$("#off").id='on';
+		
 	}
 }
 
 /* Saving domain preferences scripts */
 var saved=false;
 
+
 function checksave(domain){
 	
 	if(saved===true)
 	{
-		document.getElementById('savepage').onclick="unsave()";
-		document.getElementById('savepage').id='unsavepage';
+		$("#savepage").onclick="unsave()";
+		$("#savepage").id='unsavepage';
 		onoff=true;
 	}
 }
@@ -94,23 +102,23 @@ function checksave(domain){
 function showsavetext(){
 	if(saved===true)
 	{
-		document.getElementById('savetext').innerHTML='Don\'t always use on domain';
+		$("#savetext").innerHTML='Don\'t always use on domain';
 	}
 	else
 	{
-		document.getElementById('savetext').innerHTML='Always use on domain';
+		$("#savetext").innerHTML='Always use on domain';
 	}
 }
 
 function save(domain,profile){
-	document.getElementById('savepage').onclick="unsave(domain)";
-	document.getElementById('savepage').id='unsavepage';
+	$("#savepage").onclick="unsave(domain)";
+	$("#savepage").id='unsavepage';
 
 }
 
 function unsave(domain){
-	document.getElementById('unsavepage').onclick="save(domain,profile)";
-	document.getElementById('unsavepage').id='savepage';
+	$("#unsavepage").onclick="save(domain,profile)";
+	$("#unsavepage").id='savepage';
 
 }
 

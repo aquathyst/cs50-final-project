@@ -24,11 +24,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+/* On-off switch scripts */
+var onoff=false;
 
-var onoff='false';
+function checkonoff(){
+	if(onoff===true)
+	{
+		document.getElementById('on').id='off';
+	}
+	
+}
 
 function showonofftext(){
-	if(onoff='true')
+	if(onoff===true)
 	{
 		document.getElementById('onofftext').innerHTML='Switch off';
 	}
@@ -38,18 +46,53 @@ function showonofftext(){
 	}
 }
 
-/* Swtich on or off */
 function switch(){
-	if(onoff==='on'){
-		onoff='off';
+	if(onoff===true){
+		onoff=false;
 		
 		document.getElementById('on').id='off';
 
 	}
 	else{
-		onoff='on';
+		onoff=true;
 		document.getElementById('off').id='on';
 	}
+}
+
+/* Saving domain preferences scripts */
+var saved=false;
+
+function checksave(domain){
+	
+	if(saved===true)
+	{
+		document.getElementById('savepage').onclick="unsave()";
+		document.getElementById('savepage').id='unsavepage';
+		onoff=true;
+	}
+}
+
+function showsavetext(){
+	if(saved===true)
+	{
+		document.getElementById('savetext').innerHTML='Don\'t always use on domain';
+	}
+	else
+	{
+		document.getElementById('savetext').innerHTML='Always use on domain';
+	}
+}
+
+function save(domain,profile){
+	document.getElementById('savepage').onclick="unsave(domain)";
+	document.getElementById('savepage').id='unsavepage';
+
+}
+
+function unsave(domain){
+	document.getElementById('unsavepage').onclick="save(domain,profile)";
+	document.getElementById('unsavepage').id='savepage';
+
 }
 
 /* Adapt and inject a style profile */
@@ -66,38 +109,4 @@ function adoptp(profile){
 		default:
 		;
 	}
-}
-
-var saved=false;
-
-function checksave(domain){
-	
-	if(saved=true)
-	{
-		document.getElementById('savepage').onclick='unsave()';
-		document.getElementById('savepage').id='unsavepage';
-	}
-}
-
-function showsavetext(){
-	if(saved='true')
-	{
-		document.getElementById('savetext').innerHTML='Don\'t always use on domain';
-	}
-	else
-	{
-		document.getElementById('savetext').innerHTML='Always use on domain';
-	}
-}
-
-function save(domain,profile){
-	document.getElementById('savepage').onclick='unsave()';
-	document.getElementById('savepage').id='unsavepage';
-
-}
-
-function unsave(domain){
-	document.getElementById('unsaveoage').onclick='save()';
-	document.getElementById('unsavepage').id='savepage';
-	
 }

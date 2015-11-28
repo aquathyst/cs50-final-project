@@ -30,6 +30,7 @@
     "tabs", 
     "http://*/*", 
     "https://*/*", 
-    "fontSettings"
+    "fontSettings",
+    "storage"
   ]
 }

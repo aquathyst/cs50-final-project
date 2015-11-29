@@ -15,7 +15,7 @@ function click(e) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var button = document.querySelectorAll('button');
+  var button = document.querySelectorAll("#setbutton");
   for (var i = 0, len = button.length; i < len; i++) {
     button[i].addEventListener('click', click);
   }

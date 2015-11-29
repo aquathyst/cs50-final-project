@@ -1,13 +1,21 @@
+/*
+  AlphaText
+  JavaScript for popup.html
+*/
+
+
 function click(e) {
-
+  var fsize = document.getElementById("font_size").value;
+  var ffamily = document.getElementById("font_family").value;
   chrome.tabs.executeScript(null,
-      {code:"document.body.style.fontSize = '" + e.target.value + "'"});
+    {code:"document.body.style.fontSize = '" + fsize + "'"});
+  chrome.tabs.executeScript(null,
+    {code:"document.body.style.fontFamily = '" + ffamily + "'"});
   window.close();
-
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var fontsize = document.getElementById("fontsize");
+  var fontsize = $("#fontsize");
   var size = fontsize.length;
   for (var i = 0; i < size; i++) {
     fontsize.options[i].addEventListener('click', click);
@@ -16,21 +24,105 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+/* Get url and domain of website */
+var url=chrome.tabs.Tab.url;
+var domain=false;
+
+function getdomain(url){
+	var end=url.indexOf('/',8)
+	if(end!==-1)
+	{
+		if(url.indexOf("http://")!==-1)
+		{
+			domain=url.substring(7,end);
+		}
+		else if(url.indexOf("https://")!==-1)
+		{
+			domain=url.substring(8,end);
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
 
 
 
+/* On-off switch scripts */
+var onoff=false;
 
-var onoff='off';
+function checkonoff(){
+	if(onoff===true)
+	{
+		$("#on").id='off';
+	}
 
-/* Swtich on or off */
+}
+
+function showonofftext(){
+	if(onoff===true)
+	{
+		$("#onofftext").innerHTML='Switch off';
+	}
+	else
+	{
+		$("#onofftext").innerHTML='Switch on';
+	}
+}
+
 function switch(){
-	if(onoff==='on'){
-		onoff='off';
+	if(onoff===true){
+		onoff=false;
+		$("#on").id='off';
+
 	}
 	else{
-		onoff='on';
-
+		onoff=true;
+		$("#off").id='on';
+		
 	}
+}
+
+/* Saving domain preferences scripts */
+var saved=false;
+
+
+function checksave(domain){
+	
+	if(saved===true)
+	{
+		$("#savepage").onclick="unsave()";
+		$("#savepage").id='unsavepage';
+		onoff=true;
+	}
+}
+
+function showsavetext(){
+	if(saved===true)
+	{
+		$("#savetext").innerHTML='Don\'t always use on domain';
+	}
+	else
+	{
+		$("#savetext").innerHTML='Always use on domain';
+	}
+}
+
+function save(domain,profile){
+	$("#savepage").onclick="unsave(domain)";
+	$("#savepage").id='unsavepage';
+
+}
+
+function unsave(domain){
+	$("#unsavepage").onclick="save(domain,profile)";
+	$("#unsavepage").id='savepage';
+
 }
 
 /* Adapt and inject a style profile */

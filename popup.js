@@ -15,7 +15,7 @@ function click(e) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var button = document.querySelectorAll("#setbutton");
+  var button = document.querySelectorAll("#setstyle");
   for (var i = 0, len = button.length; i < len; i++) {
     button[i].addEventListener('click', click);
   }

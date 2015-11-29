@@ -35,8 +35,8 @@
         <!--Quick styles-->
         <td>
           <div class="sectionhead" id="qshead"><p>Quick Styles</p></div>
-          <div class="small quickstyles"><div class="contents">
-            Font Size: 
+          <div class="smaller quickstyles"><div class="contents">
+            Font Size:
             <div id="fontsize">
               <select id="font_size">
                 <option value="14px">14</option>
@@ -48,34 +48,40 @@
               </select>
             </div>
           </div></div>
-          <div class="small quickstyles"><div class="contents">
-            Font Style: 
+          <div class="smaller quickstyles"><div class="contents">
+            Font Style:
             <div id="fontfamily">
               <select id="font_family">
                 <option value="Arial">Arial</option>
                 <option value="Verdana">Verdana</option>
                 <option value="Helvetica">Helvetica</option>
-                <option value="Cursive">Cursive</option>
                 <option value="Tahoma">Tahoma</option>
+                <option value="Georgia">Georgia</option>
                 <option value="Times New Roman">Times New Roman</option>
+                <option value="Cursive">Cursive</option>
               </select>
             </div>
           </div></div>
-          <div class="small quickstyles"><div class="contents">
-            Line Height: 
-            <select id="lineheight"> 
-              <option value="14px">14</option>
-              <option value="14px">16</option>
-              <option value="14px">18</option>
-              <option value="14px">20</option>
-              <option value="14px">24</option>
-              <option value="14px">28</option>
-            </select>
+          <div class="smaller quickstyles"><div class="contents">
+            Line Height:
+            <div id="lineheight">
+              <select id="line_height">
+                <option value="14px">14</option>
+                <option value="14px">16</option>
+                <option value="14px">18</option>
+                <option value="14px">20</option>
+                <option value="14px">24</option>
+                <option value="14px">28</option>
+              </select>
+            </div>
           </div></div>
-        </div>
-        <button id="setbutton" type="button" align="center">Set</button>
+          <div class="smaller" id="setstyle" id="setbutton" type="button"><div class="contents">
+            Set
+          </div></div>
+        </td>
       </tr></table>
-    </td>
+    
+      <!--<button id="setbutton" type="button" align="center">Set</button>-->
 
     <!-- Status text -->
     <p id="status">

@@ -19,7 +19,7 @@
   "content_scripts":[
     {
       "matches":["http://*/*","https://*/*"],
-      "css":["mystyles.css"],
+      "css":["/css/popupstyle.css"],
       "js":["3rdparty/jquery-2.1.4.min.js","contentscript.js"]
     }
   ],

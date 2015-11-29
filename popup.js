@@ -72,7 +72,7 @@ function showonofftext(){
 	}
 }
 
-function switch(){
+function toggle(){
 	if(onoff===true){
 		onoff=false;
 		$("#on").id='off';

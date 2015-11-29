@@ -1,0 +1,6 @@
+/*
+  AlphaText
+  JavaScript for event page
+*/
+
+

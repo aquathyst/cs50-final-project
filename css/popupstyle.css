@@ -25,6 +25,9 @@ h1{
   font-size:50%;
   color:#AAAAAA;
 }
+::selection{
+  background-color:Transparent;
+}
 
 /* Buttons */
 /* General styles */

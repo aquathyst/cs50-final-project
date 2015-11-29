@@ -153,9 +153,26 @@ td{
 
 .quickstyles{
   background-color:#73BDAC;
+  font-style:italic;
 }
 .quickstyles:hover{
   background-color:#5ECEBB;
+}
+
+#setstyle{
+  background-color:#53AD9C;
+  font-size:105%;
+  font-weight:bold;
+}
+#setstyle:hover{
+  background-color:#63CDAC;
+}
+#setstyle:active{
+  background-color:#239D7C;
+}
+
+#font_size,#font_family,#line_height{
+  width:100px;
 }
 
 /* Button section heads */

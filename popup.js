@@ -31,6 +31,34 @@ function renderstatus(eventt){
 	}
 }
 
+/* Add and remove CSS */
+// function addCSS(profile){
+// 	switch(profile){
+// 		case 'default':
+// 			csslink='default.css';
+// 			break;
+// 		default:
+// 			return;
+// 	}
+
+// 	var csslinktag=document.createElement("link");
+// 	csslinktag.href="profiles/"+csslink;
+// 	csslinktag.id="customcss";
+// 	csslinktag.type="text/css";
+// 	csslinktag.rel="stylesheet";
+// 	document.getElementsByTagName("head")[0].appendChild(csslinktag);
+// }
+// function clearstyles(){
+// 	var target=document.getElementById("customcss")
+// 	target && target.parentNode.removeChild(target);
+
+// 	// var head=document.querySelectorAll("head");
+// 	// 	for(var i=0,len=head.length;i<len;i++){
+// 	// 		head[i].removeChild(target);
+// 	// 	}
+// }
+
+
 /* Toggle On-Off */
 function toggle(e){
 	if(onoff===false){
@@ -67,9 +95,11 @@ function qsset(e) {
 function adoptp(profile){
 	
 	// TODO: Remove all injected css and styles
-	
+	// clearstyles();
+
 	switch(profile){
 		case 'default':
+			// addCSS('default')
 			chrome.tabs.insertCSS(null,{file:"profiles/default.css"});
 			break;
 		// case 1:
@@ -87,6 +117,9 @@ function adoptp(profile){
 	activep=profile;
 	renderstatus('adoptp');
 }
+
+
+
 
 /* Button event listeners */
 document.addEventListener('DOMContentLoaded',function(){

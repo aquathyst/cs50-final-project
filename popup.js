@@ -15,14 +15,11 @@ function click(e) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var fontsize = $("#fontsize");
-  var size = fontsize.length;
-  for (var i = 0; i < size; i++) {
-    fontsize.options[i].addEventListener('click', click);
+  var button = document.querySelectorAll('button');
+  for (var i = 0, len = button.length; i < len; i++) {
+    button[i].addEventListener('click', click);
   }
 });
-
-
 
 /* Get url and domain of website */
 var url=chrome.tabs.Tab.url;
@@ -140,3 +137,4 @@ function adoptp(profile){
 		;
 	}
 }
+

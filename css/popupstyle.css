@@ -22,8 +22,9 @@ h1{
   font-weight:normal;
 }
 #status{
-  font-size:50%;
-  color:#AAAAAA;
+  font-size:100%;
+  color:#AACCCC;
+  margin:10px;
 }
 ::selection{
   background-color:Transparent;
@@ -97,23 +98,23 @@ td{
 }
 
 /* Each button */
-#on{
+#off{
   background-color:#7AB947;
 }
-#on:hover{
+#off:hover{
   background-color:#8EC462;
 }
-#on:active{
+#off:active{
   background-color:#5D8D35;
 }
 
-#off{
+#on{
   background-color:#CC6F6C;
 }
-#off:hover{
+#on:hover{
   background-color:#D48784;
 }
-#off:active{
+#on:active{
   background-color:#BD4743;
 }
 

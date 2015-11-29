@@ -92,6 +92,9 @@ td{
 #profilecol img,#profilecol p{
   float:left;
 }
+.contents{
+  display:block;
+}
 
 /* Each button */
 #on{

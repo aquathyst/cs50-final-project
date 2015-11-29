@@ -33,8 +33,8 @@
         <!--Quick styles-->
         <td>
           <div class="sectionhead" id="qshead"><p>Quick Styles</p></div>
-          <div class="smaller quickstyles">
-            Font Size:
+          <div class="smaller quickstyles"><div class="contents">
+            Font Size:<br/>
             <div id="fontsize">
               <select id="font_size">
                 <option value="14px">14</option>
@@ -45,9 +45,9 @@
                 <option value="28px">28</option>
               </select>
             </div>
-          </div>
-          <div class="smaller quickstyles">
-            Font Style:
+          </div></div>
+          <div class="smaller quickstyles"><div class="contents">
+            Font Style:<br/>
             <div id="fontfamily">
               <select id="font_family">
                 <option value="Arial">Arial</option>
@@ -59,9 +59,9 @@
                 <option value="Cursive">Cursive</option>
               </select>
             </div>
-          </div>
-          <div class="smaller quickstyles">
-            Line Height:
+          </div></div>
+          <div class="smaller quickstyles"><div class="contents">
+            Line Height:<br/>
             <div id="lineheight">
               <select id="line_height">
                 <option value="100%">100%</option>
@@ -70,20 +70,19 @@
                 <option value="200%">200%</option>
               </select>
             </div>
-          </div>
-          <div class="smaller" id="setstyle" type="button">
+          </div></div>
+          <div class="smaller" id="setstyle" type="button"><div class="contents">
             Set
-          </div>
+          </div></div>
         </td>
       </tr></table>
     
-      <!--<button id="setbutton" type="button" align="center">Set</button>-->
-
     <!-- Status text -->
     <p id="status">
 
       <noscript>Sorry, Javascript must be enabled for AlphaText to work!</noscript>
     </p>
     <script src="popup.js"></script>
+    <script src="3rdparty/jquery-2.1.4.min.js"></script>
   </body>
 </html>

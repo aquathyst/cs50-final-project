@@ -17,7 +17,7 @@
         </td>
 
         <td>
-          <div class="mid" id="options" onclick="chrome.runtime.openOptionsPage()"><div class="contents"><img src="images/options.png"/><p>Options</p></div></div>
+          <div class="mid" id="options"><div class="contents"><img src="images/options.png"/><p>Options</p></div></div>
           <div class="mid" id="savepage" onclick="save(domain,profile)"><div class="contents"><img src="images/save.png"/><p id="savetext">Always use on domain</p></div></div>
         </td>
 
@@ -37,6 +37,7 @@
             Font Size:<br/>
             <div id="fontsize">
               <select id="font_size">
+                <option value="null">---</option>
                 <option value="14px">14</option>
                 <option value="16px">16</option>
                 <option value="18px">18</option>
@@ -50,6 +51,7 @@
             Font Style:<br/>
             <div id="fontfamily">
               <select id="font_family">
+                <option value="null">---</option>
                 <option value="Arial">Arial</option>
                 <option value="Verdana">Verdana</option>
                 <option value="Helvetica">Helvetica</option>
@@ -64,6 +66,7 @@
             Line Height:<br/>
             <div id="lineheight">
               <select id="line_height">
+                <option value="null">---</option>
                 <option value="100%">100%</option>
                 <option value="120%">120%</option>
                 <option value="150%">150%</option>

@@ -31,7 +31,7 @@ function renderstatus(eventt){
 	}
 }
 
-/* Add and remove CSS */
+// /* Add and remove CSS */
 // function addCSS(profile){
 // 	switch(profile){
 // 		case 'default':
@@ -40,17 +40,22 @@ function renderstatus(eventt){
 // 		default:
 // 			return;
 // 	}
-
-// 	var csslinktag=document.createElement("link");
-// 	csslinktag.href="profiles/"+csslink;
-// 	csslinktag.id="customcss";
-// 	csslinktag.type="text/css";
-// 	csslinktag.rel="stylesheet";
-// 	document.getElementsByTagName("head")[0].appendChild(csslinktag);
+// 	chrome.tabs.executeScript(null,
+// 	    {code:
+// 			"var csslinktag=document.createElement('link');
+// 			csslinktag.href='profiles/'+csslink;
+// 			csslinktag.id='customcss';
+// 			csslinktag.type='text/css';
+// 			csslinktag.rel='stylesheet';
+// 			document.getElementsByTagName('head')[0].appendChild(csslinktag);"
+// 		});
 // }
 // function clearstyles(){
-// 	var target=document.getElementById("customcss")
-// 	target && target.parentNode.removeChild(target);
+// 	chrome.tabs.executeScript(null,
+// 	    {code:
+// 			"var target=document.getElementById('customcss')
+// 			target && target.parentNode.removeChild(target);"
+// 		});
 
 // 	// var head=document.querySelectorAll("head");
 // 	// 	for(var i=0,len=head.length;i<len;i++){
@@ -77,18 +82,29 @@ function toggle(e){
 	}
 }
 
+/* Open options panel */
+function openoptions(e){
+	chrome.runtime.openOptionsPage();
+}
+
 /* Quick Styles */
 function qsset(e) {
-  var fsize = document.getElementById("font_size").value;
-  var ffamily = document.getElementById("font_family").value;
-  var lheight = document.getElementById("line_height").value;
-  chrome.tabs.executeScript(null,
-    {code:"document.body.style.fontSize = '" + fsize + "'"});
-  chrome.tabs.executeScript(null,
-    {code:"document.body.style.fontFamily = '" + ffamily + "'"});
-  chrome.tabs.executeScript(null,
-    {code:"document.body.style.lineHeight = '" + lheight + "'"});
-  //window.close();
+	var fsize = document.getElementById("font_size").value;
+	var ffamily = document.getElementById("font_family").value;
+	var lheight = document.getElementById("line_height").value;
+	if(fsize!=="null"){
+	  		chrome.tabs.executeScript(null,
+	    	{code:"document.body.style.fontSize = '" + fsize + "'"});
+	}
+	if(ffamily!=="null"){
+		chrome.tabs.executeScript(null,
+		    {code:"document.body.style.fontFamily = '" + ffamily + "'"});
+	}
+	if(lheight!=="null"){
+		chrome.tabs.executeScript(null,
+		    {code:"document.body.style.lineHeight = '" + lheight + "'"});
+	}
+	renderstatus('quickstyleset');
 }
 
 /* Adapt and inject a style profile */
@@ -118,9 +134,6 @@ function adoptp(profile){
 	renderstatus('adoptp');
 }
 
-
-
-
 /* Button event listeners */
 document.addEventListener('DOMContentLoaded',function(){
   // Quick Style Set
@@ -132,6 +145,11 @@ document.addEventListener('DOMContentLoaded',function(){
   var onofftoggle = document.querySelectorAll("#off");
   for (var i = 0, len = onofftoggle.length; i < len; i++) {
     onofftoggle[i].addEventListener('click', toggle);
+  }
+  // Options
+  var options = document.querySelectorAll("#options");
+  for (var i = 0, len = options.length; i < len; i++) {
+    options[i].addEventListener('click', openoptions);
   }
 });
 
@@ -156,14 +174,6 @@ document.addEventListener('DOMContentLoaded',function(){
 // 		$("#onofftext").innerHTML='Switch on';
 // 	}
 // }
-
-
-
-
-
-
-
-
 
 // /* Get url and domain of website */
 // var url=chrome.tabs.Tab.url;
@@ -195,7 +205,6 @@ document.addEventListener('DOMContentLoaded',function(){
 
 // /* Saving domain preferences scripts */
 // var saved=false;
-
 
 // function checksave(domain){
 	

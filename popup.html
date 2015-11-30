@@ -13,11 +13,11 @@
       <table><tr>
         
         <td>
-          <div class="big" id="on" onclick="toggle()"><div class="contents"><img src="images/onoff.png"/><p id="onofftext">Switch on</p></div></div>
+          <div class="big" id="off"><div class="contents"><img src="images/onoff.png"/><p id="onofftext">Switch on</p></div></div>
         </td>
 
         <td>
-          <div class="mid" id="options" onclick="chrome.runtime.openOptionsPage()"><div class="contents"><img src="images/options.png"/><p>Options</p></div></div>
+          <div class="mid" id="options"><div class="contents"><img src="images/options.png"/><p>Options</p></div></div>
           <div class="mid" id="savepage" onclick="save(domain,profile)"><div class="contents"><img src="images/save.png"/><p id="savetext">Always use on domain</p></div></div>
         </td>
 
@@ -33,10 +33,11 @@
         <!--Quick styles-->
         <td>
           <div class="sectionhead" id="qshead"><p>Quick Styles</p></div>
-          <div class="smaller quickstyles">
-            Font Size:
+          <div class="smaller quickstyles"><div class="contents">
+            Font Size:<br/>
             <div id="fontsize">
               <select id="font_size">
+                <option value="null">---</option>
                 <option value="14px">14</option>
                 <option value="16px">16</option>
                 <option value="18px">18</option>
@@ -45,11 +46,12 @@
                 <option value="28px">28</option>
               </select>
             </div>
-          </div>
-          <div class="smaller quickstyles">
-            Font Style:
+          </div></div>
+          <div class="smaller quickstyles"><div class="contents">
+            Font Style:<br/>
             <div id="fontfamily">
               <select id="font_family">
+                <option value="null">---</option>
                 <option value="Arial">Arial</option>
                 <option value="Verdana">Verdana</option>
                 <option value="Helvetica">Helvetica</option>
@@ -59,31 +61,30 @@
                 <option value="Cursive">Cursive</option>
               </select>
             </div>
-          </div>
-          <div class="smaller quickstyles">
-            Line Height:
+          </div></div>
+          <div class="smaller quickstyles"><div class="contents">
+            Line Height:<br/>
             <div id="lineheight">
               <select id="line_height">
+                <option value="null">---</option>
                 <option value="100%">100%</option>
                 <option value="120%">120%</option>
                 <option value="150%">150%</option>
                 <option value="200%">200%</option>
               </select>
             </div>
-          </div>
-          <div class="smaller" id="setstyle" type="button">
+          </div></div>
+          <div class="smaller" id="setstyle" type="button"><div class="contents">
             Set
-          </div>
+          </div></div>
         </td>
       </tr></table>
     
-      <!--<button id="setbutton" type="button" align="center">Set</button>-->
-
     <!-- Status text -->
     <p id="status">
-
       <noscript>Sorry, Javascript must be enabled for AlphaText to work!</noscript>
     </p>
     <script src="popup.js"></script>
+    <script src="3rdparty/jquery-2.1.4.min.js"></script>
   </body>
 </html>

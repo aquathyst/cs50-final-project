@@ -2,11 +2,32 @@
   AlphaText
   JavaScript for popup.html
 */
+var count = 0;
+var isEOF = false;
+var profiles = []; 
+
+function loadProfiles() {
+  var profileList = "";
+  while (!isEOF) {
+    var profile_name = "profile" + count;
+    if (localStorage.getItem(profile_name)) 
+      count++;
+    else
+      isEOF = true;
+  }
+  var temp = "<div id='profile1'>" + localStorage.getItem("profile1") + "</div";
+  temp += "<div id='profile2'>" + localStorage.getItem("profile2") + "</div>";
+  temp += "<div id='profile3'>" + localStorage.getItem("profile3") + "</div>";
+  document.getElementById("profiles").innerHTML = temp;
+}
 
 
 function click(e) {
   var fsize = document.getElementById("font_size").value;
   var ffamily = document.getElementById("font_family").value;
+  if (typeof(Storage) !== "undefined") {
+    if (e.target.id === "profile1" || e.target.id === "profile1" || e.target.id === "profile3")
+  }
   chrome.tabs.executeScript(null,
     {code:"document.body.style.fontSize = '" + fsize + "'"});
   chrome.tabs.executeScript(null,

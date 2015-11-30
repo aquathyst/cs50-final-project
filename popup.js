@@ -138,9 +138,9 @@ function qsset(e) {
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
 	
-	if (typeof(Storage) !== "undefined") {
-    	if (e.target.id === "profile1" || e.target.id === "profile1" || e.target.id === "profile3")
-  	}
+	// if (typeof(Storage) !== "undefined") {
+ //    	if (e.target.id === "profile1" || e.target.id === "profile1" || e.target.id === "profile3")
+ //  	}
 	
 	if(fsize!=="null"){
 	  		chrome.tabs.executeScript(null,

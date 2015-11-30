@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "AlphaText--Extension for online text readability",
-  "description": "This extension helps enhance online articles readbility with user customization",
+  "description": "This extension helps enhance online articles readability with user customization",
   "version": "1.0",
 
   "browser_action": {

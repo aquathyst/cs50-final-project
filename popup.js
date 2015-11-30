@@ -21,57 +21,33 @@ function loadProfiles() {
   document.getElementById("profiles").innerHTML = temp;
 }
 
-function click(e) {
-  var fsize = document.getElementById("font_size").value;
-  var ffamily = document.getElementById("font_family").value;
-  if (typeof(Storage) !== "undefined") {
-    if (e.target.id === "profile1" || e.target.id === "profile1" || e.target.id === "profile3")
-  }
-  chrome.tabs.executeScript(null,
-    {code:"document.body.style.fontSize = '" + fsize + "'"});
-  chrome.tabs.executeScript(null,
-    {code:"document.body.style.fontFamily = '" + ffamily + "'"});
-  window.close();
-}
+// /* Get url and domain of website */
+// var url=chrome.tabs.Tab.url;
+// var domain=false;
 
-document.addEventListener('DOMContentLoaded', function () {
-  var button = document.querySelectorAll("#setstyle");
-  for (var i = 0, len = button.length; i < len; i++) {
-    button[i].addEventListener('click', click);
-  }
-});
+// function getdomain(url){
+// 	var end=url.indexOf('/',8)
+// 	if(end!==-1)
+// 	{
+// 		if(url.indexOf("http://")!==-1)
+// 		{
+// 			domain=url.substring(7,end);
+// 		}
+// 		else if(url.indexOf("https://")!==-1)
+// 		{
+// 			domain=url.substring(8,end);
+// 		}
+// 		else
+// 		{
+// 			return false;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		return false;
+// 	}
+// }
 
-/* Get url and domain of website */
-var url=chrome.tabs.Tab.url;
-var domain=false;
-
-function getdomain(url){
-	var end=url.indexOf('/',8)
-	if(end!==-1)
-	{
-		if(url.indexOf("http://")!==-1)
-		{
-			domain=url.substring(7,end);
-		}
-		else if(url.indexOf("https://")!==-1)
-		{
-			domain=url.substring(8,end);
-		}
-		else
-		{
-			return false;
-		}
-	}
-	else
-	{
-		return false;
-	}
-}
-
-
-
-/* On-off switch scripts */
-=======
 /* Variables to track state */
 var onoff=false;
 var activep=null;
@@ -161,6 +137,11 @@ function qsset(e) {
 	var fsize = document.getElementById("font_size").value;
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
+	
+	if (typeof(Storage) !== "undefined") {
+    	if (e.target.id === "profile1" || e.target.id === "profile1" || e.target.id === "profile3")
+  	}
+	
 	if(fsize!=="null"){
 	  		chrome.tabs.executeScript(null,
 	    	{code:"document.body.style.fontSize = '" + fsize + "'"});

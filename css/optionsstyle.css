@@ -1,25 +1,6 @@
 /*
   AlphaText
-  Stylesheet for options.html
+  Additional stylesheet for options.html
 */
 
-body{
-	font-family:'Roboto',Helvetica,Arial,sans-serif;
-	background-color:#FFFFFF;
-	color:#202020;
-}
-h1{
-	font-weight:normal;
-	color:#808080;
-	text-align:center;
-	font-size:150%;
-}
-h2{
-	font-weight:bold;
-	color:#505020;
-	text-align:left;
-	font-size:125%;
-}
-p{
-	font-size:100%;
-}
+

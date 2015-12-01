@@ -1,0 +1,40 @@
+/*
+  AlphaText
+  Stylesheet for options.html, help.html and about.html
+*/
+
+body{
+	font-family:'Roboto',Helvetica,Arial,sans-serif;
+	background-color:#FFFFFF;
+	color:#202020;
+}
+h1{
+	font-weight:normal;
+	color:#808080;
+	text-align:center;
+	font-size:150%;
+}
+h2{
+	font-weight:bold;
+	color:#505020;
+	text-align:left;
+	font-size:125%;
+}
+p{
+	font-size:100%;
+}
+#menubar{
+	margin:0 auto;
+	display:block;
+	text-align: center
+}
+a.menu{
+	color:#A0A090;
+	font-weight:bold;
+	text-decoration:none;
+	margin:2%;
+	font-size:105%;
+}
+a.menu:hover{
+	color:#808060;
+}

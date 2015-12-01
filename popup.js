@@ -53,10 +53,13 @@ var onoff=false;
 var activep=null;
 
 /* Render status text */
-function renderstatus(eventt){
-	switch(eventt){
+function renderstatus(eventtype){
+	switch(eventtype){
 		case 'adoptp':
 			document.getElementById("status").innerHTML='Profile '+activep+' activated!';
+			break;
+		case 'adoptpd':
+			document.getElementById("status").innerHTML='Default profile activated!';
 			break;
 		case 'error':
 			document.getElementById("status").innerHTML='Error!';
@@ -71,7 +74,7 @@ function renderstatus(eventt){
 			document.getElementById("status").innerHTML='Quick style set successfully!';
 			break;
 		default:
-			document.getElementById("status").innerHTML=eventt;
+			document.getElementById("status").innerHTML=eventtype;
 			break;
 	}
 }
@@ -116,7 +119,12 @@ function toggle(e){
 		onoff=true;
 		document.getElementById("onofftext").innerHTML='Switch off';
 		document.getElementById("off").id='on';
-		adoptp('default');
+		if(activep===null){
+			adoptp(0);
+		}
+		else{
+			adoptp(activep);
+		}
 	}
 	else{
 		// Switch off
@@ -157,6 +165,7 @@ function qsset(e) {
 	renderstatus('quickstyleset');
 }
 
+
 /* Adapt and inject a style profile */
 function adoptp(profile){
 	
@@ -164,43 +173,75 @@ function adoptp(profile){
 	// clearstyles();
 
 	switch(profile){
-		case 'default':
+		case 0:
 			// addCSS('default')
 			chrome.tabs.insertCSS(null,{file:"profiles/default.css"});
 			break;
-		// case 1:
-		// 	chrome.tabs.insertCSS(null,{file:"profiles/user1.css"});
-		// 	break;
-		// case 2:
-		// 	chrome.tabs.insertCSS(null,{file:"profiles/user2.css"});
-		// 	break;
-		// case 3:
-		// 	chrome.tabs.insertCSS(null,{file:"profiles/user3.css"});
-		// 	break;
+		case 1:
+			chrome.tabs.insertCSS(null,{file:"profiles/user1.css"});
+			break;
+		case 2:
+			chrome.tabs.insertCSS(null,{file:"profiles/user2.css"});
+			break;
+		case 3:
+			chrome.tabs.insertCSS(null,{file:"profiles/user3.css"});
+			break;
 		default:
 			return;
 	}
 	activep=profile;
-	renderstatus('adoptp');
+	if(profile!==0){
+		renderstatus('adoptp');
+	}
+	else{
+		renderstatus('adoptpd');
+	}
 }
+function adoptp0(e){adoptp(0);}
+function adoptp1(e){adoptp(1);}
+function adoptp2(e){adoptp(2);}
+function adoptp3(e){adoptp(3);}
+
 
 /* Button event listeners */
 document.addEventListener('DOMContentLoaded',function(){
-  // Quick Style Set
-  var button = document.querySelectorAll("#setstyle");
-  for (var i = 0, len = button.length; i < len; i++) {
-    button[i].addEventListener('click', qsset);
-  }
-  // On-off toggle
-  var onofftoggle = document.querySelectorAll("#off");
-  for (var i = 0, len = onofftoggle.length; i < len; i++) {
-    onofftoggle[i].addEventListener('click', toggle);
-  }
-  // Options
-  var options = document.querySelectorAll("#options");
-  for (var i = 0, len = options.length; i < len; i++) {
-    options[i].addEventListener('click', openoptions);
-  }
+	
+	// On-off toggle
+	var onofftoggle = document.querySelectorAll("#off");
+	for (var i = 0, len = onofftoggle.length; i < len; i++) {
+	    onofftoggle[i].addEventListener('click', toggle);
+	}
+
+	// Options
+	var options = document.querySelectorAll("#options");
+	for (var i = 0, len = options.length; i < len; i++) {
+	    options[i].addEventListener('click', openoptions);
+	}
+
+	//Profiles
+	var profile0set = document.querySelectorAll("#profile0");
+	for (var i = 0, len = profile0set.length; i < len; i++) {
+	    profile0set[i].addEventListener('click', adoptp0);
+	}
+	var profile1set = document.querySelectorAll("#profile1");
+	for (var i = 0, len = profile1set.length; i < len; i++) {
+	    profile1set[i].addEventListener('click', adoptp1);
+	}
+	var profile2set = document.querySelectorAll("#profile2");
+	for (var i = 0, len = profile2set.length; i < len; i++) {
+	    profile2set[i].addEventListener('click', adoptp2);
+	}
+	var profile3set = document.querySelectorAll("#profile3");
+	for (var i = 0, len = profile3set.length; i < len; i++) {
+	    profile3set[i].addEventListener('click', adoptp3);
+	}
+	
+	// Quick Style Set
+	var qsbutton = document.querySelectorAll("#setstyle");
+	for (var i = 0, len = qsbutton.length; i < len; i++) {
+	    qsbutton[i].addEventListener('click', qsset);
+	}
+	
 });
 
 

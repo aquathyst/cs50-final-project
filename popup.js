@@ -21,32 +21,34 @@ function loadProfiles() {
   document.getElementById("profiles").innerHTML = temp;
 }
 
-// /* Get url and domain of website */
-// var url=chrome.tabs.Tab.url;
-// var domain=false;
-
-// function getdomain(url){
-// 	var end=url.indexOf('/',8)
-// 	if(end!==-1)
-// 	{
-// 		if(url.indexOf("http://")!==-1)
-// 		{
-// 			domain=url.substring(7,end);
-// 		}
-// 		else if(url.indexOf("https://")!==-1)
-// 		{
-// 			domain=url.substring(8,end);
-// 		}
-// 		else
-// 		{
-// 			return false;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		return false;
-// 	}
-// }
+/* Get url and domain of website */
+var taburl=null;
+var tabdomain=null;
+function geturldomain(){
+	chrome.tabs.query({'active':true},function(tab){
+	    taburl=tab[0].url;
+	    var end=taburl.indexOf('/',8)
+		if(end!==-1)
+		{
+			if(taburl.indexOf("http://")!==-1)
+			{
+				tabdomain=taburl.substring(7,end);
+			}
+			else if(taburl.indexOf("https://")!==-1)
+			{
+				tabdomain=taburl.substring(8,end);
+			}
+			else
+			{
+				tabdomain=null;
+			}
+		}
+		else
+		{
+			tabdomain=null;
+		}
+	});
+}
 
 /* Variables to track state */
 var onoff=false;
@@ -55,6 +57,9 @@ var activep=null;
 /* Render status text */
 function renderstatus(eventtype){
 	switch(eventtype){
+		case 'off':
+			document.getElementById("status").innerHTML='AlphaText deactivated.';
+			break;
 		case 'adoptp':
 			document.getElementById("status").innerHTML='Profile '+activep+' activated!';
 			break;
@@ -132,6 +137,7 @@ function toggle(e){
 		document.getElementById("onofftext").innerHTML='Switch on';
 		document.getElementById("on").id='off';
 		//  TODO: Remove all injected styles
+		renderstatus('off');
 	}
 }
 
@@ -205,7 +211,10 @@ function adoptp3(e){adoptp(3);}
 
 /* Button event listeners */
 document.addEventListener('DOMContentLoaded',function(){
-	
+
+	// Save current url and domain
+	geturldomain();
+
 	// On-off toggle
 	var onofftoggle = document.querySelectorAll("#off");
 	for (var i = 0, len = onofftoggle.length; i < len; i++) {
@@ -241,7 +250,7 @@ document.addEventListener('DOMContentLoaded',function(){
 	for (var i = 0, len = qsbutton.length; i < len; i++) {
 	    qsbutton[i].addEventListener('click', qsset);
 	}
-	
+
 });
 
 

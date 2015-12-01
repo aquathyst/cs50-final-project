@@ -21,6 +21,10 @@ function loadProfiles() {
   document.getElementById("profiles").innerHTML = temp;
 }
 
+
+
+
+
 /* Get url and domain of website */
 var taburl=null;
 var tabdomain=null;
@@ -274,34 +278,6 @@ document.addEventListener('DOMContentLoaded',function(){
 // 		$("#onofftext").innerHTML='Switch on';
 // 	}
 // }
-
-// /* Get url and domain of website */
-// var url=chrome.tabs.Tab.url;
-// var domain=false;
-
-// function getdomain(url){
-// 	var end=url.indexOf('/',8)
-// 	if(end!==-1)
-// 	{
-// 		if(url.indexOf("http://")!==-1)
-// 		{
-// 			domain=url.substring(7,end);
-// 		}
-// 		else if(url.indexOf("https://")!==-1)
-// 		{
-// 			domain=url.substring(8,end);
-// 		}
-// 		else
-// 		{
-// 			return false;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		return false;
-// 	}
-// }
-
 
 // /* Saving domain preferences scripts */
 // var saved=false;

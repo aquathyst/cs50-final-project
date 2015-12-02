@@ -159,18 +159,18 @@ function qsset(e) {
 	// if (typeof(Storage) !== "undefined") {
  //    	if (e.target.id === "profile1" || e.target.id === "profile1" || e.target.id === "profile3")
  //  	}
-	
+
 	if(fsize!=="null"){
 	  		chrome.tabs.executeScript(null,
-	    	{code:"document.body.style.fontSize = '" + fsize + "'"});
+	    	{code:"document.body.style.setProperty('font-size','"+fsize+"','important');"});
 	}
 	if(ffamily!=="null"){
 		chrome.tabs.executeScript(null,
-		    {code:"document.body.style.fontFamily = '" + ffamily + "'"});
+		    {code:"document.body.style.setProperty('font-family','"+ffamily+"','important');"});
 	}
 	if(lheight!=="null"){
 		chrome.tabs.executeScript(null,
-		    {code:"document.body.style.lineHeight = '" + lheight + "'"});
+		    {code:"document.body.style.setProperty('line-height','"+lheight+"','important');"});
 	}
 	renderstatus('quickstyleset');
 }

@@ -1,12 +1,12 @@
 body{
-	font-family:"Open Sans",Arial,Helvetica,sans-serif;
-	background-color:#FFFFFF;
-	color:#161616;
+	font-family:"Open Sans",Arial,Helvetica,sans-serif !important; 
+	background-color:#FFFFFF !important;
+	color:#161616 !important;
 }
 p{
-	font-size:16px;
-	line-height:120%;
+	font-size:16px !important;
+	line-height:120% !important;
 }
 h1,h2,h3,h4,h5,h6{
-	font-family:Georgia,"Times News Roman",serif;
+	font-family:Georgia,"Times News Roman",serif !important;
 }

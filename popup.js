@@ -88,6 +88,11 @@ function renderstatus(eventtype){
 	}
 }
 
+
+
+// $("body").removeClass('alphatextcustom');
+// $("p").removeClass('alphatextcustom');
+
 // /* Add and remove CSS */
 // function addCSS(profile){
 // 	switch(profile){
@@ -189,6 +194,12 @@ function adoptp(profile){
 			break;
 		case 1:
 			chrome.tabs.insertCSS(null,{file:"profiles/user1.css"});
+			$("body").innerHTML+='<script src="3rdparty/jquery-2.1.4.min.js"></script>';
+			chrome.tabs.executeScript(null,
+				{code:
+					"$('body').addClass('alphatextcustom');"+
+					"$('p').addClass('alphatextcustom');"
+				});
 			break;
 		case 2:
 			chrome.tabs.insertCSS(null,{file:"profiles/user2.css"});
@@ -254,6 +265,9 @@ document.addEventListener('DOMContentLoaded',function(){
 	for (var i = 0, len = qsbutton.length; i < len; i++) {
 	    qsbutton[i].addEventListener('click', qsset);
 	}
+
+
+	
 
 });
 

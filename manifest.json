@@ -12,7 +12,7 @@
   }, 
   
   "background": {
-    "scripts": ["eventPage.js"],
+    "scripts": ["3rdparty/jquery-2.1.4.min.js","eventPage.js"],
     "persistent": false
   },
   

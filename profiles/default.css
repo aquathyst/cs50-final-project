@@ -1,12 +1,12 @@
-body{
+body.alphatextcustom{
 	font-family:"Open Sans",Arial,Helvetica,sans-serif !important; 
 	background-color:#FFFFFF !important;
 	color:#161616 !important;
 }
-p{
+.alphatextcustom p{
 	font-size:16px !important;
 	line-height:120% !important;
 }
-h1,h2,h3,h4,h5,h6{
+.alphatextcustom h1,.alphatextcustom h2,.alphatextcustom h3,.alphatextcustom h4,.alphatextcustom h5,.alphatextcustom h6{
 	font-family:Georgia,"Times News Roman",serif !important;
 }

@@ -88,44 +88,6 @@ function renderstatus(eventtype){
 	}
 }
 
-
-
-// $("body").removeClass('alphatextcustom');
-// $("p").removeClass('alphatextcustom');
-
-// /* Add and remove CSS */
-// function addCSS(profile){
-// 	switch(profile){
-// 		case 'default':
-// 			csslink='default.css';
-// 			break;
-// 		default:
-// 			return;
-// 	}
-// 	chrome.tabs.executeScript(null,
-// 	    {code:
-// 			"var csslinktag=document.createElement('link');
-// 			csslinktag.href='profiles/'+csslink;
-// 			csslinktag.id='customcss';
-// 			csslinktag.type='text/css';
-// 			csslinktag.rel='stylesheet';
-// 			document.getElementsByTagName('head')[0].appendChild(csslinktag);"
-// 		});
-// }
-// function clearstyles(){
-// 	chrome.tabs.executeScript(null,
-// 	    {code:
-// 			"var target=document.getElementById('customcss')
-// 			target && target.parentNode.removeChild(target);"
-// 		});
-
-// 	// var head=document.querySelectorAll("head");
-// 	// 	for(var i=0,len=head.length;i<len;i++){
-// 	// 		head[i].removeChild(target);
-// 	// 	}
-// }
-
-
 /* Toggle On-Off */
 function toggle(e){
 	if(onoff===false){
@@ -133,6 +95,12 @@ function toggle(e){
 		onoff=true;
 		document.getElementById("onofftext").innerHTML='Switch off';
 		document.getElementById("off").id='on';
+		
+		chrome.tabs.executeScript(null,
+				{code:
+					"$('body').addClass('alphatextcustom');"
+				});
+
 		if(activep===null){
 			adoptp(0);
 		}
@@ -145,7 +113,12 @@ function toggle(e){
 		onoff=false;
 		document.getElementById("onofftext").innerHTML='Switch on';
 		document.getElementById("on").id='off';
-		//  TODO: Remove all injected styles
+		
+		chrome.tabs.executeScript(null,
+				{code:
+					"$('body').removeClass('alphatextcustom');"
+				});
+
 		renderstatus('off');
 	}
 }
@@ -184,8 +157,7 @@ function qsset(e) {
 /* Adapt and inject a style profile */
 function adoptp(profile){
 	
-	// TODO: Remove all injected css and styles
-	// clearstyles();
+	// TODO: Remove all injected styles
 
 	switch(profile){
 		case 0:
@@ -194,12 +166,6 @@ function adoptp(profile){
 			break;
 		case 1:
 			chrome.tabs.insertCSS(null,{file:"profiles/user1.css"});
-			$("body").innerHTML+='<script src="3rdparty/jquery-2.1.4.min.js"></script>';
-			chrome.tabs.executeScript(null,
-				{code:
-					"$('body').addClass('alphatextcustom');"+
-					"$('p').addClass('alphatextcustom');"
-				});
 			break;
 		case 2:
 			chrome.tabs.insertCSS(null,{file:"profiles/user2.css"});
@@ -265,12 +231,7 @@ document.addEventListener('DOMContentLoaded',function(){
 	for (var i = 0, len = qsbutton.length; i < len; i++) {
 	    qsbutton[i].addEventListener('click', qsset);
 	}
-
-
-	
-
 });
-
 
 
 

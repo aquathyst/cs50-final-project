@@ -267,8 +267,8 @@ document.addEventListener('DOMContentLoaded',function(){
 	    qsbutton[i].addEventListener('click', qsset);
 	}
 
-	checkonoff();
-	initsetup();
+	// checkonoff();
+	// initsetup();
 
 	// // OK here is the cool stuff 
 	// chrome.runtime.onConnect.addListener(function(port){

@@ -88,6 +88,28 @@ function renderstatus(eventtype){
 	}
 }
 
+// // Check on or off state and set popup state
+// function checkonoff(e){
+// 	chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+// 		if(tabs[0].getElementsByClassName("alphatextcustom").length>0)
+// 		{
+// 			onoff=true;
+// 		}
+// 		else
+// 		{
+// 			onoff=false;
+// 		}
+// 	});
+// }
+
+// // Set popup state
+// function initsetup(){
+// 	if(onoff===true)
+// 	{
+// 		$("#on").id='off';
+// 	}
+// }
+
 /* Toggle On-Off */
 function toggle(e){
 	if(onoff===false){
@@ -143,10 +165,6 @@ function qsset(e) {
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
 	
-	// if (typeof(Storage) !== "undefined") {
- //    	if (e.target.id === "profile1" || e.target.id === "profile1" || e.target.id === "profile3")
- //  	}
-
  	// Set properties if not empty
 	if(fsize!=="null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq{font-size:"+fsize+" !important;}"});
@@ -248,18 +266,32 @@ document.addEventListener('DOMContentLoaded',function(){
 	for (var i = 0, len = qsbutton.length; i < len; i++) {
 	    qsbutton[i].addEventListener('click', qsset);
 	}
+
+	checkonoff();
+	initsetup();
+
+	// // OK here is the cool stuff 
+	// chrome.runtime.onConnect.addListener(function(port){
+	// 	console.assert(port.name=="onoffp");
+	// 	port.onMessage.addListener(function(msg)
+	// 	{
+	// 		if(msg.state=="ready")
+	// 		{
+	// 			port.postMessage({req:"checkonoff"});
+	// 		}
+	// 		else if(msg.state=="off")
+	// 		{
+	// 			onoff=false;
+	// 		}
+	// 		else if(msg.state=="on")
+	// 		{
+	// 			onoff=true;
+	// 		}
+	// 	});
+	// });
+
 });
 
-
-
-// function checkonoff(){
-// 	$("")
-// 	if(onoff===true)
-// 	{
-// 		$("#on").id='off';
-// 	}
-
-// }
 
 // function showonofftext(){
 // 	if(onoff===true)

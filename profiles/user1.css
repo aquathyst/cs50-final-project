@@ -1,12 +1,12 @@
-body.alphatextcustom{
+body.alphatextcustomp{
 	font-family:'Times New Roman',serif !important; 
 	background-color:#FFFFFF !important;
 	color:#161616 !important;
 }
-.alphatextcustom p{
+.alphatextcustomp p{
 	font-size:16px !important;
 	line-height:120% !important;
 }
-.alphatextcustom h1,.alphatextcustom h2,.alphatextcustom h3,.alphatextcustom h4,.alphatextcustom h5,.alphatextcustom h6{
+.alphatextcustomp h1,.alphatextcustomp h2,.alphatextcustomp h3,.alphatextcustomp h4,.alphatextcustomp h5,.alphatextcustomp h6{
 	font-family:"Roboto",serif !important;
 }

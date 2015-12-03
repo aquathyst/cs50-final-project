@@ -98,7 +98,7 @@ function toggle(e){
 		
 		chrome.tabs.executeScript(null,
 				{code:
-					"$('body').addClass('alphatextcustom');"
+					"$('body').addClass('alphatextcustomp');"
 				});
 
 		if(activep===null){
@@ -116,7 +116,8 @@ function toggle(e){
 		
 		chrome.tabs.executeScript(null,
 				{code:
-					"$('body').removeClass('alphatextcustom');"
+					"$('body').removeClass('alphatextcustomp');"+
+					"$('body').removeClass('alphatextcustomq');"
 				});
 
 		renderstatus('off');
@@ -130,6 +131,14 @@ function openoptions(e){
 
 /* Quick Styles */
 function qsset(e) {
+	
+	// Put in .alphatextcustomq if needed
+	chrome.tabs.executeScript(null,
+		{code:
+			"$('body').addClass('alphatextcustomq');"
+		});
+
+	// Get inputs
 	var fsize = document.getElementById("font_size").value;
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
@@ -138,18 +147,17 @@ function qsset(e) {
  //    	if (e.target.id === "profile1" || e.target.id === "profile1" || e.target.id === "profile3")
  //  	}
 
+ 	// Set properties if not empty
 	if(fsize!=="null"){
-	  		chrome.tabs.executeScript(null,
-	    	{code:"document.body.style.setProperty('font-size','"+fsize+"','important');"});
+		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq{font-size:"+fsize+" !important;}"});
 	}
 	if(ffamily!=="null"){
-		chrome.tabs.executeScript(null,
-		    {code:"document.body.style.setProperty('font-family','"+ffamily+"','important');"});
+		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq{font-family:"+ffamily+" !important;}"});
 	}
 	if(lheight!=="null"){
-		chrome.tabs.executeScript(null,
-		    {code:"document.body.style.setProperty('line-height','"+lheight+"','important');"});
+		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq{line-height:"+lheight+" !important;}"});
 	}
+	
 	renderstatus('quickstyleset');
 }
 
@@ -157,8 +165,13 @@ function qsset(e) {
 /* Adapt and inject a style profile */
 function adoptp(profile){
 	
-	// TODO: Remove all injected styles
+	// Remove .alphatextcustomq if needed
+	chrome.tabs.executeScript(null,
+		{code:
+			"$('body').removeClass('alphatextcustomq');"
+		});
 
+	// Insert CSS profile
 	switch(profile){
 		case 0:
 			// addCSS('default')
@@ -176,6 +189,7 @@ function adoptp(profile){
 		default:
 			return;
 	}
+	
 	activep=profile;
 	if(profile!==0){
 		renderstatus('adoptp');
@@ -184,17 +198,20 @@ function adoptp(profile){
 		renderstatus('adoptpd');
 	}
 }
+// Functions for event call
 function adoptp0(e){adoptp(0);}
 function adoptp1(e){adoptp(1);}
 function adoptp2(e){adoptp(2);}
 function adoptp3(e){adoptp(3);}
 
 
-/* Button event listeners */
+/* First things to load once started */
 document.addEventListener('DOMContentLoaded',function(){
 
 	// Save current url and domain
 	geturldomain();
+
+	/* Button event listeners */
 
 	// On-off toggle
 	var onofftoggle = document.querySelectorAll("#off");
@@ -236,6 +253,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
 
 // function checkonoff(){
+// 	$("")
 // 	if(onoff===true)
 // 	{
 // 		$("#on").id='off';

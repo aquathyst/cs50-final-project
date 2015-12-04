@@ -10,7 +10,6 @@ var maxNum = 3; //maximum number of profiles saved
 // added a random delete.png file but you can replate it with something else later
 function loadProfiles() {
   var profileList = "";
-  var profileIndex = "";
   var isEOF = false; 
   
   count = 1;
@@ -22,21 +21,23 @@ function loadProfiles() {
       + "_delete' title='Delete' src='delete.png' height='10' width='10' align='bottom'/></div>"; 
       count++;
     }
+    // because the profiles are not loaded sequentially or if user deleted some 
+    // need to maintain the correct count even if people deleted or added profiles
     else {
       var isFound = false;
       var precount = count;
       var lastcount = count;
-      for (var i = precount; i < maxNum; i++) {
+      for (var i = precount; i <= maxNum; i++) {
           profileId = "profileItem" + i; 
           if (localStorage.getItem(profileId) !== null) {
-              isFound = true;
-              lastcount = count;
-              break;
+            isFound = true;
+            lastcount = count;
+            break;
           }
           else
             count++;
       }
-      if (!isFound) {
+      if (isFound === false) {
         if (maxNum === count)
             count = lastcount;
         isEOF = true;
@@ -47,11 +48,6 @@ function loadProfiles() {
     if (profileList === "")
         profileList = "No Profile";
     document.getElementById("profiles").innerHTML = profileList;
-  /* var temp = "<div id='profile1'>" + localStorage.getItem("profile1") + "</div";
-  temp += "<div id='profile2'>" + localStorage.getItem("profile2") + "</div>";
-  temp += "<div id='profile3'>" + localStorage.getItem("profile3") + "</div>";
-  document.getElementById("profiles").innerHTML = temp;
-  */
 }
 
 // to check if a profile exists; if it exists then return true; else return false

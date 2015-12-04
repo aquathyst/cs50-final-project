@@ -6,11 +6,14 @@
 /* Include JQuery */
 document.getElementsByTagName("body")[0].innerHTML+="<script src='" + chrome.extension.getURL("3rdparty/jquery-2.1.4.min.js") + "'></script>";
 
-/* Check on off */
-// var onoffstate=false;
+// /* Check on off */
+// var onoffstate='off';
+// if($(".alphatextcustomp").length>0){onoffstate='on';}
+// else{onoffstate='off';}
+
 
 // Now tell popup about it 
-
+// chrome.runtime.sendMessage({state:onoffstate});
 
 
 // chrome.runtime.onMessage.addListener(

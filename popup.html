@@ -9,31 +9,21 @@
     
     <!--Button array-->
     <div id="buttons">
-      <!--Main buttons-->
       <table><tr>
-        
-        <td>
-          <div class="big" id="off"><div class="contents"><img src="images/onoff.png"/><p id="onofftext">Switch on</p></div></div>
-        </td>
-
-        <td>
-          <div class="mid" id="options"><div class="contents"><img src="images/options.png"/><p>Options</p></div></div>
-          <div class="mid" id="savepage"><div class="contents"><img src="images/save.png"/><p id="savetext">Always use on domain</p></div></div>
-        </td>
 
         <!--Profiles-->
         <td id="profilecol">
           <div class="sectionhead" id="profhead"><p>Profiles</p></div>
-          <div class="smaller" id="profile1"><div class="profiles"><img src="images/profile.png" class="profim"/><p>Profile 1</p></div></div>
-          <div class="smaller" id="profile2"><div class="profiles"><img src="images/profile.png" class="profim"/><p>Profile 2</p></div></div>
-          <div class="smaller" id="profile3"><div class="profiles"><img src="images/profile.png" class="profim"/><p>Profile 3</p></div></div>
-          <div class="smaller" id="profile0"><div class="profiles"><img src="images/profile.png" class="profim"/><p>Default</p></div></div>
+          <div class="small" id="profile1"><div class="profiles"><img src="images/profile.png" class="profim"/><p>Profile 1</p></div></div>
+          <div class="small" id="profile2"><div class="profiles"><img src="images/profile.png" class="profim"/><p>Profile 2</p></div></div>
+          <div class="small" id="profile3"><div class="profiles"><img src="images/profile.png" class="profim"/><p>Profile 3</p></div></div>
+          <div class="small" id="profile0"><div class="profiles"><img src="images/profile.png" class="profim"/><p>Default</p></div></div>
         </td>
 
         <!--Quick styles-->
         <td>
           <div class="sectionhead" id="qshead"><p>Quick Styles</p></div>
-          <div class="smaller quickstyles"><div class="contents">
+          <div class="small quickstyles"><div class="contents">
             Font Size:<br/>
             <div id="fontsize">
               <select id="font_size">
@@ -47,7 +37,7 @@
               </select>
             </div>
           </div></div>
-          <div class="smaller quickstyles"><div class="contents">
+          <div class="small quickstyles"><div class="contents">
             Font Style:<br/>
             <div id="fontfamily">
               <select id="font_family">
@@ -62,7 +52,7 @@
               </select>
             </div>
           </div></div>
-          <div class="smaller quickstyles"><div class="contents">
+          <div class="small quickstyles"><div class="contents">
             Line Height:<br/>
             <div id="lineheight">
               <select id="line_height">
@@ -74,10 +64,18 @@
               </select>
             </div>
           </div></div>
-          <div class="smaller" id="setstyle" type="button"><div class="contents">
+          <div class="small" id="setstyle" type="button"><div class="contents">
             Set
           </div></div>
         </td>
+
+        <!--Main buttons-->
+        <td>
+          <div class="big" id="options"><div class="contents"><img src="images/options.png"/><p>Options</p></div></div>
+          <div class="big" id="off"><div class="contents"><img src="images/off.png"/><p id="offtext">Remove all styles</p></div></div>
+          <div class="big" id="savepage"><div class="contents"><img src="images/save.png"/><p id="savetext">Always use on domain</p></div></div>
+        </td>
+
       </tr></table>
     </div>
     

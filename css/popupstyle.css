@@ -10,7 +10,7 @@ body{
   background:white;
   text-align:center;
   font-family:'Roboto',Helvetica,Arial,sans-serif;
-  font-size:100%;
+  font-size:110%;
   width:600px;
   height:200px;
 }
@@ -22,7 +22,7 @@ h1{
   font-weight:normal;
 }
 #status{
-  font-size:100%;
+  font-size:110%;
   color:#AACCCC;
   margin:10px;
 }
@@ -34,8 +34,6 @@ h1{
 /* General styles */
 #buttons{
   margin:0 auto;
-  height:150px;
-  width:500px;
   color:#FFFFFF;
   display:inline;
   overflow-y:auto;
@@ -66,17 +64,12 @@ td{
   border:0px;
 }
 #buttons .big{
-  height:100%;
-}
-#buttons .mid{
-  height:50%;
-}
-#buttons .smaller{
-  height:19.5%;
+  height:33.3%;
 }
 #buttons .small{
-  height:26%;
+  height:19.5%;
 }
+
 
 /* Button contents */
 #buttons img{
@@ -99,22 +92,12 @@ td{
 
 /* Each button */
 #off{
-  background-color:#7AB947;
-}
-#off:hover{
-  background-color:#8EC462;
-}
-#off:active{
-  background-color:#5D8D35;
-}
-
-#on{
   background-color:#CC6F6C;
 }
-#on:hover{
+#off:hover{
   background-color:#D48784;
 }
-#on:active{
+#off:active{
   background-color:#BD4743;
 }
 
@@ -194,6 +177,6 @@ td{
   width:100%;
 }
 .sectionhead p{
-  font-size:120%;
+  font-size:130%;
   font-weight:bold;
 }

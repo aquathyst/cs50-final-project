@@ -22,7 +22,7 @@ function loadProfiles() {
 }
 
 
-
+/*======== ptrw08's zone below here =======*/
 
 
 /* Get url and domain of website */
@@ -55,14 +55,14 @@ function geturldomain(){
 }
 
 /* Variables to track state */
-var onoff=false;
+// var onoff=false;
 var activep=null;
 
 /* Render status text */
 function renderstatus(eventtype){
 	switch(eventtype){
 		case 'off':
-			document.getElementById("status").innerHTML='AlphaText deactivated.';
+			document.getElementById("status").innerHTML='All styles removed';
 			break;
 		case 'adoptp':
 			document.getElementById("status").innerHTML='Profile '+activep+' activated!';
@@ -102,6 +102,11 @@ function renderstatus(eventtype){
 // 	});
 // }
 
+// chrome.runtime.onMessage.addListener(function(statem,sender,response){
+//       alert(onoff);
+// });
+
+
 // // Set popup state
 // function initsetup(){
 // 	if(onoff===true)
@@ -110,41 +115,45 @@ function renderstatus(eventtype){
 // 	}
 // }
 
-/* Toggle On-Off */
+/* Toggle Off */
 function toggle(e){
-	if(onoff===false){
-		// Switch on
-		onoff=true;
-		document.getElementById("onofftext").innerHTML='Switch off';
-		document.getElementById("off").id='on';
-		
-		chrome.tabs.executeScript(null,
-				{code:
-					"$('body').addClass('alphatextcustomp');"
-				});
-
-		if(activep===null){
-			adoptp(0);
-		}
-		else{
-			adoptp(activep);
-		}
-	}
-	else{
-		// Switch off
-		onoff=false;
-		document.getElementById("onofftext").innerHTML='Switch on';
-		document.getElementById("on").id='off';
-		
-		chrome.tabs.executeScript(null,
+	// Remove all styles
+	chrome.tabs.executeScript(null,
 				{code:
 					"$('body').removeClass('alphatextcustomp');"+
 					"$('body').removeClass('alphatextcustomq');"
 				});
 
-		renderstatus('off');
-	}
+	renderstatus('off');
 }
+
+// 	if(onoff===false){
+// 		// Switch on
+// 		onoff=true;
+// 		document.getElementById("onofftext").innerHTML='Switch off';
+// 		document.getElementById("off").id='on';
+		
+// 		chrome.tabs.executeScript(null,
+// 				{code:
+// 					"$('body').addClass('alphatextcustomp');"
+// 				});
+
+// 		// if(activep===null){
+// 		// 	adoptp(0);
+// 		// }
+// 		// else{
+// 		// 	adoptp(activep);
+// 		// }
+// 	}
+// 	else{
+// 		// Switch off
+// 		onoff=false;
+// 		document.getElementById("onofftext").innerHTML='Switch on';
+// 		document.getElementById("on").id='off';
+		
+		
+// 	}
+// }
 
 /* Open options panel */
 function openoptions(e){
@@ -189,6 +198,12 @@ function adoptp(profile){
 			"$('body').removeClass('alphatextcustomq');"
 		});
 
+	// Put in .alphatextcustomp if needed
+	chrome.tabs.executeScript(null,
+		{code:
+			"$('body').addClass('alphatextcustomp');"
+		});
+
 	// Insert CSS profile
 	switch(profile){
 		case 0:
@@ -231,10 +246,10 @@ document.addEventListener('DOMContentLoaded',function(){
 
 	/* Button event listeners */
 
-	// On-off toggle
-	var onofftoggle = document.querySelectorAll("#off");
-	for (var i = 0, len = onofftoggle.length; i < len; i++) {
-	    onofftoggle[i].addEventListener('click', toggle);
+	// Off toggle
+	var offtoggle = document.querySelectorAll("#off");
+	for (var i = 0, len = offtoggle.length; i < len; i++) {
+	    offtoggle[i].addEventListener('click', toggle);
 	}
 
 	// Options

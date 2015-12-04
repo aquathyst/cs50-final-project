@@ -10,7 +10,43 @@
     <h1>AlphaText Settings</h1>
         
     <h2>User preferences</h2>
+
     <h2>Change profile styles</h2>
+      <b>Select Font Size:</b>
+        <div id="fontsize">
+          <select id="font_size">
+            <option value="14px">14</option>
+            <option value="16px">16</option>
+            <option value="18px">18</option>
+            <option value="20px">20</option>
+            <option value="24px">24</option>
+            <option value="28px">28</option>
+          </select>
+        </div>
+      <b>Select Font Family:</b>
+        <div id="fontfamily">
+          <select id="font_family">
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Cursive">Cursive</option>
+          </select>
+        </div>
+      <b>Select Line Height:</b>
+        <div id="lineheight">
+          <select id="line_height">
+            <option value="100%">100%</option>
+            <option value="120%">120%</option>
+            <option value="150%">150%</option>
+            <option value="200%">200%</option>
+          </select>
+        </div>
+      <b>Saved Profiles:</b>
+        <div id="profiles"></div>
+        <button id="addProfile" type="button" align="center">Add as Profile</button>
     <h2>Manage saved domains</h2>
 
     <div id="menubar">
@@ -18,5 +54,13 @@
       <a class="menu" href="about.html">About AlphaText</a>
       <a class="menu" href="help.html">Help and FAQs</a>
     </div>
+        
+    <!-- Status text -->
+    <p id="status">
+      <noscript>Sorry, Javascript must be enabled for AlphaText to work!</noscript>
+    </p>
+    <script src="3rdparty/jquery-2.1.4.min.js"></script>
+    <script src="options.js"></script>
+    
   </body>
 </html>

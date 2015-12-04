@@ -45,9 +45,6 @@ function renderstatus(eventtype){
 		case 'adoptp':
 			document.getElementById("status").innerHTML='Profile '+activep+' activated!';
 			break;
-		case 'adoptpd':
-			document.getElementById("status").innerHTML='Default profile activated!';
-			break;
 		case 'error':
 			document.getElementById("status").innerHTML='Error!';
 			break;
@@ -83,10 +80,6 @@ function adoptp(profile){
 
 	// Insert CSS profile
 	switch(profile){
-		case 0:
-			// addCSS('default')
-			chrome.tabs.insertCSS(null,{file:"profiles/default.css"});
-			break;
 		case 1:
 			chrome.tabs.insertCSS(null,{file:"profiles/user1.css"});
 			break;
@@ -109,7 +102,6 @@ function adoptp(profile){
 	}
 }
 // Functions for event call
-function adoptp0(e){adoptp(0);}
 function adoptp1(e){adoptp(1);}
 function adoptp2(e){adoptp(2);}
 function adoptp3(e){adoptp(3);}
@@ -228,10 +220,6 @@ document.addEventListener('DOMContentLoaded',function(){
 	}
 
 	// Profiles
-	var profile0set=document.querySelectorAll("#profile0");
-	for(var i=0,len=profile0set.length;i<len;i++){
-	    profile0set[i].addEventListener('click',adoptp0);
-	}
 	var profile1set=document.querySelectorAll("#profile1");
 	for(var i=0,len=profile1set.length;i<len;i++){
 	    profile1set[i].addEventListener('click',adoptp1);

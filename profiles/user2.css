@@ -1,0 +1,12 @@
+body.alphatextcustomp{
+	font-family:"Open Sans",Arial,Helvetica,sans-serif !important; 
+	background-color:#FFFFFF !important;
+	color:#161616 !important;
+}
+.alphatextcustomp p{
+	font-size:16px !important;
+	line-height:120% !important;
+}
+.alphatextcustomp h1,.alphatextcustomp h2,.alphatextcustomp h3,.alphatextcustomp h4,.alphatextcustomp h5,.alphatextcustomp h6{
+	font-family:Georgia,"Times News Roman",serif !important;
+}

@@ -66,6 +66,9 @@ td{
 #buttons .big{
   height:33.3%;
 }
+#buttons .mid{
+  height:26%;
+}
 #buttons .small{
   height:19.5%;
 }
@@ -131,13 +134,13 @@ td{
   background-color:#255C8D;
 }
 
-#profile0,#profile1,#profile2,#profile3{
+#profile1,#profile2,#profile3{
   background-color:#DBB743;
 }
-#profile0:hover,#profile1:hover,#profile2:hover,#profile3:hover{
+#profile1:hover,#profile2:hover,#profile3:hover{
   background-color:#E2C568;
 }
-#profile0:active,#profile1:active,#profile2:active,#profile3:active{
+#profile1:active,#profile2:active,#profile3:active{
   background-color:#B89624;
 }
 

@@ -3,8 +3,6 @@
   JavaScript for popup.html
 */
 
-/*======== ptrw08's zone below here =======*/
-
 /* Variables to track active profile and saved state*/
 var activep=null;
 var saved=false;

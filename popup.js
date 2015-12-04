@@ -88,33 +88,6 @@ function renderstatus(eventtype){
 	}
 }
 
-// // Check on or off state and set popup state
-// function checkonoff(e){
-// 	chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-// 		if(tabs[0].getElementsByClassName("alphatextcustom").length>0)
-// 		{
-// 			onoff=true;
-// 		}
-// 		else
-// 		{
-// 			onoff=false;
-// 		}
-// 	});
-// }
-
-// chrome.runtime.onMessage.addListener(function(statem,sender,response){
-//       alert(onoff);
-// });
-
-
-// // Set popup state
-// function initsetup(){
-// 	if(onoff===true)
-// 	{
-// 		$("#on").id='off';
-// 	}
-// }
-
 /* Toggle Off */
 function toggle(e){
 	// Remove all styles
@@ -126,34 +99,6 @@ function toggle(e){
 
 	renderstatus('off');
 }
-
-// 	if(onoff===false){
-// 		// Switch on
-// 		onoff=true;
-// 		document.getElementById("onofftext").innerHTML='Switch off';
-// 		document.getElementById("off").id='on';
-		
-// 		chrome.tabs.executeScript(null,
-// 				{code:
-// 					"$('body').addClass('alphatextcustomp');"
-// 				});
-
-// 		// if(activep===null){
-// 		// 	adoptp(0);
-// 		// }
-// 		// else{
-// 		// 	adoptp(activep);
-// 		// }
-// 	}
-// 	else{
-// 		// Switch off
-// 		onoff=false;
-// 		document.getElementById("onofftext").innerHTML='Switch on';
-// 		document.getElementById("on").id='off';
-		
-		
-// 	}
-// }
 
 /* Open options panel */
 function openoptions(e){
@@ -281,43 +226,7 @@ document.addEventListener('DOMContentLoaded',function(){
 	for (var i = 0, len = qsbutton.length; i < len; i++) {
 	    qsbutton[i].addEventListener('click', qsset);
 	}
-
-	// checkonoff();
-	// initsetup();
-
-	// // OK here is the cool stuff 
-	// chrome.runtime.onConnect.addListener(function(port){
-	// 	console.assert(port.name=="onoffp");
-	// 	port.onMessage.addListener(function(msg)
-	// 	{
-	// 		if(msg.state=="ready")
-	// 		{
-	// 			port.postMessage({req:"checkonoff"});
-	// 		}
-	// 		else if(msg.state=="off")
-	// 		{
-	// 			onoff=false;
-	// 		}
-	// 		else if(msg.state=="on")
-	// 		{
-	// 			onoff=true;
-	// 		}
-	// 	});
-	// });
-
 });
-
-
-// function showonofftext(){
-// 	if(onoff===true)
-// 	{
-// 		$("#onofftext").innerHTML='Switch off';
-// 	}
-// 	else
-// 	{
-// 		$("#onofftext").innerHTML='Switch on';
-// 	}
-// }
 
 // /* Saving domain preferences scripts */
 // var saved=false;

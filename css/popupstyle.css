@@ -53,8 +53,11 @@ h1{
   -ms-transition:background-color 0.2s linear;
   transition:background-color 0.2s linear;
 }
-table,tr{
+tr{
   height:100%;
+}
+table{
+  height:300px;
 }
 td{
   height:100%;
@@ -73,7 +76,6 @@ td{
   height:19.5%;
 }
 
-
 /* Button contents */
 #buttons img{
   width:60px;
@@ -91,6 +93,9 @@ td{
 }
 .contents{
   display:block;
+}
+.contents p{
+  margin-top:0px;
 }
 
 /* Each button */

@@ -26,15 +26,21 @@ p{
 #menubar{
 	margin:0 auto;
 	display:block;
-	text-align: center
+	text-align:center;
 }
 a.menu{
-	color:#A0A090;
+	color:#909090;
 	font-weight:bold;
 	text-decoration:none;
-	margin:2%;
-	font-size:105%;
+	margin:3%;
+	font-size:125%;
+	-o-transition:color 0.2s linear;
+	-moz-transition:color 0.2s linear;
+	-khtml-transition:bcolor 0.2s linear;
+	-webkit-transition:color 0.2s linear;
+	-ms-transition:color 0.2s linear;
+	transition:color 0.2s linear;
 }
 a.menu:hover{
-	color:#808060;
+	color:#A09050;
 }

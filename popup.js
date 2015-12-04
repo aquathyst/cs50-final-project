@@ -160,23 +160,27 @@ function openoptions(e){
 }
 
 /* Saving domain*/
-function togglesave(){
+function togglesave(domtosave){
 	if(saved===false)
 	{
 		// Save!
 		/* Put into saved list*/
 		saved=true;
-		$("#savepage").id="unsavepage";
+		document.getElementById("savetext").innerHTML='Don\'t use on domain';
+		document.getElementById("savepage").id="unsavepage";
+		renderstatus('save');
 	}
 	else
 	{
 		// Unsave!
 		/* Remove from saved list */
 		saved=false;
-		$("#unsavepage").id="savepage";
+		document.getElementById("savetext").innerHTML='Always use profile on domain';
+		document.getElementById("unsavepage").id="savepage";
+		renderstatus('unsave');
 	}
 }
-function savee(e){togglesave(/*tabdomain*/);}
+function savee(e){togglesave("www.google.com"/*tabdomain*/);}
 
 /* Check if the domain was saved by user */
 function checksave(domtocheck){
@@ -188,12 +192,12 @@ function checksave(domtocheck){
 		
 		// Adjust state and button
 		saved=true;
-		$("#savepage").id="unsavepage";
-		$("#unsavepage").innerHTML='Don\'t use profile on domain';
+		document.getElementById("savetext").innerHTML='Don\'t use on domain';
+		document.getElementById("savepage").id="unsavepage";
 	}
 	else
 	{
-		$("#savepage").innerHTML='Always use profile on domain';
+		document.getElementById("savetext").innerHTML='Always use profile on domain';
 	}
 }
 
@@ -223,7 +227,7 @@ document.addEventListener('DOMContentLoaded',function(){
 	    savedom[i].addEventListener('click',savee);
 	}
 
-	//Profiles
+	// Profiles
 	var profile0set=document.querySelectorAll("#profile0");
 	for(var i=0,len=profile0set.length;i<len;i++){
 	    profile0set[i].addEventListener('click',adoptp0);
@@ -248,5 +252,5 @@ document.addEventListener('DOMContentLoaded',function(){
 	}
 
 	// Check if a saved domain
-	// checksave(tabdomain);
+	checksave(tabdomain);
 });

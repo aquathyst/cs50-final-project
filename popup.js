@@ -156,7 +156,7 @@ function togglesave(domtosave){
 	if(saved===false)
 	{
 		// Save!
-		/* Put into saved list*/
+		/* TODO: Put into saved list with activep*/
 		saved=true;
 		document.getElementById("savetext").innerHTML='Don\'t use on domain';
 		document.getElementById("savepage").id="unsavepage";
@@ -165,7 +165,7 @@ function togglesave(domtosave){
 	else
 	{
 		// Unsave!
-		/* Remove from saved list */
+		/* TODO: Remove from saved list */
 		saved=false;
 		document.getElementById("savetext").innerHTML='Always use profile on domain';
 		document.getElementById("unsavepage").id="savepage";
@@ -176,10 +176,10 @@ function savee(e){togglesave("www.google.com"/*tabdomain*/);}
 
 /* Check if the domain was saved by user */
 function checksave(domtocheck){
-	if(false/*in saved list*/)
+	if(false/*TODO: in saved list?*/)
 	{
 		// Adopt saved profile
-		var savedp=0/*the profile*/;
+		var savedp=0/*TODO: the profile*/;
 		adoptp(savedp);
 		
 		// Adjust state and button

@@ -121,6 +121,7 @@ function qsset(e) {
 	var lheight = document.getElementById("line_height").value;
 	
  	// Set properties if not empty
+ 	/*
 	if(fsize!=="null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq{font-size:"+fsize+" !important;}"});
 	}
@@ -130,6 +131,14 @@ function qsset(e) {
 	if(lheight!=="null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq{line-height:"+lheight+" !important;}"});
 	}
+	*/ //temp removing this code 
+	if(fsize!=="null")
+	    chrome.tabs.executeScript(null, {code:"document.body.style.setProperty('font-size','" + fsize + "','important');"});
+	if(ffamily!=="null")
+		chrome.tabs.executeScript(null, {code:"document.body.style.setProperty('font-family','" + ffamily + "','important');"});
+	if(lheight!=="null")
+		chrome.tabs.executeScript(null, {code:"document.body.style.setProperty('line-height','" + lheight + "','important');"});
+
 	
 	renderstatus('quickstyleset');
 }
@@ -156,7 +165,7 @@ function togglesave(domtosave){
 	if(saved===false)
 	{
 		// Save!
-		/* Put into saved list*/
+		/* TODO: Put into saved list with activep*/
 		saved=true;
 		document.getElementById("savetext").innerHTML='Don\'t use on domain';
 		document.getElementById("savepage").id="unsavepage";
@@ -165,7 +174,7 @@ function togglesave(domtosave){
 	else
 	{
 		// Unsave!
-		/* Remove from saved list */
+		/* TODO: Remove from saved list */
 		saved=false;
 		document.getElementById("savetext").innerHTML='Always use profile on domain';
 		document.getElementById("unsavepage").id="savepage";
@@ -176,10 +185,10 @@ function savee(e){togglesave("www.google.com"/*tabdomain*/);}
 
 /* Check if the domain was saved by user */
 function checksave(domtocheck){
-	if(false/*in saved list*/)
+	if(false/*TODO: in saved list?*/)
 	{
 		// Adopt saved profile
-		var savedp=0/*the profile*/;
+		var savedp=0/*TODO: the profile*/;
 		adoptp(savedp);
 		
 		// Adjust state and button

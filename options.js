@@ -10,34 +10,33 @@ var maxNum = 3; //maximum number of profiles saved
 // added a random delete.png file but you can replate it with something else later
 function loadProfiles() {
   var profileList = "";
+  var profileIndex = "";
   var isEOF = false; 
   
   count = 1;
   while (!isEOF) {
     var profileId = "profileItem" + count;
     if (localStorage.getItem(profileId) !== null) {
-      profileList += "<div id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'>" 
+      profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'>" 
       + localStorage.getItem(profileId) + "&nbsp&nbsp<img id= '" + profileId 
       + "_delete' title='Delete' src='delete.png' height='10' width='10' align='bottom'/></div>"; 
       count++;
     }
-    // because the profiles are not loaded sequentially or if user deleted some 
-    // need to maintain the correct count even if people deleted or added profiles
     else {
       var isFound = false;
       var precount = count;
       var lastcount = count;
-      for (var i = precount; i <= maxNum; i++) {
+      for (var i = precount; i < maxNum; i++) {
           profileId = "profileItem" + i; 
           if (localStorage.getItem(profileId) !== null) {
-            isFound = true;
-            lastcount = count;
-            break;
+              isFound = true;
+              lastcount = count;
+              break;
           }
           else
             count++;
       }
-      if (isFound === false) {
+      if (!isFound) {
         if (maxNum === count)
             count = lastcount;
         isEOF = true;
@@ -48,6 +47,11 @@ function loadProfiles() {
     if (profileList === "")
         profileList = "No Profile";
     document.getElementById("profiles").innerHTML = profileList;
+  /* var temp = "<div id='profile1'>" + localStorage.getItem("profile1") + "</div";
+  temp += "<div id='profile2'>" + localStorage.getItem("profile2") + "</div>";
+  temp += "<div id='profile3'>" + localStorage.getItem("profile3") + "</div>";
+  document.getElementById("profiles").innerHTML = temp;
+  */
 }
 
 // to check if a profile exists; if it exists then return true; else return false
@@ -75,8 +79,7 @@ function setStyle(fs, ff, lh) {
 
 // to remove profile item
 function removeProfile(eid) {
-    for (var i = 0; i < maxNum; i++) 
-        localStorage.removeItem("profileItem" + i);
+    localStorage.removeItem("profileItem" + eid);
 }
 
 // click event to add profile
@@ -88,7 +91,7 @@ function clickAddButton(e) {
 	// need to check if the browser supports HTML5 local storage
 	// must be no older than Chrome 4.0, IE 8, Firefox 3.5, etc
 	if (typeof(Storage) !== "undefined") {
-	    if (e.target.id == "addProfile") {
+	    if (e.target.id == "addProfile" && count < maxNum) {
 	        var profile_name = "profileItem" + count;
 	        if (profileExists(fsize, ffamily, lheight) === false) {
 	            localStorage.setItem(profile_name, fsize + " - " + ffamily + " - " + lheight);
@@ -97,6 +100,8 @@ function clickAddButton(e) {
 	        else
 	            alert("Same profile exists");
 	    }
+	    else
+	        alert("You can only add 3 profiles");
 	}
 	else
 	    alert("Sorry! Your browser does not support Web Storage.");

@@ -70,11 +70,11 @@ function profileExists(fs, ff, lh) {
 // to change the font, size, and line height of a web page
 function setStyle(fs, ff, lh) {
     chrome.tabs.executeScript(null,
-	    	{code:"document.body.style.setProperty('font-size','" + fs + "','important');"});
+	    	{code:"document.body.style.setProperty('font-size','" + fs + "','!important');"});
 	chrome.tabs.executeScript(null,
-	    	{code:"document.body.style.setProperty('font-family','" + ff + "','important');"});
+	    	{code:"document.body.style.setProperty('font-family','" + ff + "','!important');"});
 	chrome.tabs.executeScript(null,
-	    	{code:"document.body.style.setProperty('line-height','" + lh + "','important');"});
+	    	{code:"document.body.style.setProperty('line-height','" + lh + "','!important');"});
 }
 
 // to remove profile item
@@ -91,7 +91,7 @@ function clickAddButton(e) {
 	// need to check if the browser supports HTML5 local storage
 	// must be no older than Chrome 4.0, IE 8, Firefox 3.5, etc
 	if (typeof(Storage) !== "undefined") {
-	    if (e.target.id == "addProfile" && count < maxNum) {
+	    if (e.target.id == "addProfile" && count <= maxNum) {
 	        var profile_name = "profileItem" + count;
 	        if (profileExists(fsize, ffamily, lheight) === false) {
 	            localStorage.setItem(profile_name, fsize + " - " + ffamily + " - " + lheight);
@@ -121,7 +121,7 @@ function clickDiv(e) {
             loadProfiles();
         }
         else {
-            var fontvalue = localStorage.getitem(e.target.id);
+            var fontvalue = localStorage.getItem(e.target.id);
             var values = fontvalue.split(" - ");
             fsize = values[0];
             ffamily = values[1];
@@ -135,7 +135,7 @@ function clickDiv(e) {
 document.addEventListener('DOMContentLoaded', function() {
     var addProfile = document.querySelector("#addProfile");
     addProfile.addEventListener('click', clickAddButton);
-    var divs = document.querySelectorAll('div');
+    var divs = document.querySelectorAll('div, img');
     for (var i = 0, len = divs.length; i < len; i++)
         divs[i].addEventListener('click', clickDiv);
 });

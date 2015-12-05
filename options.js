@@ -47,11 +47,6 @@ function loadProfiles() {
     if (profileList === "")
         profileList = "No Profile";
     document.getElementById("profiles").innerHTML = profileList;
-  /* var temp = "<div id='profile1'>" + localStorage.getItem("profile1") + "</div";
-  temp += "<div id='profile2'>" + localStorage.getItem("profile2") + "</div>";
-  temp += "<div id='profile3'>" + localStorage.getItem("profile3") + "</div>";
-  document.getElementById("profiles").innerHTML = temp;
-  */
 }
 
 // to check if a profile exists; if it exists then return true; else return false
@@ -79,7 +74,7 @@ function setStyle(fs, ff, lh) {
 
 // to remove profile item
 function removeProfile(eid) {
-    localStorage.removeItem("profileItem" + eid);
+    localStorage.removeItem(eid);
 }
 
 // click event to add profile
@@ -120,14 +115,6 @@ function clickDiv(e) {
             removeProfile(idToDelete);
             loadProfiles();
         }
-        else {
-            var fontvalue = localStorage.getItem(e.target.id);
-            var values = fontvalue.split(" - ");
-            fsize = values[0];
-            ffamily = values[1];
-            lheight = values[2];
-            setStyle(fsize, ffamily, lheight);
-        }
     }
 }
 
@@ -135,7 +122,7 @@ function clickDiv(e) {
 document.addEventListener('DOMContentLoaded', function() {
     var addProfile = document.querySelector("#addProfile");
     addProfile.addEventListener('click', clickAddButton);
-    var divs = document.querySelectorAll('div, img');
+    var divs = document.querySelectorAll('div');
     for (var i = 0, len = divs.length; i < len; i++)
         divs[i].addEventListener('click', clickDiv);
 });

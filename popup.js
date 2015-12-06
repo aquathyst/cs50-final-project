@@ -75,6 +75,16 @@ var css1="";
 var css2="";
 var css3="";
 
+/* Prepare fallback fonts for CSS */
+function fallbackfont(font){
+	if(font==="Arial"||font==="Verdana"||font==="Helvetica"||font==="Tahoma"||font==="Cursive"){
+		return "sans-serif";
+	}
+	else{
+		return "serif";
+	}
+}
+
 /* Make CSS */
 function makeCSS(pnum){
 	
@@ -87,10 +97,10 @@ function makeCSS(pnum){
     var lheight = values[2];
 
     // Generate CSS string
-    var csstemp="body.alphatextcustomp p{"+
+    var csstemp="body.alphatextcustomp p,body.alphatextcustomp p,a{"+
     		+"font-size:"+fsize+" !important;}"
     		+"body.alphatextcustomp *{"
-    		+"font-family:"+ffamily+",sans serif !important;"
+    		+"font-family:"+ffamily+","+fallbackfont(ffamily)+" !important;"
     		+"line-height:"+lheight+" !important;}";
 
     // Save into css vars
@@ -173,7 +183,7 @@ function qsset(e) {
  	// Set properties if not empty
  	
 	if(fsize!=="null"){
-		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p{font-size:"+fsize+" !important;}"});
+		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a{font-size:"+fsize+" !important;}"});
 	}
 	if(ffamily!=="null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{font-family:"+ffamily+" !important;}"});

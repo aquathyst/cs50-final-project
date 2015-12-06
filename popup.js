@@ -39,6 +39,8 @@ function geturldomain(){
 /* Render status text */
 function renderstatus(eventtype){
 	switch(eventtype){
+		case 'EMPTY':
+			document.getElementById("status").innerHTML='';
 		case 'off':
 			document.getElementById("status").innerHTML='All styles removed.';
 			break;

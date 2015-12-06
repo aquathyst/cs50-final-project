@@ -6,6 +6,17 @@
 /* Render status text */
 function renderstatus(what){
   switch(what){
+    case 'EMPTY':
+      document.getElementById("prefstatus").innerHTML='';
+      document.getElementById("profstatus").innerHTML='';
+      document.getElementById("domstatus").innerHTML='';
+      document.getElementById("overallstatus").innerHTML='';
+    case 'padd':
+      document.getElementById("profstatus").innerHTML='Profile saved';
+      break;
+    case 'prem':
+      document.getElementById("profstatus").innerHTML='Profile removed';
+      break;
     case 'psamep':
       document.getElementById("profstatus").innerHTML='Same profile exists';
       break;
@@ -99,6 +110,7 @@ function clickAddButton(e) {
 	        if (profileExists(fsize, ffamily, lheight) === false) {
 	            localStorage.setItem(profile_name, fsize + " - " + ffamily + " - " + lheight);
 	            loadProfiles();
+              renderstatus('padd');
 	        }
 	        else
 	            // alert("Same profile exists");
@@ -125,14 +137,19 @@ function clickDiv(e) {
             var idToDelete = eleId.substring(0, eleId.length - 7);
             removeProfile(idToDelete);
             loadProfiles();
+            renderstatus('prem');
         }
     }
 }
 
 // add event listener for when the page loads
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // Add Profile
     var addProfile = document.querySelector("#addProfile");
     addProfile.addEventListener('click', clickAddButton);
+
+    // Remove Profile
     var divs = document.querySelectorAll('div');
     for (var i = 0, len = divs.length; i < len; i++)
         divs[i].addEventListener('click', clickDiv);

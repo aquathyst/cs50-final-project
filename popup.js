@@ -1,10 +1,13 @@
 /*
-  AlphaText
-  JavaScript for popup.html
-*/
+ * Copyright (C) 2015 Holly Zhou and Peter Wang. All rights reserved.
+ *
+ * AlphaText--Extension for online text readability
+ * Javascript for popup
+ */
 
 /* Add jQuery methods for js to work */
 function addmethods(){
+	// jQuery from http://jquery.com/
 	chrome.tabs.executeScript(null,{file:chrome.extension.getURL("3rdparty/jquery-2.1.4.min.js")});
 }
 

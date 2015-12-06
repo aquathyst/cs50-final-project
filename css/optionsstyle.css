@@ -1,7 +1,9 @@
 /*
-  AlphaText
-  Additional stylesheet for options.html
-*/
+ * Copyright (C) 2015 Holly Zhou and Peter Wang. All rights reserved.
+ *
+ * AlphaText--Extension for online text readability
+ * Stylesheet for options
+ */
 
 .status{
 	font-size:110%;

@@ -139,14 +139,22 @@ td{
   background-color:#255C8D;
 }
 
-#profile1,#profile2,#profile3{
+#profileItem1,#profileItem2,#profileItem3{
   background-color:#DBB743;
 }
-#profile1:hover,#profile2:hover,#profile3:hover{
+#profileItem1:hover,#profileItem2:hover,#profileItem3:hover{
   background-color:#E2C568;
 }
-#profile1:active,#profile2:active,#profile3:active{
+#profileItem1:active,#profileItem2:active,#profileItem3:active{
   background-color:#B89624;
+}
+
+#profileempty{
+  background-color:#999999;
+  color:#CCCCCC;
+}
+#profileempty:hover{
+  background-color:#A5A5A5;
 }
 
 .quickstyles{

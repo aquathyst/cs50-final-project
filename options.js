@@ -3,6 +3,24 @@
   JavaScript for options.html
 */
 
+/* Render status text */
+function renderstatus(what){
+  switch(what){
+    case 'psamep':
+      document.getElementById("profstatus").innerHTML='Same profile exists';
+      break;
+    case 'pmorethan3':
+      document.getElementById("profstatus").innerHTML='You can only add 3 profiles';
+      break;
+    case 'pnostorage':
+      document.getElementById("profstatus").innerHTML='Sorry! Your browser does not support Web Storage.';
+      break;
+    default:
+      document.getElementById("overallstatus").innerHTML=what;
+      break;
+  }
+}
+
 var count; //to record the number of profiles saved
 var maxNum = 3; //maximum number of profiles saved
 
@@ -17,7 +35,7 @@ function loadProfiles() {
   while (!isEOF) {
     var profileId = "profileItem" + count;
     if (localStorage.getItem(profileId) !== null) {
-      profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'>" 
+      profileList += "<div class='profs' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><b>Profile " + count + "</b>: "
       + localStorage.getItem(profileId) + "&nbsp&nbsp<img id= '" + profileId 
       + "_delete' title='Delete' src='delete.png' height='10' width='10' align='bottom'/></div>"; 
       count++;
@@ -62,16 +80,6 @@ function profileExists(fs, ff, lh) {
     return false;
 }
 
-// to change the font, size, and line height of a web page
-function setStyle(fs, ff, lh) {
-    chrome.tabs.executeScript(null,
-	    	{code:"document.body.style.setProperty('font-size','" + fs + "','!important');"});
-	chrome.tabs.executeScript(null,
-	    	{code:"document.body.style.setProperty('font-family','" + ff + "','!important');"});
-	chrome.tabs.executeScript(null,
-	    	{code:"document.body.style.setProperty('line-height','" + lh + "','!important');"});
-}
-
 // to remove profile item
 function removeProfile(eid) {
     localStorage.removeItem(eid);
@@ -79,7 +87,7 @@ function removeProfile(eid) {
 
 // click event to add profile
 function clickAddButton(e) {
-    var fsize = document.getElementById("font_size").value;
+  var fsize = document.getElementById("font_size").value;
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
 	
@@ -93,13 +101,16 @@ function clickAddButton(e) {
 	            loadProfiles();
 	        }
 	        else
-	            alert("Same profile exists");
+	            // alert("Same profile exists");
+              renderstatus('psamep');
 	    }
 	    else
-	        alert("You can only add 3 profiles");
+	        // alert("You can only add 3 profiles");
+          renderstatus('pmorethan3');
 	}
 	else
-	    alert("Sorry! Your browser does not support Web Storage.");
+	    // alert("Sorry! Your browser does not support Web Storage.");
+      renderstatus('pnostorage');
 }
 
 // to handle profile deletion and font/size/line height change

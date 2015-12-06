@@ -3,4 +3,11 @@
   Additional stylesheet for options.html
 */
 
+.status{
+	font-size:110%;
+ 	color:#AACCCC;
+}
 
+.profs{
+	color:#998800;
+}

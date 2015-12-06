@@ -9,7 +9,8 @@
   <body>
     <h1>AlphaText Settings</h1>
         
-    <h2>User preferences</h2>
+    <!-- <h2>User preferences</h2>
+      <div class="status" id="prefstatus"></div> -->
 
     <h2>Change profile styles</h2>
       <b>Select Font Size:</b>
@@ -23,6 +24,7 @@
             <option value="28px">28</option>
           </select>
         </div>
+      <br/>
       <b>Select Font Family:</b>
         <div id="fontfamily">
           <select id="font_family">
@@ -35,6 +37,7 @@
             <option value="Cursive">Cursive</option>
           </select>
         </div>
+      <br/>
       <b>Select Line Height:</b>
         <div id="lineheight">
           <select id="line_height">
@@ -44,20 +47,26 @@
             <option value="200%">200%</option>
           </select>
         </div>
+      <br/>
       <b>Saved Profiles:</b>
         <div id="profiles"></div>
         <button id="addProfile" type="button" align="center">Add as Profile</button>
-    
-    <h2>Manage saved domains</h2>
+      <br/>
+      <div class="status" id="profstatus"></div>
 
+    <!-- <h2>Manage saved domains</h2>
+    <div class="status" id="domstatus"></div> -->
 
     <div id="menubar">
       <a class="menu" href="options.html">Settings</a>
       <a class="menu" href="about.html">About AlphaText</a>
       <a class="menu" href="help.html">Help and FAQs</a>
-    </div>
+      </div>
     
-    <noscript>Sorry, Javascript must be enabled for AlphaText to work!</noscript>
+    <div class="status" id="overallstatus">
+      <noscript>Sorry, Javascript must be enabled for AlphaText to work!</noscript>
+    </div>
+
     <script src="3rdparty/jquery-2.1.4.min.js"></script>
     <script src="options.js"></script>
   </body>

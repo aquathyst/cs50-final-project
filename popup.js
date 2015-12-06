@@ -87,8 +87,9 @@ function makeCSS(pnum){
     var lheight = values[2];
 
     // Generate CSS string
-    var csstemp="body.alphatextcustomp{"+
-    		+"font-size:"+fsize+" !important;"
+    var csstemp="body.alphatextcustomp p{"+
+    		+"font-size:"+fsize+" !important;}"
+    		+"body.alphatextcustomp *{"
     		+"font-family:"+ffamily+",sans serif !important;"
     		+"line-height:"+lheight+" !important;}";
 
@@ -172,13 +173,13 @@ function qsset(e) {
  	// Set properties if not empty
  	
 	if(fsize!=="null"){
-		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq{font-size:"+fsize+" !important;}"});
+		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p{font-size:"+fsize+" !important;}"});
 	}
 	if(ffamily!=="null"){
-		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq{font-family:"+ffamily+" !important;}"});
+		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{font-family:"+ffamily+" !important;}"});
 	}
 	if(lheight!=="null"){
-		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq{line-height:"+lheight+" !important;}"});
+		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{line-height:"+lheight+" !important;}"});
 	}
 	
 	renderstatus('quickstyleset');

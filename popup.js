@@ -173,14 +173,6 @@ function qsset(e) {
 	if(lheight!=="null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq{line-height:"+lheight+" !important;}"});
 	}
-
-	// if(fsize!=="null")
-	//     chrome.tabs.executeScript(null, {code:"document.body.style.setProperty('font-size','" + fsize + "','important');"});
-	// if(ffamily!=="null")
-	// 	chrome.tabs.executeScript(null, {code:"document.body.style.setProperty('font-family','" + ffamily + "','important');"});
-	// if(lheight!=="null")
-	// 	chrome.tabs.executeScript(null, {code:"document.body.style.setProperty('line-height','" + lheight + "','important');"});
-
 	
 	renderstatus('quickstyleset');
 }

@@ -37,7 +37,7 @@ function loadProfiles() {
     if (localStorage.getItem(profileId) !== null) {
       profileList += "<div class='profs' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><b>Profile " + count + "</b>: "
       + localStorage.getItem(profileId) + "&nbsp&nbsp<img id= '" + profileId 
-      + "_delete' title='Delete' src='delete.png' height='10' width='10' align='bottom'/></div>"; 
+      + "_delete' title='Delete' src='images/delete.png' height='10' width='10' align='bottom'/></div>"; 
       count++;
     }
     else {

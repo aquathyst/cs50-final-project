@@ -295,9 +295,6 @@ function loadProfiles() {
   document.getElementById("profilecol").innerHTML = "<div class='sectionhead' id='profhead'><p>Profiles</p></div>" + profileList + emptyProf;
 }
 
-// Load profile buttons
-window.onload = loadProfiles;
-
 /* Load once started */
 document.addEventListener('DOMContentLoaded',function(){
 
@@ -323,6 +320,9 @@ document.addEventListener('DOMContentLoaded',function(){
 	for(var i=0,len=savedom.length;i<len;i++){
 	    savedom[i].addEventListener('click',savee);
 	}
+
+	// Load profile buttons
+	loadProfiles();
 
 	// Profiles
 	var profile1set=document.querySelectorAll("#profileItem1");

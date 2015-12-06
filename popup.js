@@ -3,6 +3,11 @@
   JavaScript for popup.html
 */
 
+/* Add jQuery methods for js to work */
+function addmethods(){
+	chrome.tabs.executeScript(null,{file:chrome.extension.getURL("3rdparty/jquery-2.1.4.min.js")});
+}
+
 /* Variables to track active profile and saved state*/
 var activep=null;
 var saved=false;
@@ -291,6 +296,9 @@ function loadProfiles() {
 
 /* Load once started */
 document.addEventListener('DOMContentLoaded',function(){
+
+	// Add jQuery
+	addmethods();
 
 	// Save current url and domain
 	geturldomain();

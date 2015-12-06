@@ -29,6 +29,10 @@ h1{
 ::selection{
   background-color:transparent;
 }
+.minitext{
+  font-size:75%;
+  display:block;
+}
 
 /* Buttons */
 /* General styles */

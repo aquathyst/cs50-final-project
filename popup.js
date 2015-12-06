@@ -253,7 +253,7 @@ function loadProfiles() {
     var profileId = "profileItem" + count;
     if (localStorage.getItem(profileId) !== null) {
       profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='profiles'><img src='images/profile.png' class='profim'/><p>Profile " 
-      + count + "</p></div></div>"; 
+      + count + "</p><span class='minitext'>" + localStorage.getItem(profileId) + "</span></div></div>"; 
       count++;
     }
     else {
@@ -339,4 +339,3 @@ document.addEventListener('DOMContentLoaded',function(){
 	// Check if a saved domain
 	checksave(tabdomain);
 });
-

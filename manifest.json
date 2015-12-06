@@ -21,14 +21,14 @@
   },
 
   "background": {
-    "scripts": ["3rdparty/jquery-2.1.4.min.js","eventPage.js"],
+    "scripts": ["eventPage.js"],
     "persistent": false
   },
   
   "content_scripts": [
     {
       "matches": ["http://*/*","https://*/*"],
-      "js": ["3rdparty/jquery-2.1.4.min.js","contentscript.js"]
+      "js": ["contentscript.js"]
     }
   ],
 

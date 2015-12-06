@@ -15,35 +15,6 @@ function addmethods(){
 var activep=null;
 var saved=false;
 
-/* Get url and domain of website */
-var taburl=null;
-var tabdomain=null;
-function geturldomain(){
-	chrome.tabs.query({'active':true},function(tab){
-	    taburl=tab[0].url;
-	    var end=taburl.indexOf('/',8)
-		if(end!==-1)
-		{
-			if(taburl.indexOf("http://")!==-1)
-			{
-				tabdomain=taburl.substring(7,end);
-			}
-			else if(taburl.indexOf("https://")!==-1)
-			{
-				tabdomain=taburl.substring(8,end);
-			}
-			else
-			{
-				tabdomain=null;
-			}
-		}
-		else
-		{
-			tabdomain=null;
-		}
-	});
-}
-
 /* Render status text */
 function renderstatus(eventtype){
 	switch(eventtype){
@@ -66,6 +37,9 @@ function renderstatus(eventtype){
 			break;
 		case 'quickstyleset':
 			document.getElementById("status").innerHTML='Quick style set successfully!';
+			break;
+		case 'saveautop':
+			document.getElementById("status").innerHTML='Profile '+activep+' activated automatically on this domain!';
 			break;
 		default:
 			document.getElementById("status").innerHTML=eventtype;
@@ -157,12 +131,8 @@ function adoptp(profile){
 	}
 	
 	activep=profile;
-	if(profile!==0){
-		renderstatus('adoptp');
-	}
-	else{
-		renderstatus('adoptpd');
-	}
+
+	renderstatus('adoptp');
 }
 // Functions for event call
 function adoptp1(e){adoptp(1);}
@@ -243,9 +213,10 @@ function checksave(domtocheck){
 	if(false/*TODO: in saved list?*/)
 	{
 		// Adopt saved profile
-		var savedp=0/*TODO: the profile*/;
+		var savedp=1/*TODO: the profile*/;
 		adoptp(savedp);
-		
+		renderstatus('saveautop');
+
 		// Adjust state and button
 		saved=true;
 		document.getElementById("savetext").innerHTML='Don\'t use on domain';
@@ -257,8 +228,40 @@ function checksave(domtocheck){
 	}
 }
 
-/* Profiles Management */
+/* Get url and domain of website, and see if it was saved */
+var taburl=null;
+var tabdomain=null;
+function checkurldomain(){
+	chrome.tabs.query({'active':true},function(tab){
+	    // Getting URL and domain
+	    taburl=tab[0].url;
+	    var end=taburl.indexOf('/',8)
+		if(end!==-1)
+		{
+			if(taburl.indexOf("http://")!==-1)
+			{
+				tabdomain=taburl.substring(7,end);
+			}
+			else if(taburl.indexOf("https://")!==-1)
+			{
+				tabdomain=taburl.substring(8,end);
+			}
+			else
+			{
+				tabdomain=null;
+			}
+		}
+		else
+		{
+			tabdomain=null;
+		}
 
+		// Check if saved
+		checksave(tabdomain);
+	});
+}
+
+/* Profiles Management */
 var count; //to record the number of profiles saved
 var maxNum = 3; //maximum number of profiles saved
 
@@ -315,7 +318,7 @@ document.addEventListener('DOMContentLoaded',function(){
 	addmethods();
 
 	// Save current url and domain
-	geturldomain();
+	checkurldomain();
 
 	/* Button event listeners */
 
@@ -359,7 +362,4 @@ document.addEventListener('DOMContentLoaded',function(){
 	for(var i=0,len=qsbutton.length;i<len;i++){
 	    qsbutton[i].addEventListener('click',qsset);
 	}
-
-	// Check if a saved domain
-	checksave(tabdomain);
 });

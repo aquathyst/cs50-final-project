@@ -31,6 +31,8 @@
       "js": ["3rdparty/jquery-2.1.4.min.js","contentscript.js"]
     }
   ],
+
+  "incognito": "spanning",
   
   "options_ui": {
     "page": "options.html",
@@ -46,4 +48,5 @@
     "fontSettings",
     "storage"
   ]
+ 
 }

@@ -273,7 +273,7 @@ function loadProfiles() {
   while (!isEOF) {
     var profileId = "profileItem" + count;
     if (localStorage.getItem(profileId) !== null) {
-      profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='profiles'><img src='images/profile.png' class='profim'/><p>Profile " 
+      profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='profiles'><img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/><p>Profile " 
       + count + "</p><span class='minitext'>" + localStorage.getItem(profileId) + "</span></div></div>"; 
       count++;
     }

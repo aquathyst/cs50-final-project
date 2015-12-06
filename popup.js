@@ -8,7 +8,7 @@
 /* Add jQuery methods for js to work */
 function addmethods(){
 	// jQuery from http://jquery.com/
-	chrome.tabs.executeScript(null,{file:chrome.extension.getURL("3rdparty/jquery-2.1.4.min.js")});
+	chrome.tabs.executeScript(null,{file:"3rdparty/jquery-2.1.4.min.js"});
 }
 
 /* Variables to track active profile and saved state*/

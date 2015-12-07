@@ -32,8 +32,9 @@ h1{
   background-color:transparent;
 }
 .minitext{
-  font-size:75%;
-  display:block;
+  font-size:60%;
+  clear:both;
+  margin-top:-5%;
 }
 
 /* Buttons */

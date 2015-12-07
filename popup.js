@@ -190,7 +190,13 @@ function togglesave(domtosave){
 	if(saved===false)
 	{
 		// Save!
-		/* TODO: Put into saved list with activep*/
+		if(activep!==null){
+			localStorage.setItem('dom: '+tabdomain,activep.toString());
+		}
+		else
+		{
+			localStorage.setItem('dom: '+tabdomain,'1');
+		}
 		saved=true;
 		document.getElementById("savetext").innerHTML='Don\'t use on domain';
 		document.getElementById("savepage").id="unsavepage";
@@ -199,21 +205,21 @@ function togglesave(domtosave){
 	else
 	{
 		// Unsave!
-		/* TODO: Remove from saved list */
+		localStorage.removeItem('dom: '+tabdomain);
 		saved=false;
 		document.getElementById("savetext").innerHTML='Always use profile on domain';
 		document.getElementById("unsavepage").id="savepage";
 		renderstatus('unsave');
 	}
 }
-function savee(e){togglesave("www.google.com"/*tabdomain*/);}
+function savee(e){togglesave(tabdomain);}
 
 /* Check if the domain was saved by user */
 function checksave(domtocheck){
-	if(false/*TODO: in saved list?*/)
+	if(localStorage.getItem('dom: '+tabdomain)!==null)
 	{
 		// Adopt saved profile
-		var savedp=1/*TODO: the profile*/;
+		var savedp=parseInt(localStorage.getItem('dom: '+tabdomain));
 		adoptp(savedp);
 		renderstatus('saveautop');
 
@@ -277,7 +283,7 @@ function loadProfiles() {
     var profileId = "profileItem" + count;
     if (localStorage.getItem(profileId) !== null) {
       profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='profiles'><img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/><p>Profile " 
-      + count + "</p><span class='minitext'>" + localStorage.getItem(profileId) + "</span></div></div>"; 
+      + count + "</p><p class='minitext'>" + localStorage.getItem(profileId) + "</p></div></div>"; 
       count++;
     }
     else {

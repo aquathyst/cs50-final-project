@@ -25,7 +25,7 @@ h1{
 }
 #status{
   font-size:110%;
-  color:#AACCCC;
+  color:#DAA740;
   margin:10px;
 }
 ::selection{
@@ -83,7 +83,7 @@ td{
   height:19.5%;
 }
 
-/* Button contents */
+/* General button contents */
 #buttons img{
   width:60px;
   display:block;
@@ -184,17 +184,7 @@ td{
   background-color:#239D7C;
 }
 
-#font_size,#font_family,#line_height{
-  width:100px;
-}
-
 /* Button section heads */
-#profhead{
-  background-color:#B99F03;
-}
-#qshead{
-  background-color:#40625B;
-}
 .sectionhead{
   height:22%;
   width:100%;
@@ -202,4 +192,15 @@ td{
 .sectionhead p{
   font-size:130%;
   font-weight:bold;
+}
+#profhead{
+  background-color:#B99F03;
+}
+#qshead{
+  background-color:#40625B;
+}
+
+/* Dropdowns */
+#font_size,#font_family,#line_height{
+  width:100px;
 }

@@ -286,8 +286,11 @@ function loadProfiles() {
 		{
 		  profileId=localStorage.key(keyi);
 		  profv=localStorage.getItem(localStorage.key(keyi));
-		  profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='profiles'><img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/><p>Profile " 
-		  + localStorage.key(keyi).substring(11) + "</p><p class='minitext'>" + localStorage.getItem(profileId) + "</p></div></div>"; 
+		  profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='contents'>"
+		  		+"<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>"
+		  		+"<p>Profile " + localStorage.key(keyi).substring(11) + "</p>"
+		  		+"<p class='minitext'>" + localStorage.getItem(profileId) + "</p>"
+		  	+"</div></div>"; 
 		  count++;
 		}
   }
@@ -333,7 +336,7 @@ function loadProfiles() {
 
   // Make empty profile blanks
   for(var i=0;i<maxNum-count;i++){
-	emptyProf+="<div class='mid' id='profileempty'><div class='profiles'><p>No Profile</p></div></div>";
+	emptyProf+="<div class='mid' id='profileempty'><div class='contents'><p>No Profile</p></div></div>";
   }
 
   // Generate HTML

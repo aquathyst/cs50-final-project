@@ -165,3 +165,20 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 window.onload = loadProfiles;
+
+
+
+
+
+// function loadDomains(){
+//   var domainList="";
+//   var domkeyprefix="dom: ";
+
+//   localStorage.getItem;
+
+
+//   if(domainList===""){
+//     domainList="No domains saved";
+//   }
+//   document.getElementById("domlist").innerHTML=domainList;
+// }

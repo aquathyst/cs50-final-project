@@ -72,7 +72,7 @@ td{
   border:0px;
 }
 #buttons .big{
-  height:28%;
+  height:33.3%;
 }
 #buttons .mid{
   height:26%;
@@ -80,9 +80,6 @@ td{
 }
 #buttons .small{
   height:19.5%;
-}
-#buttons .tiny{
-  height:16%;
 }
 
 /* General button contents */
@@ -149,19 +146,6 @@ p.minitext{
 }
 #unsavepage:active{
   background-color:#255C8D;
-}
-
-#savepagep{
-  background-color:#64B5D8;
-}
-#savepagep:hover{
-  background-color:#81C3DF;
-}
-#unsavepagep{
-  background-color:#3071B4;
-}
-#unsavepagep:hover{
-  background-color:#4B8DDB;
 }
 
 #profileItem1,#profileItem2,#profileItem3{

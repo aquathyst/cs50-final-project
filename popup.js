@@ -14,7 +14,6 @@ function addmethods(){
 /* Variables to track active profile and saved state*/
 var activep=null;
 var saved=false;
-var saveasp=null;
 
 /* Render status text */
 function renderstatus(eventtype){
@@ -31,7 +30,7 @@ function renderstatus(eventtype){
 			document.getElementById("status").innerHTML='Error!';
 			break;
 		case 'save':
-			document.getElementById("status").innerHTML='Domain saved to always use Profile '+saveasp+'.';
+			document.getElementById("status").innerHTML='Domain saved to always use Profile 1 by default.';
 			break;
 		case 'unsave':
 			document.getElementById("status").innerHTML='Domain save removed.';
@@ -191,12 +190,10 @@ function togglesave(domtosave){
 	if(saved===false)
 	{
 		// Save!
-		saveasp=document.getElementById("pnum").value;
-		localStorage.setItem('dom: '+tabdomain,saveasp);
+		localStorage.setItem('dom: '+tabdomain,1);
 		saved=true;
 		document.getElementById("savetext").innerHTML='Don\'t use on domain';
 		document.getElementById("savepage").id="unsavepage";
-		document.getElementById("savepagep").id="unsavepagep";
 		renderstatus('save');
 	}
 	else
@@ -204,9 +201,8 @@ function togglesave(domtosave){
 		// Unsave!
 		localStorage.removeItem('dom: '+tabdomain);
 		saved=false;
-		document.getElementById("savetext").innerHTML='Always use profile on domain';
+		document.getElementById("savetext").innerHTML='Always use profile 1 on domain';
 		document.getElementById("unsavepage").id="savepage";
-		document.getElementById("unsavepagep").id="savepagep";
 		renderstatus('unsave');
 	}
 }
@@ -225,7 +221,6 @@ function checksave(domtocheck){
 		saved=true;
 		document.getElementById("savetext").innerHTML='Don\'t use on domain';
 		document.getElementById("savepage").id="unsavepage";
-		document.getElementById("savepagep").id="unsavepagep";
 	}
 	else
 	{

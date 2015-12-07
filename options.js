@@ -41,19 +41,26 @@ var maxNum = 3; //maximum number of profiles saved
 // added a random delete.png file but you can replate it with something else later
 function loadProfiles() {
   var profileList = "";
-  var profileIndex = "";
-  var isEOF = false; 
-  
-  count = 1;
-  while (!isEOF) {
-    var profileId = "profileItem" + count;
-    if (localStorage.getItem(profileId) !== null) {
-      profileList += "<div class='profs' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><b>Profile " + count + "</b>: "
-      + localStorage.getItem(profileId) + "&nbsp&nbsp<img id= '" + profileId 
-      + "_delete' title='Delete' src='images/delete.png' height='10' width='10' align='bottom'/></div>"; 
-      count++;
+  // var profileIndex = "";
+  // var isEOF = false; 
+  var profileId = "";
+  var storageLen = localStorage.length;
+  // count = 1;
+  // while (!isEOF) {
+  if (storageLen > 0) {
+    // var profileId = "profileItem" + count;
+    for (var i = 0; i < 100; i++) {
+        profileId = "profileItem" + i;
+        if (localStorage.getItem(profileId) !== null) {
+          profileList += "<div class='profs' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><b>Profile " + count + "</b>: "
+          + localStorage.getItem(profileId) + "&nbsp&nbsp<img id= '" + profileId 
+          + "_delete' title='Delete' src='images/delete.png' height='10' width='10' align='bottom'/></div>"; 
+          count = i; 
+        }
     }
-    else {
+    count++; 
+    
+    /* else {
       var isFound = false;
       var precount = count;
       var lastcount = count;
@@ -74,7 +81,7 @@ function loadProfiles() {
       }
     }
   }
-  
+  */
     if (profileList === "")
         profileList = "No Profile";
     document.getElementById("profiles").innerHTML = profileList;
@@ -83,7 +90,6 @@ function loadProfiles() {
 // to check if a profile exists; if it exists then return true; else return false
 // fs = font size; ff = font family; lh = line height
 function profileExists(fs, ff, lh) {
-    var num = 1;
     for (var i = 1; i < count; i++) {
         var profileId = "profileItem" + i;
         var profileValue = fs + " - " + ff + " - " + lh;
@@ -103,11 +109,12 @@ function clickAddButton(e) {
   var fsize = document.getElementById("font_size").value;
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
+	var storageLen = localStorage.length; 
 	
 	// need to check if the browser supports HTML5 local storage
 	// must be no older than Chrome 4.0, IE 8, Firefox 3.5, etc
 	if (typeof(Storage) !== "undefined") {
-	    if (e.target.id == "addProfile" && count <= maxNum) {
+	    if (e.target.id == "addProfile" && storageLen < maxNum) {
 	        var profile_name = "profileItem" + count;
 	        if (profileExists(fsize, ffamily, lheight) === false) {
 	            localStorage.setItem(profile_name, fsize + " - " + ffamily + " - " + lheight);

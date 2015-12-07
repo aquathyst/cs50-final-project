@@ -34,63 +34,81 @@ function renderstatus(what){
   }
 }
 
-var count; //to record the number of profiles saved
+// var count; //to record the number of profiles saved
 var maxNum = 3; //maximum number of profiles saved
 
 // loading and reloading profile items
 // added a random delete.png file but you can replate it with something else later
 function loadProfiles() {
   var profileList = "";
-  // var profileIndex = "";
-  // var isEOF = false; 
-  var profileId = "";
+  var profkeyprefix="profileItem";
   var storageLen = localStorage.length;
-  // count = 1;
-  // while (!isEOF) {
-  if (storageLen > 0) {
-    // var profileId = "profileItem" + count;
-    for (var i = 0; i < 100; i++) {
-        profileId = "profileItem" + i;
-        if (localStorage.getItem(profileId) !== null) {
-          profileList += "<div class='profs' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><b>Profile " + count + "</b>: "
-          + localStorage.getItem(profileId) + "&nbsp&nbsp<img id= '" + profileId 
-          + "_delete' title='Delete' src='images/delete.png' height='10' width='10' align='bottom'/></div>"; 
-          count = i; 
-        }
-    }
-    count++; 
-    
-    /* else {
-      var isFound = false;
-      var precount = count;
-      var lastcount = count;
-      for (var i = precount; i < maxNum; i++) {
-          profileId = "profileItem" + i; 
-          if (localStorage.getItem(profileId) !== null) {
-              isFound = true;
-              lastcount = count;
-              break;
-          }
-          else
-            count++;
-      }
-      if (!isFound) {
-        if (maxNum === count)
-            count = lastcount;
-        isEOF = true;
-      }
+  var profileId = "";
+  var profv = "";
+
+  for(var keyi=0;keyi<storageLen;keyi++)
+  {
+    if(localStorage.key(keyi).substring(0,11)===profkeyprefix)
+    {
+      profileId=localStorage.key(keyi);
+      profv=localStorage.getItem(localStorage.key(keyi));
+      profileList += "<div class='profs' id='" + profileId + "' value='" + profv + "'><b>Profile " + profileId.substring(11) + "</b>: "
+          + profv + "&nbsp&nbsp<img id= '" + profileId 
+          + "_delete' title='Delete' src='images/delete.png' height='10' width='10' align='bottom'/></div>";
     }
   }
-  */
-    if (profileList === "")
-        profileList = "No Profile";
-    document.getElementById("profiles").innerHTML = profileList;
+
+  // // var profileIndex = "";
+  // // var isEOF = false; 
+  // var profileId = "";
+  // var storageLen = localStorage.length;
+  // // count = 1;
+  // // while (!isEOF) {
+  // if (storageLen > 0) {
+  //   // var profileId = "profileItem" + count;
+  //   for (var i = 0; i < 100; i++) {
+  //       profileId = "profileItem" + i;
+  //       if (localStorage.getItem(profileId) !== null) {
+  //         profileList += "<div class='profs' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><b>Profile " + count + "</b>: "
+  //         + localStorage.getItem(profileId) + "&nbsp&nbsp<img id= '" + profileId 
+  //         + "_delete' title='Delete' src='images/delete.png' height='10' width='10' align='bottom'/></div>"; 
+  //         count = i; 
+  //       }
+  //   }
+  //   count++; 
+    
+  //   /* else {
+  //     var isFound = false;
+  //     var precount = count;
+  //     var lastcount = count;
+  //     for (var i = precount; i < maxNum; i++) {
+  //         profileId = "profileItem" + i; 
+  //         if (localStorage.getItem(profileId) !== null) {
+  //             isFound = true;
+  //             lastcount = count;
+  //             break;
+  //         }
+  //         else
+  //           count++;
+  //     }
+  //     if (!isFound) {
+  //       if (maxNum === count)
+  //           count = lastcount;
+  //       isEOF = true;
+  //     }
+  //   }
+  // }
+  // */
+
+  if (profileList === "")
+      profileList = "No Profile";
+  document.getElementById("profiles").innerHTML = profileList;
 }
 
 // to check if a profile exists; if it exists then return true; else return false
 // fs = font size; ff = font family; lh = line height
 function profileExists(fs, ff, lh) {
-    for (var i = 1; i < count; i++) {
+    for (var i = 1; i <= maxNum; i++) {
         var profileId = "profileItem" + i;
         var profileValue = fs + " - " + ff + " - " + lh;
         if (localStorage.getItem(profileId) === profileValue) 
@@ -104,18 +122,39 @@ function removeProfile(eid) {
     localStorage.removeItem(eid);
 }
 
+// Figure out what is the next profile number to be saved to
+function nextNum(){
+  if(localStorage.getItem('profileItem1')===null)
+  {
+    return 1;
+  }
+  else if(localStorage.getItem('profileItem2')===null)
+  {
+    return 2;
+  }
+  else if(localStorage.getItem('profileItem3')===null)
+  {
+    return 3;
+  }
+  else
+  {
+    return 'MAX';
+  }
+}
+
 // click event to add profile
 function clickAddButton(e) {
   var fsize = document.getElementById("font_size").value;
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
 	var storageLen = localStorage.length; 
-	
+	var profNum=nextNum();
+
 	// need to check if the browser supports HTML5 local storage
 	// must be no older than Chrome 4.0, IE 8, Firefox 3.5, etc
 	if (typeof(Storage) !== "undefined") {
-	    if (e.target.id == "addProfile" && storageLen < maxNum) {
-	        var profile_name = "profileItem" + count;
+	    if (profNum!=='MAX') {
+	        var profile_name = "profileItem" + profNum;
 	        if (profileExists(fsize, ffamily, lheight) === false) {
 	            localStorage.setItem(profile_name, fsize + " - " + ffamily + " - " + lheight);
 	            loadProfiles();
@@ -151,6 +190,30 @@ function clickDiv(e) {
     }
 }
 
+// Load domains list
+function loadDomains(){
+  var domainList="";
+  var domkeyprefix="dom: ";
+  var storagelength=localStorage.length;
+
+  // Generate HTML
+  for(var keyi=0;keyi<storagelength;keyi++)
+  {
+    if(localStorage.key(keyi).substring(0,5)===domkeyprefix)
+    {
+      var dom=localStorage.key(keyi).substring(5);
+      var pro=localStorage.getItem(localStorage.key(keyi));
+      domainList+="<div class='doms'><b><a href='http://"+dom+"' target='_blank'>"+dom+"</a></b> (Profile "+pro+")</div>";
+    }
+  }
+  
+  // If empty
+  if(domainList===""){
+    domainList="No domains saved";
+  }
+  document.getElementById("domlist").innerHTML=domainList;
+}
+
 // add event listener for when the page loads
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -164,21 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
         divs[i].addEventListener('click', clickDiv);
 });
 
-window.onload = loadProfiles;
-
-
-
-
-
-// function loadDomains(){
-//   var domainList="";
-//   var domkeyprefix="dom: ";
-
-//   localStorage.getItem;
-
-
-//   if(domainList===""){
-//     domainList="No domains saved";
-//   }
-//   document.getElementById("domlist").innerHTML=domainList;
-// }
+window.onload = function(){
+  loadProfiles();
+  loadDomains();
+};

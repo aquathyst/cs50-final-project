@@ -30,7 +30,7 @@ function renderstatus(eventtype){
 			document.getElementById("status").innerHTML='Error!';
 			break;
 		case 'save':
-			document.getElementById("status").innerHTML='Domain saved.';
+			document.getElementById("status").innerHTML='Domain saved to always use Profile '+activep+'.';
 			break;
 		case 'unsave':
 			document.getElementById("status").innerHTML='Domain save removed.';
@@ -67,34 +67,34 @@ function makeCSS(pnum){
 	
 	// Get saved info
 	var eleId = "profileItem"+pnum;
-    var fontvalue = localStorage.getItem(eleId);
-    var values = fontvalue.split(" - ");
-    var fsize = values[0];
-    var ffamily = values[1];
-    var lheight = values[2];
+	var fontvalue = localStorage.getItem(eleId);
+	var values = fontvalue.split(" - ");
+	var fsize = values[0];
+	var ffamily = values[1];
+	var lheight = values[2];
 
-    // Generate CSS string
-    var csstemp="body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"+
-    		+"font-size:"+fsize+" !important;}"
-    		+"body.alphatextcustomp *{"
-    		+"font-family:"+ffamily+","+fallbackfont(ffamily)+" !important;"
-    		+"line-height:"+lheight+" !important;}";
+	// Generate CSS string
+	var csstemp="body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"+
+			+"font-size:"+fsize+" !important;}"
+			+"body.alphatextcustomp *{"
+			+"font-family:"+ffamily+","+fallbackfont(ffamily)+" !important;"
+			+"line-height:"+lheight+" !important;}";
 
-    // Save into css vars
-    switch(pnum)
-    {
-    	case 1:
-    		css1=csstemp;
-    		break;
+	// Save into css vars
+	switch(pnum)
+	{
+		case 1:
+			css1=csstemp;
+			break;
 		case 2:
-    		css2=csstemp;
-    		break;
+			css2=csstemp;
+			break;
 		case 3:
-    		css3=csstemp;
-    		break;
-    	default:
-    		break;
-    }
+			css3=csstemp;
+			break;
+		default:
+			break;
+	}
 }
 
 /* Adapt and inject a style profile */
@@ -153,8 +153,8 @@ function qsset(e) {
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
 	
- 	// Set properties if not empty
- 	
+	// Set properties if not empty
+	
 	if(fsize!=="null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li{font-size:"+fsize+" !important;}"});
 	}
@@ -239,9 +239,9 @@ var taburl=null;
 var tabdomain=null;
 function checkurldomain(){
 	chrome.tabs.query({'active':true},function(tab){
-	    // Getting URL and domain
-	    taburl=tab[0].url;
-	    var end=taburl.indexOf('/',8)
+		// Getting URL and domain
+		taburl=tab[0].url;
+		var end=taburl.indexOf('/',8)
 		if(end!==-1)
 		{
 			if(taburl.indexOf("http://")!==-1)
@@ -268,52 +268,72 @@ function checkurldomain(){
 }
 
 /* Profiles Management */
-var count; //to record the number of profiles saved
+var count = 0; //to record the number of profiles saved
 var maxNum = 3; //maximum number of profiles saved
 
 // loading and reloading profile items
 function loadProfiles() {
   var profileList = "";
-  var emptyProf = "";
+  var profkeyprefix="profileItem";
+  var storageLen = localStorage.length;
   var profileId = "";
-  // var isEOF = false; 
+  var profv = "";
+  var emptyProf = "";
+
+  for(var keyi=0;keyi<storageLen;keyi++)
+  {
+		if(localStorage.key(keyi).substring(0,11)===profkeyprefix)
+		{
+		  profileId=localStorage.key(keyi);
+		  profv=localStorage.getItem(localStorage.key(keyi));
+		  profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='profiles'><img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/><p>Profile " 
+		  + localStorage.key(keyi).substring(11) + "</p><p class='minitext'>" + localStorage.getItem(profileId) + "</p></div></div>"; 
+		  count++;
+		}
+  }
+
+  // var profileList = "";
+  // var emptyProf = "";
+  // var profileId = "";
+  // // var isEOF = false; 
   
-  count = 0;
-  //while (!isEOF) {
-  // 100 is an arbitrary number because profileId keeps incrementing even if you delete stuff
-  for (var i = 0; i < 100; i++) {
-    profileId = "profileItem" + i;
-    if (localStorage.getItem(profileId) !== null) {
-      profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='profiles'><img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/><p>Profile " 
-      + count + "</p><p class='minitext'>" + localStorage.getItem(profileId) + "</p></div></div>"; 
-      count = i;
-    }
-    count++;
-    /* else {
-      var isFound = false;
-      var precount = count;
-      var lastcount = count;
-      for (var i = precount; i < maxNum; i++) {
-          profileId = "profileItem" + i; 
-          if (localStorage.getItem(profileId) !== null) {
-              isFound = true;
-              lastcount = count;
-              break;
-          }
-          else
-            count++;
-      }
-      if (!isFound) {
-        if (maxNum === count)
-            count = lastcount;
-        isEOF = true;
-      }
-    }
+  // count = 0;
+  // //while (!isEOF) {
+  // // 100 is an arbitrary number because profileId keeps incrementing even if you delete stuff
+  // for (var i = 0; i < 100; i++) {
+  //   profileId = "profileItem" + i;
+  //   if (localStorage.getItem(profileId) !== null) {
+  //     profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='profiles'><img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/><p>Profile " 
+  //     + count + "</p><p class='minitext'>" + localStorage.getItem(profileId) + "</p></div></div>"; 
+  //     count = i;
+  //   }
+  //   count++;
+	/* else {
+	  var isFound = false;
+	  var precount = count;
+	  var lastcount = count;
+	  for (var i = precount; i < maxNum; i++) {
+		  profileId = "profileItem" + i; 
+		  if (localStorage.getItem(profileId) !== null) {
+			  isFound = true;
+			  lastcount = count;
+			  break;
+		  }
+		  else
+			count++;
+	  }
+	  if (!isFound) {
+		if (maxNum === count)
+			count = lastcount;
+		isEOF = true;
+	  }
+	}
   }
   */
+
   // Make empty profile blanks
-  for(var i=0;i<=maxNum-count;i++){
-    emptyProf+="<div class='mid' id='profileempty'><div class='profiles'><p>No Profile</p></div></div>";
+  for(var i=0;i<maxNum-count;i++){
+	emptyProf+="<div class='mid' id='profileempty'><div class='profiles'><p>No Profile</p></div></div>";
   }
 
   // Generate HTML
@@ -334,19 +354,19 @@ document.addEventListener('DOMContentLoaded',function(){
 	// Options
 	var options=document.querySelectorAll("#options");
 	for(var i=0,len=options.length;i<len;i++){
-	    options[i].addEventListener('click',openoptions);
+		options[i].addEventListener('click',openoptions);
 	}
 
 	// Off toggle
 	var offtoggle=document.querySelectorAll("#off");
 	for(var i=0,len=offtoggle.length;i<len;i++){
-	    offtoggle[i].addEventListener('click',toggle);
+		offtoggle[i].addEventListener('click',toggle);
 	}
 
 	// Save domain
 	var savedom=document.querySelectorAll("#savepage");
 	for(var i=0,len=savedom.length;i<len;i++){
-	    savedom[i].addEventListener('click',savee);
+		savedom[i].addEventListener('click',savee);
 	}
 
 	// Load profile buttons
@@ -355,20 +375,20 @@ document.addEventListener('DOMContentLoaded',function(){
 	// Profiles
 	var profile1set=document.querySelectorAll("#profileItem1");
 	for(var i=0,len=profile1set.length;i<len;i++){
-	    profile1set[i].addEventListener('click',adoptp1);
+		profile1set[i].addEventListener('click',adoptp1);
 	}
 	var profile2set=document.querySelectorAll("#profileItem2");
 	for(var i=0,len=profile2set.length;i<len;i++){
-	    profile2set[i].addEventListener('click',adoptp2);
+		profile2set[i].addEventListener('click',adoptp2);
 	}
 	var profile3set=document.querySelectorAll("#profileItem3");
 	for(var i=0,len=profile3set.length;i<len;i++){
-	    profile3set[i].addEventListener('click',adoptp3);
+		profile3set[i].addEventListener('click',adoptp3);
 	}
 	
 	// Quick Style Set
 	var qsbutton=document.querySelectorAll("#setstyle");
 	for(var i=0,len=qsbutton.length;i<len;i++){
-	    qsbutton[i].addEventListener('click',qsset);
+		qsbutton[i].addEventListener('click',qsset);
 	}
 });

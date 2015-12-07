@@ -295,45 +295,6 @@ function loadProfiles() {
 		}
   }
 
-  // var profileList = "";
-  // var emptyProf = "";
-  // var profileId = "";
-  // // var isEOF = false; 
-  
-  // count = 0;
-  // //while (!isEOF) {
-  // // 100 is an arbitrary number because profileId keeps incrementing even if you delete stuff
-  // for (var i = 0; i < 100; i++) {
-  //   profileId = "profileItem" + i;
-  //   if (localStorage.getItem(profileId) !== null) {
-  //     profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='profiles'><img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/><p>Profile " 
-  //     + count + "</p><p class='minitext'>" + localStorage.getItem(profileId) + "</p></div></div>"; 
-  //     count = i;
-  //   }
-  //   count++;
-	/* else {
-	  var isFound = false;
-	  var precount = count;
-	  var lastcount = count;
-	  for (var i = precount; i < maxNum; i++) {
-		  profileId = "profileItem" + i; 
-		  if (localStorage.getItem(profileId) !== null) {
-			  isFound = true;
-			  lastcount = count;
-			  break;
-		  }
-		  else
-			count++;
-	  }
-	  if (!isFound) {
-		if (maxNum === count)
-			count = lastcount;
-		isEOF = true;
-	  }
-	}
-  }
-  */
-
   // Make empty profile blanks
   for(var i=0;i<maxNum-count;i++){
 	emptyProf+="<div class='mid' id='profileempty'><div class='contents'><p>No Profile</p></div></div>";

@@ -58,48 +58,6 @@ function loadProfiles() {
     }
   }
 
-  // // var profileIndex = "";
-  // // var isEOF = false; 
-  // var profileId = "";
-  // var storageLen = localStorage.length;
-  // // count = 1;
-  // // while (!isEOF) {
-  // if (storageLen > 0) {
-  //   // var profileId = "profileItem" + count;
-  //   for (var i = 0; i < 100; i++) {
-  //       profileId = "profileItem" + i;
-  //       if (localStorage.getItem(profileId) !== null) {
-  //         profileList += "<div class='profs' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><b>Profile " + count + "</b>: "
-  //         + localStorage.getItem(profileId) + "&nbsp&nbsp<img id= '" + profileId 
-  //         + "_delete' title='Delete' src='images/delete.png' height='10' width='10' align='bottom'/></div>"; 
-  //         count = i; 
-  //       }
-  //   }
-  //   count++; 
-    
-  //   /* else {
-  //     var isFound = false;
-  //     var precount = count;
-  //     var lastcount = count;
-  //     for (var i = precount; i < maxNum; i++) {
-  //         profileId = "profileItem" + i; 
-  //         if (localStorage.getItem(profileId) !== null) {
-  //             isFound = true;
-  //             lastcount = count;
-  //             break;
-  //         }
-  //         else
-  //           count++;
-  //     }
-  //     if (!isFound) {
-  //       if (maxNum === count)
-  //           count = lastcount;
-  //       isEOF = true;
-  //     }
-  //   }
-  // }
-  // */
-
   if (profileList === "")
       profileList = "No Profile";
   document.getElementById("profiles").innerHTML = profileList;
@@ -161,15 +119,12 @@ function clickAddButton(e) {
               renderstatus('padd');
 	        }
 	        else
-	            // alert("Same profile exists");
               renderstatus('psamep');
 	    }
 	    else
-	        // alert("You can only add 3 profiles");
           renderstatus('pmorethan3');
 	}
 	else
-	    // alert("Sorry! Your browser does not support Web Storage.");
       renderstatus('pnostorage');
 }
 

@@ -14,6 +14,7 @@ function addmethods(){
 /* Variables to track active profile and saved state*/
 var activep=null;
 var saved=false;
+var saveasp=null;
 
 /* Render status text */
 function renderstatus(eventtype){
@@ -30,7 +31,7 @@ function renderstatus(eventtype){
 			document.getElementById("status").innerHTML='Error!';
 			break;
 		case 'save':
-			document.getElementById("status").innerHTML='Domain saved to always use Profile '+activep+'.';
+			document.getElementById("status").innerHTML='Domain saved to always use Profile '+saveasp+'.';
 			break;
 		case 'unsave':
 			document.getElementById("status").innerHTML='Domain save removed.';
@@ -190,16 +191,12 @@ function togglesave(domtosave){
 	if(saved===false)
 	{
 		// Save!
-		if(activep!==null){
-			localStorage.setItem('dom: '+tabdomain,activep.toString());
-		}
-		else
-		{
-			localStorage.setItem('dom: '+tabdomain,'1');
-		}
+		saveasp=document.getElementById("pnum").value;
+		localStorage.setItem('dom: '+tabdomain,saveasp);
 		saved=true;
 		document.getElementById("savetext").innerHTML='Don\'t use on domain';
 		document.getElementById("savepage").id="unsavepage";
+		document.getElementById("savepagep").id="unsavepagep";
 		renderstatus('save');
 	}
 	else
@@ -209,6 +206,7 @@ function togglesave(domtosave){
 		saved=false;
 		document.getElementById("savetext").innerHTML='Always use profile on domain';
 		document.getElementById("unsavepage").id="savepage";
+		document.getElementById("unsavepagep").id="savepagep";
 		renderstatus('unsave');
 	}
 }
@@ -227,6 +225,7 @@ function checksave(domtocheck){
 		saved=true;
 		document.getElementById("savetext").innerHTML='Don\'t use on domain';
 		document.getElementById("savepage").id="unsavepage";
+		document.getElementById("savepagep").id="unsavepagep";
 	}
 	else
 	{
@@ -274,6 +273,7 @@ var maxNum = 3; //maximum number of profiles saved
 // loading and reloading profile items
 function loadProfiles() {
   var profileList = "";
+  var domprofileList = "";
   var profkeyprefix="profileItem";
   var storageLen = localStorage.length;
   var profileId = "";
@@ -290,7 +290,8 @@ function loadProfiles() {
 		  		+"<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>"
 		  		+"<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>"
 		  		+"<p class='minitext'>" + localStorage.getItem(profileId) + "</p>"
-		  	+"</div></div>"; 
+		  	+"</div></div>";
+		  domprofileList += "<option value='"+ localStorage.key(keyi).substring(11) +"'>Profile "+ localStorage.key(keyi).substring(11) +"</option>"
 		  count++;
 		}
   }
@@ -302,6 +303,7 @@ function loadProfiles() {
 
   // Generate HTML
   document.getElementById("profilecol").innerHTML = "<div class='sectionhead' id='profhead'><p>Profiles</p></div>" + profileList + emptyProf;
+  document.getElementById("pnum").innerHTML = domprofileList;
 }
 
 /* Load once started */

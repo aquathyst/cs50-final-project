@@ -9,21 +9,32 @@ body{
 	font-family:'Roboto',Helvetica,Arial,sans-serif;
 	background-color:#FFFFFF;
 	color:#202020;
+	font-size:80%;
+}
+h1,h2,h3{
+	margin:0px;
 }
 h1{
 	font-weight:normal;
 	color:#808080;
 	text-align:center;
-	font-size:150%;
+	font-size:180%;
 }
 h2{
 	font-weight:bold;
-	color:#505020;
+	color:#AE7F22;
 	text-align:left;
-	font-size:125%;
+	font-size:150%;
+}
+h3{
+	font-weight:bold;
+	color:#141414;
+	text-align:left;
+	font-size:130%;
+	margin-bottom:5px;
 }
 p{
-	font-size:100%;
+	font-size:110%;
 }
 #menubar{
 	margin:0 auto;
@@ -35,7 +46,7 @@ a.menu{
 	font-weight:bold;
 	text-decoration:none;
 	margin:3%;
-	font-size:125%;
+	font-size:120%;
 	-o-transition:color 0.2s linear;
 	-moz-transition:color 0.2s linear;
 	-khtml-transition:bcolor 0.2s linear;

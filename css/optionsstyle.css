@@ -8,8 +8,21 @@
 .status{
 	font-size:110%;
  	color:#B06A58;
+ 	margin-top:10px;
 }
-
-.profs{
-	color:#998800;
+.profs,#domlist{
+	color:#995500;
+}
+#domlist a{
+	text-decoration:none;
+	color:#995500;
+}
+#domlist a:hover{
+	color:#BB8822;
+}
+#addProfile{
+	margin-top:10px;
+}
+#font_size,#font_family,#line_height{
+	width:150px;
 }

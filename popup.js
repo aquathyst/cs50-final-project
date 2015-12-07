@@ -30,7 +30,7 @@ function renderstatus(eventtype){
 			document.getElementById("status").innerHTML='Error!';
 			break;
 		case 'save':
-			document.getElementById("status").innerHTML='Domain saved to always use Profile 1 by default.';
+			document.getElementById("status").innerHTML='Domain saved to always use Profile '+activep+' by default.';
 			break;
 		case 'unsave':
 			document.getElementById("status").innerHTML='Domain save removed.';
@@ -40,6 +40,12 @@ function renderstatus(eventtype){
 			break;
 		case 'saveautop':
 			document.getElementById("status").innerHTML='Profile '+activep+' activated automatically on this domain!';
+			break;
+		case 'domautonoprof':
+			document.getElementById("status").innerHTML='Domain saved, but profile does not exist!';
+			break;
+		case 'noproftosave':
+			document.getElementById("status").innerHTML='Choose a profile first.';
 			break;
 		default:
 			document.getElementById("status").innerHTML=eventtype;
@@ -112,6 +118,7 @@ function adoptp(profile){
 			"$('body').addClass('alphatextcustomp');"
 		});
 
+	
 	// Insert CSS profile
 	switch(profile){
 		case 1:
@@ -131,7 +138,6 @@ function adoptp(profile){
 	}
 	
 	activep=profile;
-
 	renderstatus('adoptp');
 }
 // Functions for event call
@@ -190,32 +196,47 @@ function togglesave(domtosave){
 	if(saved===false)
 	{
 		// Save!
-		localStorage.setItem('dom: '+tabdomain,1);
-		saved=true;
-		document.getElementById("savetext").innerHTML='Don\'t use on domain';
-		document.getElementById("savepage").id="unsavepage";
-		renderstatus('save');
+		if(activep!==null){
+			var ptosave=activep;
+			localStorage.setItem('dom: '+tabdomain,ptosave);
+			saved=true;
+			document.getElementById("savetext").innerHTML='Don\'t use on domain';
+			document.getElementById("savepage").id="unsavepage";
+			renderstatus('save');
+		}
+		else{
+			renderstatus('noproftosave');
+		}
 	}
 	else
 	{
 		// Unsave!
 		localStorage.removeItem('dom: '+tabdomain);
 		saved=false;
-		document.getElementById("savetext").innerHTML='Always use profile 1 on domain';
+		document.getElementById("savetext").innerHTML='Always use profile  on domain';
 		document.getElementById("unsavepage").id="savepage";
 		renderstatus('unsave');
 	}
 }
 function savee(e){togglesave(tabdomain);}
 
-/* Check if the domain was saved by user */
+/* Check if the domain was saved by user, and load necessary code */
 function checksave(domtocheck){
 	if(localStorage.getItem('dom: '+tabdomain)!==null)
 	{
-		// Adopt saved profile
-		var savedp=parseInt(localStorage.getItem('dom: '+tabdomain));
-		adoptp(savedp);
-		renderstatus('saveautop');
+		// Saved!
+		var savedp=null;
+		if(localStorage.getItem('profileItem'+localStorage.getItem('dom: '+tabdomain))!==null){
+			//  Adopt saved profile
+			savedp=parseInt(localStorage.getItem('dom: '+tabdomain));
+			adoptp(savedp);
+			renderstatus('saveautop');
+		}
+		else
+		{
+			// Domain saved to use a profile but it no longer exists
+			renderstatus('domautonoprof');
+		}
 
 		// Adjust state and button
 		saved=true;
@@ -224,6 +245,7 @@ function checksave(domtocheck){
 	}
 	else
 	{
+		// Not saved yet
 		document.getElementById("savetext").innerHTML='Always use profile on domain';
 	}
 }
@@ -268,7 +290,6 @@ var maxNum = 3; //maximum number of profiles saved
 // loading and reloading profile items
 function loadProfiles() {
   var profileList = "";
-  var domprofileList = "";
   var profkeyprefix="profileItem";
   var storageLen = localStorage.length;
   var profileId = "";
@@ -286,7 +307,6 @@ function loadProfiles() {
 		  		+"<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>"
 		  		+"<p class='minitext'>" + localStorage.getItem(profileId) + "</p>"
 		  	+"</div></div>";
-		  domprofileList += "<option value='"+ localStorage.key(keyi).substring(11) +"'>Profile "+ localStorage.key(keyi).substring(11) +"</option>"
 		  count++;
 		}
   }
@@ -298,7 +318,6 @@ function loadProfiles() {
 
   // Generate HTML
   document.getElementById("profilecol").innerHTML = "<div class='sectionhead' id='profhead'><p>Profiles</p></div>" + profileList + emptyProf;
-  document.getElementById("pnum").innerHTML = domprofileList;
 }
 
 /* Load once started */

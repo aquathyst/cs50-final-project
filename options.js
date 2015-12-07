@@ -34,11 +34,9 @@ function renderstatus(what){
   }
 }
 
-// var count; //to record the number of profiles saved
 var maxNum = 3; //maximum number of profiles saved
 
 // loading and reloading profile items
-// added a random delete.png file but you can replate it with something else later
 function loadProfiles() {
   var profileList = "";
   var profkeyprefix="profileItem";

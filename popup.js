@@ -74,7 +74,7 @@ function makeCSS(pnum){
     var lheight = values[2];
 
     // Generate CSS string
-    var csstemp="body.alphatextcustomp p,body.alphatextcustomp p,a{"+
+    var csstemp="body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"+
     		+"font-size:"+fsize+" !important;}"
     		+"body.alphatextcustomp *{"
     		+"font-family:"+ffamily+","+fallbackfont(ffamily)+" !important;"
@@ -156,7 +156,7 @@ function qsset(e) {
  	// Set properties if not empty
  	
 	if(fsize!=="null"){
-		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a{font-size:"+fsize+" !important;}"});
+		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li{font-size:"+fsize+" !important;}"});
 	}
 	if(ffamily!=="null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{font-family:"+ffamily+" !important;}"});

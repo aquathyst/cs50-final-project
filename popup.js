@@ -19,36 +19,36 @@ var saved = false;
 function renderstatus(eventtype){
 	switch(eventtype){
 		case 'EMPTY':
-			document.getElementById("status").innerhtml = '';
+			document.getElementById("status").innerHTML = '';
 		case 'off':
-			document.getElementById("status").innerhtml = 'All styles removed.';
+			document.getElementById("status").innerHTML = 'All styles removed.';
 			break;
 		case 'adoptp':
-			document.getElementById("status").innerhtml = 'Profile ' + activep + ' activated!';
+			document.getElementById("status").innerHTML = 'Profile ' + activep + ' activated!';
 			break;
 		case 'error':
-			document.getElementById("status").innerhtml = 'Error!';
+			document.getElementById("status").innerHTML = 'Error!';
 			break;
 		case 'save':
-			document.getElementById("status").innerhtml = 'Domain saved to always use Profile ' + activep + ' by default.';
+			document.getElementById("status").innerHTML = 'Domain saved to always use Profile ' + activep + ' by default.';
 			break;
 		case 'unsave':
-			document.getElementById("status").innerhtml = 'Domain save removed.';
+			document.getElementById("status").innerHTML = 'Domain save removed.';
 			break;
 		case 'quickstyleset':
-			document.getElementById("status").innerhtml = 'Quick style set successfully!';
+			document.getElementById("status").innerHTML = 'Quick style set successfully!';
 			break;
 		case 'saveautop':
-			document.getElementById("status").innerhtml = 'Profile ' + activep + ' activated automatically on this domain!';
+			document.getElementById("status").innerHTML = 'Profile ' + activep + ' activated automatically on this domain!';
 			break;
 		case 'domautonoprof':
-			document.getElementById("status").innerhtml = 'Domain saved, but profile does not exist!';
+			document.getElementById("status").innerHTML = 'Domain saved, but profile does not exist!';
 			break;
 		case 'noproftosave':
-			document.getElementById("status").innerhtml = 'Choose a profile first.';
+			document.getElementById("status").innerHTML = 'Choose a profile first.';
 			break;
 		default:
-			document.getElementById("status").innerhtml = eventtype;
+			document.getElementById("status").innerHTML = eventtype;
 			break;
 	}
 }
@@ -193,14 +193,14 @@ function openoptions(e){
 
 /* Saving domain*/
 function togglesave(domtosave){
-	if(saved  === false)
+	if(saved === false)
 	{
 		// Save!
 		if(activep !== null){
 			var ptosave = activep;
 			localStorage.setItem('dom: ' + tabdomain,ptosave);
 			saved = true;
-			document.getElementById("savetext").innerhtml = 'Don\'t use on domain';
+			document.getElementById("savetext").innerHTML = 'Don\'t use on domain';
 			document.getElementById("savepage").id = "unsavepage";
 			renderstatus('save');
 		}
@@ -213,7 +213,7 @@ function togglesave(domtosave){
 		// Unsave!
 		localStorage.removeItem('dom: ' + tabdomain);
 		saved = false;
-		document.getElementById("savetext").innerhtml = 'Always use profile on domain';
+		document.getElementById("savetext").innerHTML = 'Always use profile on domain';
 		document.getElementById("unsavepage").id = "savepage";
 		renderstatus('unsave');
 	}
@@ -240,13 +240,13 @@ function checksave(domtocheck){
 
 		// Adjust state and button
 		saved = true;
-		document.getElementById("savetext").innerhtml = 'Don\'t use on domain';
+		document.getElementById("savetext").innerHTML = 'Don\'t use on domain';
 		document.getElementById("savepage").id = "unsavepage";
 	}
 	else
 	{
 		// Not saved yet
-		document.getElementById("savetext").innerhtml = 'Always use profile on domain';
+		document.getElementById("savetext").innerHTML = 'Always use profile on domain';
 	}
 }
 

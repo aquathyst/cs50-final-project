@@ -9,27 +9,27 @@
 function renderstatus(what){
   switch(what){
     case 'EMPTY':
-      document.getElementById("prefstatus").innerHTML='';
-      document.getElementById("profstatus").innerHTML='';
-      document.getElementById("domstatus").innerHTML='';
-      document.getElementById("overallstatus").innerHTML='';
+      document.getElementById("prefstatus").innerHTML = '';
+      document.getElementById("profstatus").innerHTML = '';
+      document.getElementById("domstatus").innerHTML = '';
+      document.getElementById("overallstatus").innerHTML = '';
     case 'padd':
-      document.getElementById("profstatus").innerHTML='Profile saved';
+      document.getElementById("profstatus").innerHTML = 'Profile saved';
       break;
     case 'prem':
-      document.getElementById("profstatus").innerHTML='Profile removed';
+      document.getElementById("profstatus").innerHTML = 'Profile removed';
       break;
     case 'psamep':
-      document.getElementById("profstatus").innerHTML='Same profile exists';
+      document.getElementById("profstatus").innerHTML = 'Same profile exists';
       break;
     case 'pmorethan3':
-      document.getElementById("profstatus").innerHTML='You can only add 3 profiles';
+      document.getElementById("profstatus").innerHTML = 'You can only add 3 profiles';
       break;
     case 'pnostorage':
-      document.getElementById("profstatus").innerHTML='Sorry! Your browser does not support Web Storage.';
+      document.getElementById("profstatus").innerHTML = 'Sorry! Your browser does not support Web Storage.';
       break;
     default:
-      document.getElementById("overallstatus").innerHTML=what;
+      document.getElementById("overallstatus").innerHTML = what;
       break;
   }
 }
@@ -44,12 +44,12 @@ function loadProfiles() {
   var profileId = "";
   var profv = "";
 
-  for(var keyi=0;keyi<storageLen;keyi++)
+  for(var keyi = 0; keyi < storageLen; keyi++)
   {
-    if(localStorage.key(keyi).substring(0,11)===profkeyprefix)
+    if(localStorage.key(keyi).substring(0,11) === profkeyprefix)
     {
-      profileId=localStorage.key(keyi);
-      profv=localStorage.getItem(localStorage.key(keyi));
+      profileId = localStorage.key(keyi);
+      profv = localStorage.getItem(localStorage.key(keyi));
       profileList += "<div class='profs' id='" + profileId + "' value='" + profv + "'><b>Profile " + profileId.substring(11) + "</b>: "
           + profv + "&nbsp&nbsp<img id= '" + profileId 
           + "_delete' title='Delete' src='images/delete.png' height='10' width='10' align='bottom'/></div>";
@@ -80,15 +80,15 @@ function removeProfile(eid) {
 
 // Figure out what is the next profile number to be saved to
 function nextNum(){
-  if(localStorage.getItem('profileItem1')===null)
+  if(localStorage.getItem('profileItem1') === null)
   {
     return 1;
   }
-  else if(localStorage.getItem('profileItem2')===null)
+  else if(localStorage.getItem('profileItem2') === null)
   {
     return 2;
   }
-  else if(localStorage.getItem('profileItem3')===null)
+  else if(localStorage.getItem('profileItem3') === null)
   {
     return 3;
   }
@@ -109,7 +109,7 @@ function clickAddButton(e) {
 	// need to check if the browser supports HTML5 local storage
 	// must be no older than Chrome 4.0, IE 8, Firefox 3.5, etc
 	if (typeof(Storage) !== "undefined") {
-	    if (profNum!=='MAX') {
+	    if (profNum !== 'MAX') {
 	        var profile_name = "profileItem" + profNum;
 	        if (profileExists(fsize, ffamily, lheight) === false) {
 	            localStorage.setItem(profile_name, fsize + " - " + ffamily + " - " + lheight);
@@ -145,26 +145,26 @@ function clickDiv(e) {
 
 // Load domains list
 function loadDomains(){
-  var domainList="";
-  var domkeyprefix="dom: ";
-  var storagelength=localStorage.length;
+  var domainList = "";
+  var domkeyprefix = "dom: ";
+  var storagelength = localStorage.length;
 
   // Generate HTML
-  for(var keyi=0;keyi<storagelength;keyi++)
+  for(var keyi = 0; keyi < storagelength; keyi++)
   {
-    if(localStorage.key(keyi).substring(0,5)===domkeyprefix)
+    if(localStorage.key(keyi).substring(0,5) === domkeyprefix)
     {
-      var dom=localStorage.key(keyi).substring(5);
-      var pro=localStorage.getItem(localStorage.key(keyi));
-      domainList+="<div class='doms'><b><a href='http://"+dom+"' target='_blank'>"+dom+"</a></b> (Profile "+pro+")</div>";
+      var dom = localStorage.key(keyi).substring(5);
+      var pro = localStorage.getItem(localStorage.key(keyi));
+      domainList += "<div class='doms'><b><a href='http://" + dom + "' target='_blank'>" + dom + "</a></b> (Profile " + pro + ")</div>";
     }
   }
   
   // If empty
-  if(domainList===""){
-    domainList="No domains saved";
+  if(domainList === ""){
+    domainList = "No domains saved";
   }
-  document.getElementById("domlist").innerHTML=domainList;
+  document.getElementById("domlist").innerHTML = domainList;
 }
 
 // add event listener for when the page loads

@@ -35,8 +35,7 @@ h1{
   font-size:60%;
 }
 
-/* Buttons */
-/* General styles */
+/* Buttons layout and general appearance */
 #buttons{
   margin:0 auto;
   color:#FFFFFF;
@@ -107,7 +106,7 @@ p.minitext{
   margin-bottom:10%;
 }
 
-/* Each button */
+/* Respective button styles */
 #off{
   background-color:#CC6F6C;
 }

@@ -80,7 +80,7 @@ function makeCSS(pnum){
 	var lheight = values[2];
 
 	// Generate CSS string
-	var csstemp="body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"+
+	var csstemp="body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"
 			+"font-size:"+fsize+" !important;}"
 			+"body.alphatextcustomp *{"
 			+"font-family:"+ffamily+","+fallbackfont(ffamily)+" !important;"

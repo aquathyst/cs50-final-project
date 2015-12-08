@@ -104,7 +104,7 @@ function clickAddButton(e) {
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
 	var storageLen = localStorage.length; 
-	var profNum=nextNum();
+	var profNum = nextNum();
 
 	// need to check if the browser supports HTML5 local storage
 	// must be no older than Chrome 4.0, IE 8, Firefox 3.5, etc

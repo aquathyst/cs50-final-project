@@ -213,7 +213,7 @@ function togglesave(domtosave){
 		// Unsave!
 		localStorage.removeItem('dom: '+tabdomain);
 		saved=false;
-		document.getElementById("savetext").innerHTML='Always use profile  on domain';
+		document.getElementById("savetext").innerHTML='Always use profile on domain';
 		document.getElementById("unsavepage").id="savepage";
 		renderstatus('unsave');
 	}

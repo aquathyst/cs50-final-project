@@ -12,55 +12,55 @@ function addmethods(){
 }
 
 /* Variables to track active profile and saved state*/
-var activep=null;
-var saved=false;
+var activep = null;
+var saved = false;
 
 /* Render status text */
 function renderstatus(eventtype){
 	switch(eventtype){
 		case 'EMPTY':
-			document.getElementById("status").innerHTML='';
+			document.getElementById("status").innerhtml = '';
 		case 'off':
-			document.getElementById("status").innerHTML='All styles removed.';
+			document.getElementById("status").innerhtml = 'All styles removed.';
 			break;
 		case 'adoptp':
-			document.getElementById("status").innerHTML='Profile '+activep+' activated!';
+			document.getElementById("status").innerhtml = 'Profile ' + activep + ' activated!';
 			break;
 		case 'error':
-			document.getElementById("status").innerHTML='Error!';
+			document.getElementById("status").innerhtml = 'Error!';
 			break;
 		case 'save':
-			document.getElementById("status").innerHTML='Domain saved to always use Profile '+activep+' by default.';
+			document.getElementById("status").innerhtml = 'Domain saved to always use Profile ' + activep + ' by default.';
 			break;
 		case 'unsave':
-			document.getElementById("status").innerHTML='Domain save removed.';
+			document.getElementById("status").innerhtml = 'Domain save removed.';
 			break;
 		case 'quickstyleset':
-			document.getElementById("status").innerHTML='Quick style set successfully!';
+			document.getElementById("status").innerhtml = 'Quick style set successfully!';
 			break;
 		case 'saveautop':
-			document.getElementById("status").innerHTML='Profile '+activep+' activated automatically on this domain!';
+			document.getElementById("status").innerhtml = 'Profile ' + activep + ' activated automatically on this domain!';
 			break;
 		case 'domautonoprof':
-			document.getElementById("status").innerHTML='Domain saved, but profile does not exist!';
+			document.getElementById("status").innerhtml = 'Domain saved, but profile does not exist!';
 			break;
 		case 'noproftosave':
-			document.getElementById("status").innerHTML='Choose a profile first.';
+			document.getElementById("status").innerhtml = 'Choose a profile first.';
 			break;
 		default:
-			document.getElementById("status").innerHTML=eventtype;
+			document.getElementById("status").innerhtml = eventtype;
 			break;
 	}
 }
 
 /* CSS profiles */
-var css1="";
-var css2="";
-var css3="";
+var css1 = "";
+var css2 = "";
+var css3 = "";
 
 /* Prepare fallback fonts for CSS */
 function fallbackfont(font){
-	if(font==="Arial"||font==="Verdana"||font==="Helvetica"||font==="Tahoma"||font==="Cursive"){
+	if(font === "Arial" || font === "Verdana" || font === "Helvetica" || font === "Tahoma" || font === "Cursive"){
 		return "sans-serif";
 	}
 	else{
@@ -72,7 +72,7 @@ function fallbackfont(font){
 function makeCSS(pnum){
 	
 	// Get saved info
-	var eleId = "profileItem"+pnum;
+	var eleId = "profileItem" + pnum;
 	var fontvalue = localStorage.getItem(eleId);
 	var values = fontvalue.split(" - ");
 	var fsize = values[0];
@@ -80,23 +80,23 @@ function makeCSS(pnum){
 	var lheight = values[2];
 
 	// Generate CSS string
-	var csstemp="body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"
-			+"font-size:"+fsize+" !important;}"
-			+"body.alphatextcustomp *{"
-			+"font-family:"+ffamily+","+fallbackfont(ffamily)+" !important;"
-			+"line-height:"+lheight+" !important;}";
+	var csstemp = "body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"
+			+ "font-size:" + fsize + " !important;}"
+			+ "body.alphatextcustomp *{"
+			+ "font-family:" + ffamily + "," + fallbackfont(ffamily) + " !important;"
+			+ "line-height:" + lheight + " !important;}";
 
 	// Save into css vars
 	switch(pnum)
 	{
 		case 1:
-			css1=csstemp;
+			css1 = csstemp;
 			break;
 		case 2:
-			css2=csstemp;
+			css2 = csstemp;
 			break;
 		case 3:
-			css3=csstemp;
+			css3 = csstemp;
 			break;
 		default:
 			break;
@@ -137,7 +137,7 @@ function adoptp(profile){
 			return;
 	}
 	
-	activep=profile;
+	activep = profile;
 	renderstatus('adoptp');
 }
 // Functions for event call
@@ -161,13 +161,13 @@ function qsset(e) {
 	
 	// Set properties if not empty
 	
-	if(fsize!=="null"){
+	if(fsize !== "null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li{font-size:"+fsize+" !important;}"});
 	}
-	if(ffamily!=="null"){
+	if(ffamily !== "null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{font-family:"+ffamily+" !important;}"});
 	}
-	if(lheight!=="null"){
+	if(lheight !== "null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{line-height:"+lheight+" !important;}"});
 	}
 	
@@ -193,15 +193,15 @@ function openoptions(e){
 
 /* Saving domain*/
 function togglesave(domtosave){
-	if(saved===false)
+	if(saved  === false)
 	{
 		// Save!
-		if(activep!==null){
-			var ptosave=activep;
-			localStorage.setItem('dom: '+tabdomain,ptosave);
-			saved=true;
-			document.getElementById("savetext").innerHTML='Don\'t use on domain';
-			document.getElementById("savepage").id="unsavepage";
+		if(activep !== null){
+			var ptosave = activep;
+			localStorage.setItem('dom: ' + tabdomain,ptosave);
+			saved = true;
+			document.getElementById("savetext").innerhtml = 'Don\'t use on domain';
+			document.getElementById("savepage").id = "unsavepage";
 			renderstatus('save');
 		}
 		else{
@@ -211,10 +211,10 @@ function togglesave(domtosave){
 	else
 	{
 		// Unsave!
-		localStorage.removeItem('dom: '+tabdomain);
-		saved=false;
-		document.getElementById("savetext").innerHTML='Always use profile on domain';
-		document.getElementById("unsavepage").id="savepage";
+		localStorage.removeItem('dom: ' + tabdomain);
+		saved = false;
+		document.getElementById("savetext").innerhtml = 'Always use profile on domain';
+		document.getElementById("unsavepage").id = "savepage";
 		renderstatus('unsave');
 	}
 }
@@ -222,13 +222,13 @@ function savee(e){togglesave(tabdomain);}
 
 /* Check if the domain was saved by user, and load necessary code */
 function checksave(domtocheck){
-	if(localStorage.getItem('dom: '+tabdomain)!==null)
+	if(localStorage.getItem('dom: ' + tabdomain) !== null)
 	{
 		// Saved!
-		var savedp=null;
-		if(localStorage.getItem('profileItem'+localStorage.getItem('dom: '+tabdomain))!==null){
+		var savedp = null;
+		if(localStorage.getItem('profileItem' + localStorage.getItem('dom: ' + tabdomain)) !== null){
 			//  Adopt saved profile
-			savedp=parseInt(localStorage.getItem('dom: '+tabdomain));
+			savedp = parseInt(localStorage.getItem('dom: ' + tabdomain));
 			adoptp(savedp);
 			renderstatus('saveautop');
 		}
@@ -239,43 +239,43 @@ function checksave(domtocheck){
 		}
 
 		// Adjust state and button
-		saved=true;
-		document.getElementById("savetext").innerHTML='Don\'t use on domain';
-		document.getElementById("savepage").id="unsavepage";
+		saved = true;
+		document.getElementById("savetext").innerhtml = 'Don\'t use on domain';
+		document.getElementById("savepage").id = "unsavepage";
 	}
 	else
 	{
 		// Not saved yet
-		document.getElementById("savetext").innerHTML='Always use profile on domain';
+		document.getElementById("savetext").innerhtml = 'Always use profile on domain';
 	}
 }
 
 /* Get url and domain of website, and see if it was saved */
-var taburl=null;
-var tabdomain=null;
+var taburl = null;
+var tabdomain = null;
 function checkurldomain(){
 	chrome.tabs.query({'active':true,'currentWindow':true},function(tab){
 		// Getting URL and domain
-		taburl=tab[0].url;
-		var end=taburl.indexOf('/',8)
-		if(end!==-1)
+		taburl = tab[0].url;
+		var end = taburl.indexOf('/',8)
+		if(end !== -1)
 		{
-			if(taburl.indexOf("http://")!==-1)
+			if(taburl.indexOf("http://") !== -1)
 			{
-				tabdomain=taburl.substring(7,end);
+				tabdomain = taburl.substring(7,end);
 			}
-			else if(taburl.indexOf("https://")!==-1)
+			else if(taburl.indexOf("https://") !== -1)
 			{
-				tabdomain=taburl.substring(8,end);
+				tabdomain = taburl.substring(8,end);
 			}
 			else
 			{
-				tabdomain=null;
+				tabdomain = null;
 			}
 		}
 		else
 		{
-			tabdomain=null;
+			tabdomain = null;
 		}
 
 		// Check if saved
@@ -296,24 +296,24 @@ function loadProfiles() {
   var profv = "";
   var emptyProf = "";
 
-  for(var keyi=0;keyi<storageLen;keyi++)
+  for(var keyi = 0; keyi < storageLen; keyi++)
   {
-		if(localStorage.key(keyi).substring(0,11)===profkeyprefix)
+		if(localStorage.key(keyi).substring(0,11) === profkeyprefix)
 		{
-		  profileId=localStorage.key(keyi);
-		  profv=localStorage.getItem(localStorage.key(keyi));
+		  profileId = localStorage.key(keyi);
+		  profv = localStorage.getItem(localStorage.key(keyi));
 		  profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='contents profcontents'>"
 		  		+"<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>"
 		  		+"<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>"
 		  		+"<p class='minitext'>" + localStorage.getItem(profileId) + "</p>"
-		  	+"</div></div>";
+		  	  +"</div></div>";
 		  count++;
 		}
   }
 
   // Make empty profile blanks
-  for(var i=0;i<maxNum-count;i++){
-	emptyProf+="<div class='mid' id='profileempty'><div class='contents'><p>No Profile</p></div></div>";
+  for(var i = 0; i < maxNum - count; i++){
+	emptyProf += "<div class='mid' id='profileempty'><div class='contents'><p>No Profile</p></div></div>";
   }
 
   // Generate HTML
@@ -333,19 +333,19 @@ document.addEventListener('DOMContentLoaded',function(){
 
 	// Options
 	var options=document.querySelectorAll("#options");
-	for(var i=0,len=options.length;i<len;i++){
+	for(var i = 0, len = options.length; i < len; i++){
 		options[i].addEventListener('click',openoptions);
 	}
 
 	// Off toggle
 	var offtoggle=document.querySelectorAll("#off");
-	for(var i=0,len=offtoggle.length;i<len;i++){
+	for(var i = 0, len = offtoggle.length; i < len; i++){
 		offtoggle[i].addEventListener('click',toggle);
 	}
 
 	// Save domain
 	var savedom=document.querySelectorAll("#savepage");
-	for(var i=0,len=savedom.length;i<len;i++){
+	for(var i = 0, len = savedom.length; i < len; i++){
 		savedom[i].addEventListener('click',savee);
 	}
 
@@ -353,22 +353,22 @@ document.addEventListener('DOMContentLoaded',function(){
 	loadProfiles();
 
 	// Profiles
-	var profile1set=document.querySelectorAll("#profileItem1");
-	for(var i=0,len=profile1set.length;i<len;i++){
+	var profile1set = document.querySelectorAll("#profileItem1");
+	for(var i = 0, len = profile1set.length; i < len; i++){
 		profile1set[i].addEventListener('click',adoptp1);
 	}
-	var profile2set=document.querySelectorAll("#profileItem2");
-	for(var i=0,len=profile2set.length;i<len;i++){
+	var profile2set = document.querySelectorAll("#profileItem2");
+	for(var i = 0, len = profile2set.length; i < len; i++){
 		profile2set[i].addEventListener('click',adoptp2);
 	}
-	var profile3set=document.querySelectorAll("#profileItem3");
-	for(var i=0,len=profile3set.length;i<len;i++){
+	var profile3set = document.querySelectorAll("#profileItem3");
+	for(var i = 0, len = profile3set.length; i < len; i++){
 		profile3set[i].addEventListener('click',adoptp3);
 	}
 	
 	// Quick Style Set
 	var qsbutton=document.querySelectorAll("#setstyle");
-	for(var i=0,len=qsbutton.length;i<len;i++){
+	for(var i = 0, len = qsbutton.length; i < len; i++){
 		qsbutton[i].addEventListener('click',qsset);
 	}
 });

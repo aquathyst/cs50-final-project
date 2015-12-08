@@ -254,7 +254,7 @@ function checksave(domtocheck){
 var taburl=null;
 var tabdomain=null;
 function checkurldomain(){
-	chrome.tabs.query({'active':true},function(tab){
+	chrome.tabs.query({'active':true,'currentWindow':true},function(tab){
 		// Getting URL and domain
 		taburl=tab[0].url;
 		var end=taburl.indexOf('/',8)

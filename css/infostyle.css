@@ -5,6 +5,7 @@
  * Stylesheet for options, help, and about
  */
 
+/* Texts */
 body{
 	font-family:'Roboto',Helvetica,Arial,sans-serif;
 	background-color:#FFFFFF;
@@ -36,6 +37,8 @@ h3{
 p{
 	font-size:110%;
 }
+
+/* Menu */
 #menubar{
 	margin:0 auto;
 	display:block;

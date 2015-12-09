@@ -6,198 +6,202 @@
  */
 
 body{
-  overflow:hidden;
-  margin:0 auto;
-  padding:0px;
-  background:white;
-  text-align:center;
-  font-family:'Roboto',Helvetica,Arial,sans-serif;
-  font-size:110%;
-  width:600px;
-  height:200px;
+	overflow:hidden;
+	margin:0 auto;
+	padding:0px;
+	background:white;
+	text-align:center;
+	font-family:'Roboto',Helvetica,Arial,sans-serif;
+	font-size:110%;
+	width:600px;
+	height:200px;
 }
 
 /* Texts */
 h1{
-  font-size:140%;
-  color:#AAAAAA;
-  font-weight:normal;
+	font-size:140%;
+	color:#AAAAAA;
+	font-weight:normal;
 }
 #status{
-  font-size:110%;
-  color:#EAC770;
-  margin:10px;
+	font-size:110%;
+	color:#EAC770;
+	margin:10px;
 }
 ::selection{
-  background-color:transparent;
+	background-color:transparent;
 }
 .minitext{
-  font-size:60%;
+	font-size:60%;
 }
 
 /* Buttons layout and general appearance */
 #buttons{
-  margin:0 auto;
-  color:#FFFFFF;
-  display:inline;
-  overflow-y:auto;
+	margin:0 auto;
+	color:#FFFFFF;
+	display:inline;
+	overflow-y:auto;
 }
 #buttons td>div{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:white solid;
-  border-width:1px 0px 1px 0px;
-  width:100%;
-  text-align:center;
-  -webkit-transition:background-color 0.2s linear;
-  transition:background-color 0.2s linear;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	border:white solid;
+	border-width:1px 0px 1px 0px;
+	width:100%;
+	text-align:center;
+	-webkit-transition:background-color 0.2s linear;
+	transition:background-color 0.2s linear;
 }
 tr{
-  height:100%;
+	height:100%;
 }
 table{
-  height:300px;
+	height:300px;
 }
 td{
-  height:100%;
-  width:25%;
-  margin:0;
-  padding:0;
-  border:0px;
+	height:100%;
+	width:25%;
+	margin:0;
+	padding:0;
+	border:0px;
 }
 #buttons .big{
-  height:33.3%;
+	height:33.3%;
 }
 #buttons .mid{
-  height:26%;
-  padding:5% 0px;
+	height:26%;
+	padding:5% 0px;
 }
 #buttons .small{
-  height:19.5%;
+	height:19.5%;
 }
 
 /* General button contents */
 #buttons img{
-  width:60px;
-  display:block;
-  margin:0 auto;
+	width:60px;
+	display:block;
+	margin:0 auto;
 }
 #buttons .profim{
-  width:50px;
+	width:50px;
 }
 #buttons p{
-  display:block;
+	display:block;
 }
 .contents{
-  display:block;
+	display:block;
 }
 .contents p{
-  margin-top:0px;
+	margin-top:0px;
 }
 .profcontents p{
-  margin:0px 0px 2% 0px;
+	margin:0px 0px 2% 0px;
 }
 p.minitext{
-  margin-bottom:10%;
+	margin-bottom:10%;
 }
 
 /* Respective button styles */
 #off{
-  background-color:#CC6F6C;
+	background-color:#CC6F6C;
 }
 #off:hover{
-  background-color:#D48784;
+	background-color:#D48784;
 }
 #off:active{
-  background-color:#BD4743;
+	background-color:#BD4743;
 }
 
 #options{
-  background-color:#868686;
+	background-color:#868686;
 }
 #options:hover{
-  background-color:#9C9C9C;
+	background-color:#9C9C9C;
 }
 #options:active{
-  background-color:#5A5A5A;
+	background-color:#5A5A5A;
 }
 
 #savepage{
-  background-color:#64B5D8;
+	background-color:#64B5D8;
 }
 #savepage:hover{
-  background-color:#81C3DF;
+	background-color:#81C3DF;
 }
 #savepage:active{
-  background-color:#2D8BB3;
+	background-color:#2D8BB3;
 }
 
 #unsavepage{
-  background-color:#3071B4;
+	background-color:#3071B4;
 }
 #unsavepage:hover{
-  background-color:#4B8DDB;
+	background-color:#4B8DDB;
 }
 #unsavepage:active{
-  background-color:#255C8D;
+	background-color:#255C8D;
+}
+
+#cantsave{
+	background-color:#707070;
 }
 
 #profileItem1,#profileItem2,#profileItem3{
-  background-color:#DBB743;
+	background-color:#DBB743;
 }
 #profileItem1:hover,#profileItem2:hover,#profileItem3:hover{
-  background-color:#E2C568;
+	background-color:#E2C568;
 }
 #profileItem1:active,#profileItem2:active,#profileItem3:active{
-  background-color:#B89624;
+	background-color:#B89624;
 }
 
 #profileempty{
-  background-color:#999999;
-  color:#CCCCCC;
+	background-color:#999999;
+	color:#CCCCCC;
 }
 #profileempty:hover{
-  background-color:#A5A5A5;
+	background-color:#A5A5A5;
 }
 
 .quickstyles{
-  background-color:#73BDAC;
-  font-style:italic;
+	background-color:#73BDAC;
+	font-style:italic;
 }
 .quickstyles:hover{
-  background-color:#5ECEBB;
+	background-color:#5ECEBB;
 }
 
 #setstyle{
-  background-color:#53AD9C;
-  font-size:115%;
-  font-weight:bold;
+	background-color:#53AD9C;
+	font-size:115%;
+	font-weight:bold;
 }
 #setstyle:hover{
-  background-color:#63CDAC;
+	background-color:#63CDAC;
 }
 #setstyle:active{
-  background-color:#239D7C;
+	background-color:#239D7C;
 }
 
 /* Button section heads */
 .sectionhead{
-  height:22%;
-  width:100%;
+	height:22%;
+	width:100%;
 }
 .sectionhead p{
-  font-size:130%;
-  font-weight:bold;
+	font-size:130%;
+	font-weight:bold;
 }
 #profhead{
-  background-color:#B99F03;
+	background-color:#B99F03;
 }
 #qshead{
-  background-color:#40625B;
+	background-color:#40625B;
 }
 
 /* Dropdowns */
 #font_size,#font_family,#line_height,#pnum{
-  width:100px;
+	width:100px;
 }

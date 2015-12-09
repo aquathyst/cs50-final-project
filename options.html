@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <title>AlphaText Options</title>
-    <link rel="stylesheet" type="text/css" href="css/infostyle.css">
-    <link rel="stylesheet" type="text/css" href="css/optionsstyle.css">
-  </head>
-  <body>
-    <h1>AlphaText Options</h1>
-    
-    <br/>
-    <h2>Style Profiles Management</h2>
-      <br/>
-      <h3>Select Font Size:</h3>
-        <div id="fontsize">
-          <select id="font_size">
-            <option value="14px">14</option>
-            <option value="16px">16</option>
-            <option value="18px">18</option>
-            <option value="20px">20</option>
-            <option value="24px">24</option>
-            <option value="28px">28</option>
-          </select>
-        </div>
-      <br/>
-      <h3>Select Font Family:</h3>
-        <div id="fontfamily">
-          <select id="font_family">
-            <option value="Arial">Arial</option>
-            <option value="Verdana">Verdana</option>
-            <option value="Helvetica">Helvetica</option>
-            <option value="Tahoma">Tahoma</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Times New Roman">Times New Roman</option>
-            <option value="Cursive">Cursive</option>
-          </select>
-        </div>
-      <br/>
-      <h3>Select Line Height:</h3>
-        <div id="lineheight">
-          <select id="line_height">
-            <option value="100%">100%</option>
-            <option value="120%">120%</option>
-            <option value="150%">150%</option>
-            <option value="200%">200%</option>
-          </select>
-        </div>
-      <br/>
-      <h3>Saved Profiles:</h3>
-        <div id="profiles"></div>
-        <button id="addProfile">Add as Profile</button>
-      <br/>
-      <div class="status" id="profstatus"></div>
-    
-    <br/><br/>
-    <h2>Saved Domains Management</h2>
-      <br/>
-      <h3>Saved Domains</h3>
-        <div id="domlist">
-          <!-- -->
-        </div>
-      <br/>
-      <div class="status" id="domstatus"></div>
+	<head>
+		<title>AlphaText Options</title>
+		<link rel="stylesheet" type="text/css" href="css/infostyle.css">
+		<link rel="stylesheet" type="text/css" href="css/optionsstyle.css">
+	</head>
+	<body>
+		<h1>AlphaText Options</h1>
+		
+		<br/>
+		<!-- Manage style profiles -->
+		<h2>Style Profiles Management</h2>
+			<br/>
+			<h3>Select Font Size:</h3>
+				<div id="fontsize">
+					<select id="font_size">
+						<option value="14px">14</option>
+						<option value="16px">16</option>
+						<option value="18px">18</option>
+						<option value="20px">20</option>
+						<option value="24px">24</option>
+						<option value="28px">28</option>
+					</select>
+				</div>
+			<br/>
+			<h3>Select Font Family:</h3>
+				<div id="fontfamily">
+					<select id="font_family">
+						<option value="Arial">Arial</option>
+						<option value="Verdana">Verdana</option>
+						<option value="Helvetica">Helvetica</option>
+						<option value="Tahoma">Tahoma</option>
+						<option value="Georgia">Georgia</option>
+						<option value="Times New Roman">Times New Roman</option>
+						<option value="Cursive">Cursive</option>
+					</select>
+				</div>
+			<br/>
+			<h3>Select Line Height:</h3>
+				<div id="lineheight">
+					<select id="line_height">
+						<option value="100%">100%</option>
+						<option value="120%">120%</option>
+						<option value="150%">150%</option>
+						<option value="200%">200%</option>
+					</select>
+				</div>
+			<br/>
+			<h3>Saved Profiles:</h3>
+				<div id="profiles"></div>
+			<button id="addProfile">Add as Profile</button>
+			
+			<br/>
+			<div class="status" id="profstatus"></div>
+		
+		<br/><br/>
+		<!-- View saved domains -->
+		<h2>Saved Domains Management</h2>
+			<br/>
+			<h3>Saved Domains</h3>
+				<div id="domlist">
+					<!-- -->
+				</div>
 
-    <br/>
-    <br/>
-    <div id="menubar">
-      <a class="menu" href="options.html">Options</a>
-      <a class="menu" href="about.html">About AlphaText</a>
-      <a class="menu" href="help.html">Help</a>
-    </div>
-    
-    <br/>
-    <div class="status" id="overallstatus">
-      <noscript>Sorry, Javascript must be enabled for AlphaText to work!</noscript>
-    </div>
+		<br/><br/>
+		<!-- General status text -->
+		<div class="status" id="overallstatus">
+			<noscript>Sorry, Javascript must be enabled for AlphaText to work!</noscript>
+		</div>
 
-    <script src="3rdparty/jquery-2.1.4.min.js"></script>
-    <script src="options.js"></script>
-  </body>
+		<br/>
+		<!-- Navigation -->
+		<div id="menubar">
+			<a class="menu" href="options.html">Options</a>
+			<a class="menu" href="about.html">About AlphaText</a>
+			<a class="menu" href="help.html">Help</a>
+		</div>    
+
+		<!-- Javascripts -->
+		<script src="3rdparty/jquery-2.1.4.min.js"></script>
+		<script src="options.js"></script>
+	</body>
 </html>

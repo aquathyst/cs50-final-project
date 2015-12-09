@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "AlphaText--Extension for online text readability",
+  "name": "AlphaText - Customize online text for readability",
   "short_name": "AlphaText",
-  "description": "This extension helps enhance online articles' readability with user customization",
+  "description": "Enhance online articles' readability with user customizations",
   "version": "1.0",
 
   "browser_action": {
@@ -20,11 +20,6 @@
     "48": "icons/icon-48.png",
     "128": "icons/icon-128.png" 
   },
-
-  "background": {
-    "scripts": ["eventPage.js"],
-    "persistent": false
-  },
   
   "incognito": "spanning",
   
@@ -40,5 +35,4 @@
     "http://*/*", 
     "https://*/*"
   ]
- 
 }

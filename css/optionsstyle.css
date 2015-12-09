@@ -5,11 +5,14 @@
  * Stylesheet for options
  */
 
+/* Status text */
 .status{
 	font-size:110%;
  	color:#B06A58;
  	margin-top:10px;
 }
+
+/* Profile and domain lists */
 .profs,#domlist{
 	color:#995500;
 }
@@ -23,6 +26,14 @@
 #addProfile{
 	margin-top:10px;
 }
+
+/* Delete button */
+.delbutton{
+	height:10px;
+	width:10px;
+}
+
+/* Dropdowns */
 #font_size,#font_family,#line_height{
 	width:150px;
 }

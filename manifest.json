@@ -11,7 +11,7 @@
             "19": "icons/icon-19.png",
             "38": "icons/icon-38.png"
           },
-    "default_popup": "popup.html",
+    "default_popup": "html/popup.html",
     "default_title": "AlphaText"
   }, 
   
@@ -24,7 +24,7 @@
   "incognito": "spanning",
   
   "options_ui": {
-    "page": "options.html",
+    "page": "html/options.html",
     "chrome_style": true
   },
 

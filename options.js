@@ -135,8 +135,8 @@ function clickAddButton(e) {
 	}
 }
 
-var eleId = "";
 /* to handle profile deletion */
+var eleId = "";
 function deletep(e) {
 	eleId = e.target.id;
 	if (eleId.substring(0,11) === "profileItem" && eleId.substring(eleId.length - 7, eleId.length) === "_delete") {
@@ -149,7 +149,6 @@ function deletep(e) {
 		loadProfiles();
 		renderstatus('prem');
 	}
-}
 
 /* Load domains list */
 function loadDomains() {

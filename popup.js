@@ -88,10 +88,10 @@ function makeCSS(pnum) {
 
 		// Generate CSS string
 		var csstemp = "body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"
-				+ "font-size:" + fsize + " !important;}"
-				+ "body.alphatextcustomp *{"
-				+ "font-family:" + ffamily + "," + fallbackfont(ffamily) + " !important;"
-				+ "line-height:" + lheight + " !important;}";
+			+ "font-size:" + fsize + " !important;}"
+			+ "body.alphatextcustomp *{"
+			+ "font-family:" + ffamily + "," + fallbackfont(ffamily) + " !important;"
+			+ "line-height:" + lheight + " !important;}";
 
 		// Save into css vars
 		switch(pnum)
@@ -190,10 +190,10 @@ function qsset(e) {
 function toggle(e) {
 	// Remove all styles
 	chrome.tabs.executeScript(null,
-				{code:
-					"$('body').removeClass('alphatextcustomp');"+
-					"$('body').removeClass('alphatextcustomq');"
-				});
+		{code:
+			"$('body').removeClass('alphatextcustomp');"+
+			"$('body').removeClass('alphatextcustomq');"
+		});
 
 	renderstatus('off');
 }
@@ -325,7 +325,7 @@ function loadProfiles() {
 
   // Make empty profile blanks
   for(var i = 0; i < maxNum - count; i++){
-	emptyProf += "<div class='mid' id='profileempty'><div class='contents'><p>No Profile</p></div></div>";
+		emptyProf += "<div class='mid' id='profileempty'><div class='contents'><p>No Profile</p></div></div>";
   }
 
   // Generate HTML

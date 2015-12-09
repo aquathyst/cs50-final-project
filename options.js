@@ -52,8 +52,8 @@ function loadProfiles() {
       profileId = localStorage.key(keyi);
       profv = localStorage.getItem(localStorage.key(keyi));
       profileList += "<div class='profs' id='" + profileId + "' value='" + profv + "'><b>Profile " + profileId.substring(11) + "</b>: "
-          + profv + "&nbsp&nbsp<img id= '" + profileId 
-          + "_delete' title='Delete' src='images/delete.png' height='10' width='10' alt='del'/></div>";
+        + profv + "&nbsp&nbsp<img id= '" + profileId 
+        + "_delete' title='Delete' src='images/delete.png' height='10' width='10' alt='del'/></div>";
     }
   }
 
@@ -67,20 +67,20 @@ function loadProfiles() {
 // to check if a profile exists; if it exists then return true; else return false
 // fs = font size; ff = font family; lh = line height
 function profileExists(fs, ff, lh) {
-    for (var i = 1; i <= maxNum; i++) {
-        var profileId = "profileItem" + i;
-        var profileValue = fs + " - " + ff + " - " + lh;
-        if (localStorage.getItem(profileId) === profileValue) 
-        {  
-          return true;
-        }
+  for (var i = 1; i <= maxNum; i++) {
+    var profileId = "profileItem" + i;
+    var profileValue = fs + " - " + ff + " - " + lh;
+    if (localStorage.getItem(profileId) === profileValue) 
+    {  
+      return true;
     }
-    return false;
+  }
+  return false;
 }
 
 // to remove profile item
 function removeProfile(eid) {
-    localStorage.removeItem(eid);
+  localStorage.removeItem(eid);
 }
 
 // Figure out what is the next profile number to be saved to
@@ -114,22 +114,22 @@ function clickAddButton(e) {
 	// need to check if the browser supports HTML5 local storage
 	// must be no older than Chrome 4.0, IE 8, Firefox 3.5, etc
 	if (typeof(Storage) !== "undefined") {
-	    if (profNum !== 'MAX') {
-	        var profile_name = "profileItem" + profNum;
-	        if (profileExists(fsize, ffamily, lheight) === false) {
-	            localStorage.setItem(profile_name, fsize + " - " + ffamily + " - " + lheight);
-	            loadProfiles();
-              renderstatus('padd');
-	        }
-	        else
-          {
-            renderstatus('psamep');
-          }
-	    }
-	    else
-      {
-        renderstatus('pmorethan3');
+    if (profNum !== 'MAX') {
+      var profile_name = "profileItem" + profNum;
+      if (profileExists(fsize, ffamily, lheight) === false) {
+        localStorage.setItem(profile_name, fsize + " - " + ffamily + " - " + lheight);
+        loadProfiles();
+        renderstatus('padd');
       }
+      else
+      {
+        renderstatus('psamep');
+      }
+    }
+    else
+    {
+      renderstatus('pmorethan3');
+    }
 	}
 	else
   {
@@ -144,13 +144,13 @@ function clickDiv(e) {
     var lheight = "";
     
     if ((e.target.id).substring(0,11) === "profileItem") {
-        var eleId = e.target.id;
-        if (eleId.substring(eleId.length - 7, eleId.length) === "_delete") {
-            var idToDelete = eleId.substring(0, eleId.length - 7);
-            removeProfile(idToDelete);
-            loadProfiles();
-            renderstatus('prem');
-        }
+      var eleId = e.target.id;
+      if (eleId.substring(eleId.length - 7, eleId.length) === "_delete") {
+        var idToDelete = eleId.substring(0, eleId.length - 7);
+        removeProfile(idToDelete);
+        loadProfiles();
+        renderstatus('prem');
+      }
     }
 }
 
@@ -181,15 +181,15 @@ function loadDomains() {
 // add event listener for when the page loads
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Add Profile
-    var addProfile = document.querySelector("#addProfile");
-    addProfile.addEventListener('click', clickAddButton);
+  // Add Profile
+  var addProfile = document.querySelector("#addProfile");
+  addProfile.addEventListener('click', clickAddButton);
 
-    // Remove Profile
-    var divs = document.querySelectorAll('div');
-    for (var i = 0, len = divs.length; i < len; i++) {
-      divs[i].addEventListener('click', clickDiv);
-    }
+  // Remove Profile
+  var divs = document.querySelectorAll('div');
+  for (var i = 0, len = divs.length; i < len; i++) {
+    divs[i].addEventListener('click', clickDiv);
+  }
 });
 
 window.onload = function() {

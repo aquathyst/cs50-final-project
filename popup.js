@@ -303,10 +303,10 @@ function loadProfiles() {
 		  profileId = localStorage.key(keyi);
 		  profv = localStorage.getItem(localStorage.key(keyi));
 		  profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='contents profcontents'>"
-		  		+"<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>"
-		  		+"<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>"
-		  		+"<p class='minitext'>" + localStorage.getItem(profileId) + "</p>"
-		  	  +"</div></div>";
+		  		+ "<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>"
+		  		+ "<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>"
+		  		+ "<p class='minitext'>" + localStorage.getItem(profileId) + "</p>"
+		  	  	+ "</div></div>";
 		  count++;
 		}
   }

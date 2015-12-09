@@ -1,3 +1,5 @@
-# cs50-final-project
+# AlphaText
 
-This final project is to implement a chrome extension. This extension helps enhance online articles' readability with user customization.
+AlphaText, a chrome extension that helps enhance online articles' readability with user customization.
+
+Copyright (C) 2015 Holly Zhou and Peter Wang. All rights reserved.

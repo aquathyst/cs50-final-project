@@ -35,12 +35,10 @@
 
   "permissions": [
     "activeTab",
-    "https://ajax.googleapis.com/",
-    "tabs", 
+    "tabs",
+    "storage",
     "http://*/*", 
-    "https://*/*", 
-    "fontSettings",
-    "storage"
+    "https://*/*"
   ]
  
 }

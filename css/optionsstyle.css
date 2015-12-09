@@ -26,3 +26,6 @@
 #font_size,#font_family,#line_height{
 	width:150px;
 }
+option{
+	position:absolute;
+}

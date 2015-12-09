@@ -81,10 +81,10 @@ function makeCSS(pnum) {
 	var lheight = "";
 
 	if (fontvalue!==null){
-		var values = fontvalue.split(" - ");
-		var fsize = values[0];
-		var ffamily = values[1];
-		var lheight = values[2];
+		values = fontvalue.split(" - ");
+		fsize = values[0];
+		ffamily = values[1];
+		lheight = values[2];
 
 		// Generate CSS string
 		var csstemp = "body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"
@@ -135,7 +135,6 @@ function adoptp(profile) {
 
 	// Put in .alphatextcustomp if needed
 	chrome.tabs.executeScript(null,{code:"$('body').addClass('alphatextcustomp');"});
-
 	
 	// Insert CSS profile
 	switch(profile){
@@ -154,7 +153,6 @@ function adoptp(profile) {
 		default:
 			return;
 	}
-	
 	activep = profile;
 	renderstatus('adoptp');
 }
@@ -167,8 +165,8 @@ function adoptp3(e){adoptp(3);}
 function qsset(e) {
 	
 	// Put in .alphatextcustomq if needed
-	chrome.tabs.executeScript(null,
-		{code:"$('body').addClass('alphatextcustomq');"});
+		chrome.tabs.executeScript(null,
+			{code:"$('body').addClass('alphatextcustomq');"});
 
 	// Get inputs
 	var fsize = document.getElementById("font_size").value;
@@ -176,7 +174,6 @@ function qsset(e) {
 	var lheight = document.getElementById("line_height").value;
 	
 	// Set properties if not empty
-	
 	if(fsize !== "null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li{font-size:"+fsize+" !important;}"});
 	}
@@ -186,7 +183,6 @@ function qsset(e) {
 	if(lheight !== "null"){
 		chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{line-height:"+lheight+" !important;}"});
 	}
-	
 	renderstatus('quickstyleset');
 }
 
@@ -244,7 +240,7 @@ function checksave(domtocheck) {
 		var savedp = null;
 		if(localStorage.getItem('profileItem' + localStorage.getItem('dom: ' + tabdomain)) !== null){
 			//  Adopt saved profile
-			savedp = parseInt(localStorage.getItem('dom: ' + tabdomain));
+			savedp = parseInt(localStorage.getItem('dom: ' + tabdomain),10);
 			adoptp(savedp);
 			renderstatus('saveautop');
 		}
@@ -273,7 +269,7 @@ function checkurldomain() {
 	chrome.tabs.query({'active':true,'currentWindow':true},function(tab){
 		// Getting URL and domain
 		taburl = tab[0].url;
-		var end = taburl.indexOf('/',8)
+		var end = taburl.indexOf('/',8);
 		if(end !== -1)
 		{
 			if(taburl.indexOf("http://") !== -1)

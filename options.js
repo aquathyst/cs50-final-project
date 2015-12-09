@@ -53,12 +53,14 @@ function loadProfiles() {
       profv = localStorage.getItem(localStorage.key(keyi));
       profileList += "<div class='profs' id='" + profileId + "' value='" + profv + "'><b>Profile " + profileId.substring(11) + "</b>: "
           + profv + "&nbsp&nbsp<img id= '" + profileId 
-          + "_delete' title='Delete' src='images/delete.png' height='10' width='10' align='bottom'/></div>";
+          + "_delete' title='Delete' src='images/delete.png' height='10' width='10' alt='del'/></div>";
     }
   }
 
   if (profileList === "")
-      profileList = "No Profile";
+  {
+    profileList = "No Profile";
+  }
   document.getElementById("profiles").innerHTML = profileList;
 }
 
@@ -69,7 +71,9 @@ function profileExists(fs, ff, lh) {
         var profileId = "profileItem" + i;
         var profileValue = fs + " - " + ff + " - " + lh;
         if (localStorage.getItem(profileId) === profileValue) 
-            return true;
+        {  
+          return true;
+        }
     }
     return false;
 }
@@ -118,13 +122,19 @@ function clickAddButton(e) {
               renderstatus('padd');
 	        }
 	        else
-              renderstatus('psamep');
+          {
+            renderstatus('psamep');
+          }
 	    }
 	    else
-          renderstatus('pmorethan3');
+      {
+        renderstatus('pmorethan3');
+      }
 	}
 	else
-      renderstatus('pnostorage');
+  {
+    renderstatus('pnostorage');
+  }
 }
 
 // to handle profile deletion and font/size/line height change
@@ -177,8 +187,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Remove Profile
     var divs = document.querySelectorAll('div');
-    for (var i = 0, len = divs.length; i < len; i++)
-        divs[i].addEventListener('click', clickDiv);
+    for (var i = 0, len = divs.length; i < len; i++) {
+      divs[i].addEventListener('click', clickDiv);
+    }
 });
 
 window.onload = function() {

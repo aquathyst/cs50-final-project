@@ -6,7 +6,7 @@
  */
 
 /* Add jQuery methods for js to work */
-function addmethods(){
+function addmethods() {
 	// jQuery from http://jquery.com/
 	chrome.tabs.executeScript(null,{file:"3rdparty/jquery-2.1.4.min.js"});
 }
@@ -16,10 +16,11 @@ var activep = null;
 var saved = false;
 
 /* Render status text */
-function renderstatus(eventtype){
+function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'EMPTY':
 			document.getElementById("status").innerHTML = '';
+			break;
 		case 'off':
 			document.getElementById("status").innerHTML = 'All styles removed.';
 			break;
@@ -59,7 +60,7 @@ var css2 = "";
 var css3 = "";
 
 /* Prepare fallback fonts for CSS */
-function fallbackfont(font){
+function fallbackfont(font) {
 	if(font === "Arial" || font === "Verdana" || font === "Helvetica" || font === "Tahoma" || font === "Cursive"){
 		return "sans-serif";
 	}
@@ -69,54 +70,71 @@ function fallbackfont(font){
 }
 
 /* Make CSS */
-function makeCSS(pnum){
+function makeCSS(pnum) {
 	
 	// Get saved info
 	var eleId = "profileItem" + pnum;
 	var fontvalue = localStorage.getItem(eleId);
-	var values = fontvalue.split(" - ");
-	var fsize = values[0];
-	var ffamily = values[1];
-	var lheight = values[2];
+	var values = "";
+	var fsize = "";
+	var ffamily = "";
+	var lheight = "";
 
-	// Generate CSS string
-	var csstemp = "body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"
-			+ "font-size:" + fsize + " !important;}"
-			+ "body.alphatextcustomp *{"
-			+ "font-family:" + ffamily + "," + fallbackfont(ffamily) + " !important;"
-			+ "line-height:" + lheight + " !important;}";
+	if (fontvalue!==null){
+		var values = fontvalue.split(" - ");
+		var fsize = values[0];
+		var ffamily = values[1];
+		var lheight = values[2];
 
-	// Save into css vars
-	switch(pnum)
-	{
-		case 1:
-			css1 = csstemp;
-			break;
-		case 2:
-			css2 = csstemp;
-			break;
-		case 3:
-			css3 = csstemp;
-			break;
-		default:
-			break;
+		// Generate CSS string
+		var csstemp = "body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"
+				+ "font-size:" + fsize + " !important;}"
+				+ "body.alphatextcustomp *{"
+				+ "font-family:" + ffamily + "," + fallbackfont(ffamily) + " !important;"
+				+ "line-height:" + lheight + " !important;}";
+
+		// Save into css vars
+		switch(pnum)
+		{
+			case 1:
+				css1 = csstemp;
+				break;
+			case 2:
+				css2 = csstemp;
+				break;
+			case 3:
+				css3 = csstemp;
+				break;
+			default:
+				break;
+		}
+	}
+	else{
+		switch(pnum)
+		{
+			case 1:
+				css1 = "";
+				break;
+			case 2:
+				css2 = "";
+				break;
+			case 3:
+				css3 = "";
+				break;
+			default:
+				break;
+		}
 	}
 }
 
 /* Adapt and inject a style profile */
-function adoptp(profile){
+function adoptp(profile) {
 	
 	// Remove .alphatextcustomq if needed
-	chrome.tabs.executeScript(null,
-		{code:
-			"$('body').removeClass('alphatextcustomq');"
-		});
+	chrome.tabs.executeScript(null,{code:"$('body').removeClass('alphatextcustomq');"});
 
 	// Put in .alphatextcustomp if needed
-	chrome.tabs.executeScript(null,
-		{code:
-			"$('body').addClass('alphatextcustomp');"
-		});
+	chrome.tabs.executeScript(null,{code:"$('body').addClass('alphatextcustomp');"});
 
 	
 	// Insert CSS profile
@@ -150,9 +168,7 @@ function qsset(e) {
 	
 	// Put in .alphatextcustomq if needed
 	chrome.tabs.executeScript(null,
-		{code:
-			"$('body').addClass('alphatextcustomq');"
-		});
+		{code:"$('body').addClass('alphatextcustomq');"});
 
 	// Get inputs
 	var fsize = document.getElementById("font_size").value;
@@ -175,7 +191,7 @@ function qsset(e) {
 }
 
 /* Toggle Off */
-function toggle(e){
+function toggle(e) {
 	// Remove all styles
 	chrome.tabs.executeScript(null,
 				{code:
@@ -187,12 +203,12 @@ function toggle(e){
 }
 
 /* Open options panel */
-function openoptions(e){
+function openoptions(e) {
 	chrome.runtime.openOptionsPage();
 }
 
 /* Saving domain*/
-function togglesave(domtosave){
+function togglesave(domtosave) {
 	if(saved === false)
 	{
 		// Save!
@@ -221,7 +237,7 @@ function togglesave(domtosave){
 function savee(e){togglesave(tabdomain);}
 
 /* Check if the domain was saved by user, and load necessary code */
-function checksave(domtocheck){
+function checksave(domtocheck) {
 	if(localStorage.getItem('dom: ' + tabdomain) !== null)
 	{
 		// Saved!
@@ -253,7 +269,7 @@ function checksave(domtocheck){
 /* Get url and domain of website, and see if it was saved */
 var taburl = null;
 var tabdomain = null;
-function checkurldomain(){
+function checkurldomain() {
 	chrome.tabs.query({'active':true,'currentWindow':true},function(tab){
 		// Getting URL and domain
 		taburl = tab[0].url;
@@ -303,10 +319,10 @@ function loadProfiles() {
 		  profileId = localStorage.key(keyi);
 		  profv = localStorage.getItem(localStorage.key(keyi));
 		  profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='contents profcontents'>"
-		  		+ "<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>"
-		  		+ "<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>"
-		  		+ "<p class='minitext'>" + localStorage.getItem(profileId) + "</p>"
-		  	  	+ "</div></div>";
+		  	+ "<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>"
+		  	+ "<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>"
+		  	+ "<p class='minitext'>" + localStorage.getItem(profileId) + "</p>"
+		  	+ "</div></div>";
 		  count++;
 		}
   }
@@ -321,15 +337,13 @@ function loadProfiles() {
 }
 
 /* Load once started */
-document.addEventListener('DOMContentLoaded',function(){
+document.addEventListener('DOMContentLoaded',function() {
 
 	// Add jQuery
 	addmethods();
 
 	// Save current url and domain
 	checkurldomain();
-
-	/* Button event listeners */
 
 	// Options
 	var options = document.querySelectorAll("#options");
@@ -351,21 +365,24 @@ document.addEventListener('DOMContentLoaded',function(){
 
 	// Load profile buttons
 	loadProfiles();
-
+	
 	// Profiles
+	// 1
 	var profile1set = document.querySelectorAll("#profileItem1");
 	for(var i = 0, len = profile1set.length; i < len; i++){
 		profile1set[i].addEventListener('click',adoptp1);
 	}
+	// 2
 	var profile2set = document.querySelectorAll("#profileItem2");
 	for(var i = 0, len = profile2set.length; i < len; i++){
 		profile2set[i].addEventListener('click',adoptp2);
 	}
+	// 3
 	var profile3set = document.querySelectorAll("#profileItem3");
 	for(var i = 0, len = profile3set.length; i < len; i++){
 		profile3set[i].addEventListener('click',adoptp3);
 	}
-	
+
 	// Quick Style Set
 	var qsbutton = document.querySelectorAll("#setstyle");
 	for(var i = 0, len = qsbutton.length; i < len; i++){

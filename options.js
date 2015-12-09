@@ -6,13 +6,14 @@
  */
 
 /* Render status text */
-function renderstatus(what){
+function renderstatus(what) {
   switch(what){
     case 'EMPTY':
       document.getElementById("prefstatus").innerHTML = '';
       document.getElementById("profstatus").innerHTML = '';
       document.getElementById("domstatus").innerHTML = '';
       document.getElementById("overallstatus").innerHTML = '';
+      break;
     case 'padd':
       document.getElementById("profstatus").innerHTML = 'Profile saved';
       break;
@@ -79,7 +80,7 @@ function removeProfile(eid) {
 }
 
 // Figure out what is the next profile number to be saved to
-function nextNum(){
+function nextNum() {
   if(localStorage.getItem('profileItem1') === null)
   {
     return 1;
@@ -144,7 +145,7 @@ function clickDiv(e) {
 }
 
 // Load domains list
-function loadDomains(){
+function loadDomains() {
   var domainList = "";
   var domkeyprefix = "dom: ";
   var storagelength = localStorage.length;
@@ -180,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
         divs[i].addEventListener('click', clickDiv);
 });
 
-window.onload = function(){
+window.onload = function() {
   loadProfiles();
   loadDomains();
 };

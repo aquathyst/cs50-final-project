@@ -137,7 +137,7 @@ function clickAddButton(e) {
   }
 }
 
-// to handle profile deletion and font/size/line height change
+// to handle profile deletion 
 function clickDiv(e) {
     var fsize = "";
     var ffamily = "";

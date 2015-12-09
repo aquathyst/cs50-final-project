@@ -26,13 +26,6 @@
     "persistent": false
   },
   
-  "content_scripts": [
-    {
-      "matches": ["http://*/*","https://*/*"],
-      "js": ["contentscript.js"]
-    }
-  ],
-
   "incognito": "spanning",
   
   "options_ui": {

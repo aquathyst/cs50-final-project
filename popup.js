@@ -332,19 +332,19 @@ document.addEventListener('DOMContentLoaded',function(){
 	/* Button event listeners */
 
 	// Options
-	var options=document.querySelectorAll("#options");
+	var options = document.querySelectorAll("#options");
 	for(var i = 0, len = options.length; i < len; i++){
 		options[i].addEventListener('click',openoptions);
 	}
 
 	// Off toggle
-	var offtoggle=document.querySelectorAll("#off");
+	var offtoggle = document.querySelectorAll("#off");
 	for(var i = 0, len = offtoggle.length; i < len; i++){
 		offtoggle[i].addEventListener('click',toggle);
 	}
 
 	// Save domain
-	var savedom=document.querySelectorAll("#savepage");
+	var savedom = document.querySelectorAll("#savepage");
 	for(var i = 0, len = savedom.length; i < len; i++){
 		savedom[i].addEventListener('click',savee);
 	}
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded',function(){
 	}
 	
 	// Quick Style Set
-	var qsbutton=document.querySelectorAll("#setstyle");
+	var qsbutton = document.querySelectorAll("#setstyle");
 	for(var i = 0, len = qsbutton.length; i < len; i++){
 		qsbutton[i].addEventListener('click',qsset);
 	}

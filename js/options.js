@@ -84,6 +84,11 @@ function removeProfile(eid) {
 
 /* Figure out what is the next profile number to be saved to */
 function nextNum() {
+  for (var i = 1; i < 4; i++) {
+    if (localStorage.getItem('profileItem' + i) === null)
+      return i;
+  }
+  /*
 	if(localStorage.getItem('profileItem1') === null)
 	{
 		return 1;
@@ -95,11 +100,12 @@ function nextNum() {
 	else if(localStorage.getItem('profileItem3') === null)
 	{
 		return 3;
-	}
+	} 
 	else
 	{
 		return 'MAX';
-	}
+	} */
+	return 'MAX';
 }
 
 /* click event to add profile */

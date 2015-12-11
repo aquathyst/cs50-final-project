@@ -155,6 +155,7 @@ function deletep(e) {
 		loadProfiles();
 		renderstatus('prem');
 	}
+}
 
 /* Load domains list */
 function loadDomains() {

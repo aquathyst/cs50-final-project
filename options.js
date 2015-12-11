@@ -21,7 +21,7 @@ function renderstatus(eventtype) {
 			document.getElementById("profstatus").innerHTML = 'You can only add 3 profiles';
 			break;
 		case 'pnostorage':
-			document.getElementById("profstatus").innerHTML = 'Sorry! Your browser does not support Web Storage.';
+			document.getElementById("profstatus").innerHTML = 'Sorry! Your browser does not support Local Storage.';
 			break;
 		default:
 			document.getElementById("overallstatus").innerHTML = eventtype;
@@ -63,7 +63,7 @@ function loadProfiles() {
 	document.getElementById("profiles").innerHTML = profileList;
 }
 
-/* to check if a profile exists; if it exists then return true; else return false */
+/* to check if a set of styles already exists; if it exists then return true; else return false */
 // fs = font size; ff = font family; lh = line height
 function profileExists(fs, ff, lh) {
 	for (var i = 1; i <= maxNum; i++) {
@@ -71,9 +71,11 @@ function profileExists(fs, ff, lh) {
 		var profileValue = fs + " - " + ff + " - " + lh;
 		if (localStorage.getItem(profileId) === profileValue) 
 		{  
+			// Present
 			return true;
 		}
 	}
+	// Absent
 	return false;
 }
 
@@ -106,20 +108,24 @@ function clickAddButton(e) {
 				var profile_name = "profileItem" + profNum;
 				localStorage.setItem(profile_name, fsize + " - " + ffamily + " - " + lheight);
 				loadProfiles();
+				// Profile saved
 				renderstatus('padd');
 			}
 			else
 			{
+				// Same profile settings present
 				renderstatus('psamep');
 			}
 		}
 		else
 		{
+			// More than 3 profiles
 			renderstatus('pmorethan3');
 		}
 	}
 	else
 	{
+		// Local storage not supported
 		renderstatus('pnostorage');
 	}
 }

@@ -226,6 +226,7 @@ function togglesave(domtosave) {
 				renderstatus('save');
 			}
 			else{
+				// But no profile to save with...
 				renderstatus('noproftosave');
 			}
 		}
@@ -285,27 +286,37 @@ function checksave(domtocheck) {
 function checkurldomain() {
 	chrome.tabs.query({'active':true,'currentWindow':true},function(tab){
 
-		// Getting URL and domain
+		// Getting URL
 		taburl = tab[0].url;
-		var end = taburl.indexOf('/',8);
-		if(end !== -1)
-		{
-			if(taburl.indexOf("http://") !== -1)
+
+		// End of domain
+		var end = taburl.indexOf('/',8); 
+
+		// Find start
+		var start = null;
+		if(taburl.indexOf("http://") !== -1)
 			{
-				tabdomain = taburl.substring(7,end);
+				start = 7;
 			}
 			else if(taburl.indexOf("https://") !== -1)
 			{
-				tabdomain = taburl.substring(8,end);
+				start = 8;
 			}
 			else
 			{
+				// Not HTTP or HTTPS
 				tabdomain = null;
+				return;
 			}
+		
+		// In case the ending / cannot be found
+		if(end !== -1)
+		{
+			tabdomain = taburl.substring(start,end);
 		}
 		else
 		{
-			tabdomain = null;
+			tabdomain = taburl.substring(start);
 		}
 
 		// Check if saved

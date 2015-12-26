@@ -56,3 +56,13 @@ a.menu{
 a.menu:hover{
 	color:#A09050;
 }
+
+/* Delete button */
+.delbutton{
+	height:10px;
+	width:10px;
+	opacity:0.6;
+}
+.delbutton:hover{
+	opacity:1;
+}

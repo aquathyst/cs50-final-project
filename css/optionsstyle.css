@@ -22,7 +22,7 @@
 }
 
 /* Profile and domain lists */
-.profs,#domlist{
+#profiles,#domlist{
 	color:#995500;
 }
 #domlist a{
@@ -34,16 +34,6 @@
 }
 #addProfile{
 	margin-top:10px;
-}
-
-/* Delete button */
-.delbutton{
-	height:10px;
-	width:10px;
-	opacity:0.6;
-}
-.delbutton:hover{
-	opacity:1;
 }
 
 /* Dropdowns */

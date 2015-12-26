@@ -6,25 +6,26 @@
  */
 
 /* Render status text */
+var statusmsg = '';
 function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'padd':
-			document.getElementById("profstatus").innerHTML = 'Profile saved';
+			document.getElementById("profstatus").innerText = 'Profile saved';
 			break;
 		case 'prem':
-			document.getElementById("profstatus").innerHTML = 'Profile removed';
+			document.getElementById("profstatus").innerText = 'Profile removed';
 			break;
 		case 'psamep':
-			document.getElementById("profstatus").innerHTML = 'Same profile exists';
+			document.getElementById("profstatus").innerText = 'Same profile exists';
 			break;
 		case 'pmorethan3':
-			document.getElementById("profstatus").innerHTML = 'You can only add 3 profiles';
+			document.getElementById("profstatus").innerText = 'You can only add 3 profiles';
 			break;
 		case 'pnostorage':
-			document.getElementById("profstatus").innerHTML = 'Sorry! Your browser does not support Local Storage.';
+			document.getElementById("profstatus").innerText = 'Sorry! Your browser does not support Local Storage.';
 			break;
 		default:
-			document.getElementById("overallstatus").innerHTML = eventtype;
+			document.getElementById("overallstatus").innerText = String(eventtype);
 			break;
 	}
 }

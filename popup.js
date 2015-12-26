@@ -16,40 +16,44 @@ var activep = null;
 var saved = false;
 
 /* Render status text */
+var statusmsg = '';
 function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'off':
-			document.getElementById("status").innerHTML = 'All styles removed.';
+			document.getElementById("status").innerText = 'All styles removed.';
 			break;
 		case 'adoptp':
-			document.getElementById("status").innerHTML = 'Profile ' + activep + ' activated!';
+			statusmsg = 'Profile ' + activep + ' activated!';
+			document.getElementById("status").innerText = statusmsg;
 			break;
 		case 'error':
-			document.getElementById("status").innerHTML = 'Error!';
+			document.getElementById("status").innerText = 'Error!';
 			break;
 		case 'save':
-			document.getElementById("status").innerHTML = 'Domain saved to always use Profile ' + activep + ' by default.';
+			statusmsg = 'Domain saved to always use Profile ' + activep + ' by default.';
+			document.getElementById("status").innerText = statusmsg;
 			break;
 		case 'unsave':
-			document.getElementById("status").innerHTML = 'Domain save removed.';
+			document.getElementById("status").innerText = 'Domain save removed.';
 			break;
 		case 'quickstyleset':
-			document.getElementById("status").innerHTML = 'Quick style set successfully!';
+			document.getElementById("status").innerText = 'Quick style set successfully!';
 			break;
 		case 'emptyquickstyleset':
-			document.getElementById("status").innerHTML = 'Choose some styles to apply!';
+			document.getElementById("status").innerText = 'Choose some styles to apply!';
 			break;
 		case 'saveautop':
-			document.getElementById("status").innerHTML = 'Profile ' + activep + ' activated automatically on this domain!';
+			statusmsg = 'Profile ' + activep + ' activated automatically on this domain!';
+			document.getElementById("status").innerText = statusmsg;
 			break;
 		case 'domautonoprof':
-			document.getElementById("status").innerHTML = 'Domain saved, but profile does not exist!';
+			document.getElementById("status").innerText = 'Domain saved, but profile does not exist!';
 			break;
 		case 'noproftosave':
-			document.getElementById("status").innerHTML = 'Choose a profile first.';
+			document.getElementById("status").innerText = 'Choose a profile first.';
 			break;
 		default:
-			document.getElementById("status").innerHTML = eventtype;
+			document.getElementById("status").innerText = String(eventtype);
 			break;
 	}
 }
@@ -61,11 +65,11 @@ var css3 = "";
 
 /* Prepare fallback fonts for CSS */
 function fallbackfont(font) {
-	if(font === "Arial" || font === "Verdana" || font === "Helvetica" || font === "Tahoma"){
-		return "sans-serif";
+	if(font === 'Arial' || font === 'Verdana' || font === 'Helvetica' || font === 'Tahoma'){
+		return 'sans-serif';
 	}
 	else{
-		return "serif";
+		return 'serif';
 	}
 }
 
@@ -134,7 +138,7 @@ function adoptp(profile) {
 	chrome.tabs.executeScript(null,{code:"$('body').removeClass('alphatextcustomq');"});
 	// Put in .alphatextcustomp if needed
 	chrome.tabs.executeScript(null,{code:"$('body').addClass('alphatextcustomp');"});
-	
+
 	// Insert CSS profile
 	switch(profile){
 		case 1:
@@ -221,7 +225,7 @@ function togglesave(domtosave) {
 				var ptosave = activep;
 				localStorage.setItem('dom: ' + tabdomain,ptosave);
 				saved = true;
-				document.getElementById("savetext").innerHTML = 'Don\'t use on domain';
+				document.getElementById("savetext").innerText = 'Don\'t use on domain';
 				document.getElementById("savepage").id = "unsavepage";
 				renderstatus('save');
 			}
@@ -235,7 +239,7 @@ function togglesave(domtosave) {
 			// Unsave!
 			localStorage.removeItem('dom: ' + tabdomain);
 			saved = false;
-			document.getElementById("savetext").innerHTML = 'Always use profile on domain';
+			document.getElementById("savetext").innerText = 'Always use profile on domain';
 			document.getElementById("unsavepage").id = "savepage";
 			renderstatus('unsave');
 		}
@@ -265,19 +269,19 @@ function checksave(domtocheck) {
 			}
 			// Adjust state and button
 			saved = true;
-			document.getElementById("savetext").innerHTML = 'Don\'t use on domain';
+			document.getElementById("savetext").innerText = 'Don\'t use on domain';
 			document.getElementById("savepage").id = "unsavepage";
 		}
 		else
 		{
 			// Not saved yet
-			document.getElementById("savetext").innerHTML = 'Always use profile on domain';
+			document.getElementById("savetext").innerText = 'Always use profile on domain';
 		}
 	}
 	else
 	{
 		// Domain not applicable
-		document.getElementById("savetext").innerHTML = 'Cannot save on domain';
+		document.getElementById("savetext").innerText = 'Cannot save on domain';
 		document.getElementById("savepage").id = "cantsave";
 	}
 }
@@ -294,20 +298,23 @@ function checkurldomain() {
 
 		// Find start
 		var start = null;
-		if(taburl.indexOf("http://") !== -1)
-			{
-				start = 7;
-			}
-			else if(taburl.indexOf("https://") !== -1)
-			{
-				start = 8;
-			}
-			else
-			{
-				// Not HTTP or HTTPS
-				tabdomain = null;
-				return;
-			}
+		if(taburl.indexOf("http://") === 0)
+		{
+			// HTTP
+			start = 7;
+		}
+		else if(taburl.indexOf("https://") === 0)
+		{
+			// HTTPS
+			start = 8;
+		}
+		else
+		{
+			// Not HTTP or HTTPS
+			tabdomain = null;
+			checksave(tabdomain);
+			return;
+		}
 		
 		// In case the ending / cannot be found
 		if(end !== -1)
@@ -320,7 +327,7 @@ function checkurldomain() {
 		}
 
 		// Check if saved
-		checksave(tabdomain);
+		checksave(tabdomain);;
 	});
 }
 
@@ -331,7 +338,7 @@ var maxNum = 3; // maximum number of profiles saved
 // loading and reloading profile items
 function loadProfiles() {
   var profileList = "";
-  var profkeyprefix="profileItem";
+  var profkeyprefix = "profileItem";
   var storageLen = localStorage.length;
   var profileId = "";
   var profv = "";
@@ -387,13 +394,13 @@ document.addEventListener('DOMContentLoaded',function() {
 	
 	// Profiles
 	if(document.querySelector("#profileItem1") !== null) {
-		document.querySelector("#profileItem1").addEventListener('click',adoptp1); //1
+		document.querySelector("#profileItem1").addEventListener('click',adoptp1); // 1
 	}
 	if(document.querySelector("#profileItem2") !== null) {
-		document.querySelector("#profileItem2").addEventListener('click',adoptp2); //2
+		document.querySelector("#profileItem2").addEventListener('click',adoptp2); // 2
 	}
 	if(document.querySelector("#profileItem3") !== null) {
-		document.querySelector("#profileItem3").addEventListener('click',adoptp3); //3
+		document.querySelector("#profileItem3").addEventListener('click',adoptp3); // 3
 	}
 
 	// Quick Style Set

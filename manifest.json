@@ -32,7 +32,7 @@
     "activeTab",
     "tabs",
     "storage",
-    "http://*/*", 
+    "http://*/*",
     "https://*/*"
   ]
 }

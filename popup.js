@@ -65,11 +65,11 @@ var css3 = "";
 
 /* Prepare fallback fonts for CSS */
 function fallbackfont(font) {
-	if(font === 'Arial' || font === 'Verdana' || font === 'Helvetica' || font === 'Tahoma'){
-		return 'sans-serif';
+	if(font === 'Cambria' || font === 'Georgia' || font === 'Lucida Grande' || font === 'Times New Roman'){
+		return 'serif';
 	}
 	else{
-		return 'serif';
+		return 'sans-serif';
 	}
 }
 

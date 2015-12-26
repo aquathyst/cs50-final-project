@@ -17,6 +17,18 @@ var saved = false;
 
 /* Render status text */
 var statusmsg = '';
+
+function renderstatuscol(color) {
+	switch(color){
+		case 'red':
+			//
+			break;
+		default:
+			//
+			break;
+	}
+}
+
 function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'off':
@@ -65,7 +77,7 @@ var css3 = "";
 
 /* Prepare fallback fonts for CSS */
 function fallbackfont(font) {
-	if(font === 'Cambria' || font === 'Georgia' || font === 'Lucida Grande' || font === 'Times New Roman'){
+	if(font === 'Cambria' || font === 'Garamond' || font === 'Georgia' || font === 'Lucida Grande' || font === 'Times New Roman'){
 		return 'serif';
 	}
 	else{

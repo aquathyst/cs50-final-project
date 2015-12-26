@@ -6,8 +6,7 @@
  */
 
 /* Render status text */
-var statusmsg = '';
-
+// var statusmsg = '';
 function renderstatuscol(statust,color) {
 	switch(color){
 		case 'red':
@@ -24,7 +23,6 @@ function renderstatuscol(statust,color) {
 			break;
 	}
 }
-
 function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'padd':
@@ -47,9 +45,15 @@ function renderstatus(eventtype) {
 			renderstatuscol('profstatus','red');
 			document.getElementById("profstatus").innerText = 'Sorry! Your browser does not support local storage.';
 			break;
+		case 'deletedom':
+			renderstatuscol('domstatus','yellow');
+			document.getElementById("domstatus").innerText = 'Domain removed.';
+			break;
 		default:
-			renderstatuscol('overallstatus','');
-			document.getElementById("overallstatus").innerText = String(eventtype);
+			renderstatuscol('domstatus','');
+			renderstatuscol('profstatus','');
+			document.getElementById("domstatus").innerText = String(eventtype);
+			document.getElementById("profstatus").innerText = '';
 			break;
 	}
 }
@@ -64,7 +68,7 @@ function loadProfiles() {
 	var storageLen = localStorage.length;
 	var profileId = "";
 	var profv = "";
-	var profarray = ['','',''];
+	var profvarray = ['','',''];
 	var profiletext = "";
 
 	// Generate HTML list
@@ -131,7 +135,6 @@ function clickAddButton(e) {
 	var fsize = document.getElementById("font_size").value;
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
-	var storageLen = localStorage.length; 
 	var profNum = nextNum();
 
 	// need to check if HTML5 local storage supported
@@ -192,7 +195,10 @@ function loadDomains() {
 		{
 			var dom = localStorage.key(keyi).substring(5);
 			var pro = localStorage.getItem(localStorage.key(keyi));
-			domainList += "<div class='doms'><b><a href='http://" + dom + "' target='_blank'>" + dom + "</a></b> (Profile " + pro + ")</div>";
+			domainList += "<div class='doms'>"
+				+ "<img class='delbutton' title='Delete' src='images/delete.png' alt='del' id='" + dom + "_delete'/> "
+				+ "<b><a href='http://" + dom + "' class='domlistdom' target='_blank'>" + dom + "</a></b> (Profile " + pro + ")"
+				+ "</div>";
 		}
 	}
 	
@@ -205,6 +211,27 @@ function loadDomains() {
 	document.getElementById("domlist").innerHTML = domainList;
 }
 
+/* to remove domain item */
+function removeDomain(ditem) {
+	localStorage.removeItem(ditem);
+}
+
+/* to handle domain removal */
+var deleId = "";
+function deleted(e) {
+	deleId = e.target.id;
+	if (deleId.substring(deleId.length - 7, deleId.length) === "_delete") {
+		var domToDelete = 'dom: ' + deleId.substring(0, deleId.length - 7);
+		
+		// Remove profile
+		removeDomain(domToDelete);
+
+		// Reload list and render status text
+		loadDomains();
+		renderstatus('deletedom');
+	}
+}
+
 /* Load at beginning */
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -214,10 +241,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// Add Profile
 	document.querySelector("#addProfile").addEventListener('click', clickAddButton);
-
+	
 	// Remove Profile
 	var deles = document.querySelectorAll("#profiles");
 	for (var i = 0, len = deles.length; i < len; i++) {
 		deles[i].addEventListener('click', deletep);
+	}
+	
+	// Remove Domain
+	var delesd = document.querySelectorAll("#domlist");
+	for (var j = 0, lend = delesd.length; j < lend; j++) {
+		delesd[j].addEventListener('click', deleted);
 	}
 });

@@ -11,7 +11,6 @@ var saved = false;
 
 /* Render status text */
 var statusmsg = '';
-
 function renderstatuscol(color) {
 	switch(color){
 		case 'red':
@@ -28,7 +27,6 @@ function renderstatuscol(color) {
 			break;
 	}
 }
-
 function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'off':

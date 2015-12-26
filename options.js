@@ -7,24 +7,48 @@
 
 /* Render status text */
 var statusmsg = '';
+
+function renderstatuscol(statust,color) {
+	switch(color){
+		case 'red':
+			document.getElementById(statust).className = 'statusred';
+			break;
+		case 'yellow':
+			document.getElementById(statust).className = 'statusyellow';
+			break;
+		case 'green':
+			document.getElementById(statust).className = 'statusgreen';
+			break;
+		default:
+			document.getElementById(statust).className = '';
+			break;
+	}
+}
+
 function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'padd':
+			renderstatuscol('profstatus','green');
 			document.getElementById("profstatus").innerText = 'Profile saved';
 			break;
 		case 'prem':
+			renderstatuscol('profstatus','yellow');
 			document.getElementById("profstatus").innerText = 'Profile removed';
 			break;
 		case 'psamep':
+			renderstatuscol('profstatus','red');
 			document.getElementById("profstatus").innerText = 'Same profile exists';
 			break;
 		case 'pmorethan3':
+			renderstatuscol('profstatus','red');
 			document.getElementById("profstatus").innerText = 'You can only add 3 profiles';
 			break;
 		case 'pnostorage':
-			document.getElementById("profstatus").innerText = 'Sorry! Your browser does not support Local Storage.';
+			renderstatuscol('profstatus','red');
+			document.getElementById("profstatus").innerText = 'Sorry! Your browser does not support local storage.';
 			break;
 		default:
+			renderstatuscol('overallstatus','');
 			document.getElementById("overallstatus").innerText = String(eventtype);
 			break;
 	}

@@ -6,10 +6,19 @@
  */
 
 /* Status text */
-.status{
+#overallstatus,#profstatus{
 	font-size:110%;
- 	color:#B06A58;
+ 	color:#606060;
  	margin-top:10px;
+}
+#overallstatus.statusred,#profstatus.statusred{
+	color:#DF4646;
+}
+#overallstatus.statusyellow,#profstatus.statusyellow{
+	color:#C29117;
+}
+#overallstatus.statusgreen,#profstatus.statusgreen{
+	color:#198C19;
 }
 
 /* Profile and domain lists */

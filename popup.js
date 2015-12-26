@@ -21,10 +21,16 @@ var statusmsg = '';
 function renderstatuscol(color) {
 	switch(color){
 		case 'red':
-			//
+			document.getElementById('status').className = 'statusred';
+			break;
+		case 'yellow':
+			document.getElementById('status').className = 'statusyellow';
+			break;
+		case 'green':
+			document.getElementById('status').className = 'statusgreen';
 			break;
 		default:
-			//
+			document.getElementById('status').className = '';
 			break;
 	}
 }
@@ -32,39 +38,50 @@ function renderstatuscol(color) {
 function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'off':
+			renderstatuscol('yellow');
 			document.getElementById("status").innerText = 'All styles removed.';
 			break;
 		case 'adoptp':
+			renderstatuscol('green');
 			statusmsg = 'Profile ' + activep + ' activated!';
 			document.getElementById("status").innerText = statusmsg;
 			break;
 		case 'error':
+			renderstatuscol('red');
 			document.getElementById("status").innerText = 'Error!';
 			break;
 		case 'save':
+			renderstatuscol('green');
 			statusmsg = 'Domain saved to always use Profile ' + activep + ' by default.';
 			document.getElementById("status").innerText = statusmsg;
 			break;
 		case 'unsave':
+			renderstatuscol('yellow');
 			document.getElementById("status").innerText = 'Domain save removed.';
 			break;
 		case 'quickstyleset':
+			renderstatuscol('green');
 			document.getElementById("status").innerText = 'Quick style set successfully!';
 			break;
 		case 'emptyquickstyleset':
+			renderstatuscol('red');
 			document.getElementById("status").innerText = 'Choose some styles to apply!';
 			break;
 		case 'saveautop':
+			renderstatuscol('green');
 			statusmsg = 'Profile ' + activep + ' activated automatically on this domain!';
 			document.getElementById("status").innerText = statusmsg;
 			break;
 		case 'domautonoprof':
+			renderstatuscol('red');
 			document.getElementById("status").innerText = 'Domain saved, but profile does not exist!';
 			break;
 		case 'noproftosave':
+			renderstatuscol('red');
 			document.getElementById("status").innerText = 'Choose a profile first.';
 			break;
 		default:
+			renderstatuscol('');
 			document.getElementById("status").innerText = String(eventtype);
 			break;
 	}

@@ -5,16 +5,21 @@
  * Stylesheet for popup
  */
 
+html,body{
+	width:600px;
+	height:250px;
+}
+html{
+	cursor:default;
+}
 body{
 	overflow:hidden;
-	margin:0 auto;
+	margin:0px auto;
 	padding:0px;
 	background:white;
 	text-align:center;
 	font-family:'Roboto',Helvetica,Arial,sans-serif;
 	font-size:110%;
-	width:600px;
-	height:200px;
 }
 
 /* Texts */

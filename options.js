@@ -64,6 +64,8 @@ function loadProfiles() {
 	var storageLen = localStorage.length;
 	var profileId = "";
 	var profv = "";
+	var profarray = ['','',''];
+	var profiletext = "";
 
 	// Generate HTML list
 	for(var keyi = 0; keyi < storageLen; keyi++)
@@ -72,9 +74,15 @@ function loadProfiles() {
 		{
 			profileId = localStorage.key(keyi);
 			profv = localStorage.getItem(localStorage.key(keyi));
-			profileList += "<div class='profs' id='" + profileId + "' value='" + profv + "'><b>Profile " + profileId.substring(11) + "</b>: "
-				+ profv + "  <img id= '" + profileId 
-				+ "_delete' class='delbutton' title='Delete' src='images/delete.png' alt='del'/></div>";
+
+			profvarray = profv.split(" - ");
+			profiletext = '<br/>Font Size: ' + profvarray[0] + '<br/>Font Style: ' + profvarray[1] + '<br/>Line Height: ' + profvarray[2];
+
+			profileList += "<div class='profs' id='" + profileId + "' value='" + profv + "'>"
+				+ "<img id= '" + profileId + "_delete' class='delbutton' title='Delete' src='images/delete.png' alt='del'/>"
+				+ "<b> Profile " + profileId.substring(11) + "</b>: "
+				+ profiletext 
+				+ "</div><br/>";
 		}
 	}
 

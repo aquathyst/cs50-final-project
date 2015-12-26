@@ -5,12 +5,6 @@
  * Javascript for popup
  */
 
-/* Add jQuery methods for js to work */
-function addmethods() {
-	// jQuery from http://jquery.com/
-	chrome.tabs.executeScript(null,{file:"3rdparty/jquery-2.1.4.min.js"});
-}
-
 /* Variables to track active profile and saved state */
 var activep = null;
 var saved = false;
@@ -164,9 +158,9 @@ function makeCSS(pnum) {
 function adoptp(profile) {
 
 	// Remove .alphatextcustomq if needed
-	chrome.tabs.executeScript(null,{code:"$('body').removeClass('alphatextcustomq');"});
+	chrome.tabs.executeScript(null,{code:"document.body.classList.remove('alphatextcustomq');"});
 	// Put in .alphatextcustomp if needed
-	chrome.tabs.executeScript(null,{code:"$('body').addClass('alphatextcustomp');"});
+	chrome.tabs.executeScript(null,{code:"document.body.classList.add('alphatextcustomp');"});
 
 	// Insert CSS profile
 	switch(profile){
@@ -198,7 +192,7 @@ function qsset(e) {
 
 	// Put in .alphatextcustomq if needed
 	chrome.tabs.executeScript(null,
-		{code:"$('body').addClass('alphatextcustomq');"});
+		{code:"document.body.classList.add('alphatextcustomq');"});
 
 	// Get inputs
 	var fsize = document.getElementById("font_size").value;
@@ -228,8 +222,8 @@ function toggle(e) {
 	// Remove all styles
 	chrome.tabs.executeScript(null,
 		{code:
-			"$('body').removeClass('alphatextcustomp');"+
-			"$('body').removeClass('alphatextcustomq');"
+			"document.body.classList.remove('alphatextcustomp');"+
+			"document.body.classList.remove('alphatextcustomq');"
 		});
 	renderstatus('off');
 }
@@ -400,9 +394,6 @@ function loadProfiles() {
 
 /* Load at beginning */
 document.addEventListener('DOMContentLoaded',function() {
-
-	// Add jQuery
-	addmethods();
 
 	// Save current url and domain
 	checkurldomain();

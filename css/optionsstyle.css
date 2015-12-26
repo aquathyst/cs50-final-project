@@ -35,6 +35,12 @@
 #addProfile{
 	margin-top:10px;
 }
+.delbutton{
+	opacity:0.6;
+}
+.delbutton:hover{
+	opacity:1;
+}
 
 /* Dropdowns */
 #font_size,#font_family,#line_height{

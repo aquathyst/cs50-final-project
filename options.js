@@ -243,13 +243,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.querySelector("#addProfile").addEventListener('click', clickAddButton);
 	
 	// Remove Profile
-	var deles = document.querySelectorAll("#profiles");
+	var deles = document.querySelectorAll(".profs .delbutton");
 	for (var i = 0, len = deles.length; i < len; i++) {
 		deles[i].addEventListener('click', deletep);
 	}
 	
 	// Remove Domain
-	var delesd = document.querySelectorAll("#domlist");
+	var delesd = document.querySelectorAll("#domlist .delbutton");
 	for (var j = 0, lend = delesd.length; j < lend; j++) {
 		delesd[j].addEventListener('click', deleted);
 	}

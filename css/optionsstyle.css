@@ -43,3 +43,8 @@
 option{
 	position:absolute;
 }
+
+/* Delete Button */
+.delbutton:hover{
+	cursor:pointer;
+}

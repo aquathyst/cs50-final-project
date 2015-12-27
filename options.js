@@ -59,8 +59,16 @@ function renderstatus(eventtype) {
 }
 
 /* Profiles Management */
-var maxNum = 3; //maximum number of profiles saved
 
+/* Add profile delete button listeners */
+function removeProfileListener() {
+	var deles = document.querySelectorAll("#profiles .delbutton");
+	for (var i = 0, len = deles.length; i < len; i++) {
+		deles[i].addEventListener('click', deletep);
+	}
+}
+
+var maxNum = 3; //maximum number of profiles saved
 // loading and reloading profile items
 function loadProfiles() {
 	var profileList = "";
@@ -98,6 +106,9 @@ function loadProfiles() {
 
 	// Load HTML
 	document.getElementById("profiles").innerHTML = profileList;
+
+	// Add listener
+	removeProfileListener();
 }
 
 /* to check if a set of styles already exists; if it exists then return true; else return false */
@@ -182,6 +193,14 @@ function deletep(e) {
 	}
 }
 
+/* Add domain delete button listeners */
+function removeDomainListener() {
+	var delesd = document.querySelectorAll("#domlist .delbutton");
+	for (var i = 0, lend = delesd.length; i < lend; i++) {
+		delesd[i].addEventListener('click', deleted);
+	}
+}
+
 /* Load domains list */
 function loadDomains() {
 	var domainList = "";
@@ -209,6 +228,9 @@ function loadDomains() {
 
 	// Load HTML
 	document.getElementById("domlist").innerHTML = domainList;
+
+	// Add listener
+	removeDomainListener();
 }
 
 /* to remove domain item */
@@ -235,22 +257,10 @@ function deleted(e) {
 /* Load at beginning */
 document.addEventListener('DOMContentLoaded', function() {
 
-	/* Load the lists */
+	/* Load the lists and add listeners */
 	loadProfiles();
 	loadDomains();
 
 	// Add Profile
 	document.querySelector("#addProfile").addEventListener('click', clickAddButton);
-	
-	// Remove Profile
-	var deles = document.querySelectorAll(".profs .delbutton");
-	for (var i = 0, len = deles.length; i < len; i++) {
-		deles[i].addEventListener('click', deletep);
-	}
-	
-	// Remove Domain
-	var delesd = document.querySelectorAll("#domlist .delbutton");
-	for (var j = 0, lend = delesd.length; j < lend; j++) {
-		delesd[j].addEventListener('click', deleted);
-	}
 });

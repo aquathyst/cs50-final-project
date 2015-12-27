@@ -90,11 +90,11 @@ function loadProfiles() {
 			profvarray = profv.split(" - ");
 			profiletext = '<br/>Font Size: ' + profvarray[0] + '<br/>Font Style: ' + profvarray[1] + '<br/>Line Height: ' + profvarray[2];
 
-			profileList += "<div class='profs' id='" + profileId + "' value='" + profv + "'>"
-				+ "<img id= '" + profileId + "_delete' class='delbutton' title='Delete' src='images/delete.png' alt='del'/>"
-				+ "<b> Profile " + profileId.substring(11) + "</b>: "
-				+ profiletext 
-				+ "</div><br/>";
+			profileList += "<div class='profs' id='" + profileId + "' value='" + profv + "'>" +
+				"<img id= '" + profileId + "_delete' class='delbutton' title='Delete' src='images/delete.png' alt='del'/>" +
+				"<b> Profile " + profileId.substring(11) + "</b>: " +
+				profiletext +
+				"</div><br/>";
 		}
 	}
 
@@ -214,10 +214,10 @@ function loadDomains() {
 		{
 			var dom = localStorage.key(keyi).substring(5);
 			var pro = localStorage.getItem(localStorage.key(keyi));
-			domainList += "<div class='doms'>"
-				+ "<img class='delbutton' title='Delete' src='images/delete.png' alt='del' id='" + dom + "_delete'/> "
-				+ "<b><a href='http://" + dom + "' class='domlistdom' target='_blank'>" + dom + "</a></b> (Profile " + pro + ")"
-				+ "</div>";
+			domainList += "<div class='doms'>" +
+				"<img class='delbutton' title='Delete' src='images/delete.png' alt='del' id='" + dom + "_delete'/> " +
+				"<b><a href='http://" + dom + "' class='domlistdom' target='_blank'>" + dom + "</a></b> (Profile " + pro + ")" +
+				"</div>";
 		}
 	}
 	

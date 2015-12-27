@@ -111,11 +111,11 @@ function makeCSS(pnum) {
 		lheight = values[2];
 
 		// Generate CSS string
-		var csstemp = "body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{"
-			+ "font-size:" + fsize + " !important;}"
-			+ "body.alphatextcustomp *{"
-			+ "font-family:" + ffamily + "," + fallbackfont(ffamily) + " !important;"
-			+ "line-height:" + lheight + " !important;}";
+		var csstemp = "body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{" +
+			"font-size:" + fsize + " !important;}" +
+			"body.alphatextcustomp *{" +
+			"font-family:" + ffamily + "," + fallbackfont(ffamily) + " !important;" +
+			"line-height:" + lheight + " !important;}";
 
 		// Save into css vars
 		switch(pnum)
@@ -220,7 +220,7 @@ function toggle(e) {
 	// Remove all styles
 	chrome.tabs.executeScript(null,
 		{code:
-			"document.body.classList.remove('alphatextcustomp');"+
+			"document.body.classList.remove('alphatextcustomp');" +
 			"document.body.classList.remove('alphatextcustomq');"
 		});
 	renderstatus('off');
@@ -370,14 +370,14 @@ function loadProfiles() {
   {
 		if(localStorage.key(keyi).substring(0,11) === profkeyprefix)
 		{
-		  profileId = localStorage.key(keyi);
-		  profv = localStorage.getItem(localStorage.key(keyi));
-		  profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='contents profcontents'>"
-		  	+ "<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>"
-		  	+ "<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>"
-		  	+ "<p class='minitext'>" + localStorage.getItem(profileId) + "</p>"
-		  	+ "</div></div>";
-		  count++;
+		profileId = localStorage.key(keyi);
+		profv = localStorage.getItem(localStorage.key(keyi));
+		profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='contents profcontents'>" +
+			"<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>" +
+			"<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>" +
+			"<p class='minitext'>" + localStorage.getItem(profileId) + "</p>" +
+			"</div></div>";
+		count++;
 		}
   }
 

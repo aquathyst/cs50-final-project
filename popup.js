@@ -10,7 +10,6 @@ var activep = null;
 var saved = false;
 
 /* Render status text */
-var statusmsg = '';
 function renderstatuscol(color) {
 	switch(color){
 		case 'red':
@@ -35,8 +34,7 @@ function renderstatus(eventtype) {
 			break;
 		case 'adoptp':
 			renderstatuscol('green');
-			statusmsg = 'Profile ' + activep + ' activated!';
-			document.getElementById("status").innerText = statusmsg;
+			document.getElementById("status").innerText = 'Profile ' + activep + ' activated!';
 			break;
 		case 'error':
 			renderstatuscol('red');
@@ -44,8 +42,7 @@ function renderstatus(eventtype) {
 			break;
 		case 'save':
 			renderstatuscol('green');
-			statusmsg = 'Domain saved to always use Profile ' + activep + ' by default.';
-			document.getElementById("status").innerText = statusmsg;
+			document.getElementById("status").innerText = 'Domain saved to always use Profile ' + activep + ' by default.';
 			break;
 		case 'unsave':
 			renderstatuscol('yellow');
@@ -61,8 +58,7 @@ function renderstatus(eventtype) {
 			break;
 		case 'saveautop':
 			renderstatuscol('green');
-			statusmsg = 'Profile ' + activep + ' activated automatically on this domain!';
-			document.getElementById("status").innerText = statusmsg;
+			document.getElementById("status").innerText = 'Profile ' + activep + ' activated automatically on this domain!';
 			break;
 		case 'domautonoprof':
 			renderstatuscol('red');

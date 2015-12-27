@@ -6,7 +6,6 @@
  */
 
 /* Render status text */
-// var statusmsg = '';
 function renderstatuscol(statust,color) {
 	switch(color){
 		case 'red':

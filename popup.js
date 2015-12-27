@@ -344,7 +344,7 @@ function checkurldomain() {
 		}
 
 		// Check if saved
-		checksave(tabdomain);;
+		checksave(tabdomain);
 	});
 }
 

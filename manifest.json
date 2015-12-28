@@ -4,7 +4,8 @@
   "name": "AlphaText - Customize text for readability",
   "short_name": "AlphaText",
   "description": "Enhance online articles' readability with customizations",
-  "version": "0.1",
+  "version": "1.0",
+  "author": "H. Zhou & P. Wang",
 
   "browser_action": {
     "default_icon": {

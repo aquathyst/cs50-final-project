@@ -354,36 +354,36 @@ var maxNum = 3; // maximum number of profiles saved
 
 // loading and reloading profile items
 function loadProfiles() {
-  var profileList = "";
-  var profkeyprefix = "profileItem";
-  var storageLen = localStorage.length;
-  var profileId = "";
-  var profv = "";
-  var emptyProf = "";
+	var profileList = "";
+	var profkeyprefix = "profileItem";
+	var storageLen = localStorage.length;
+	var profileId = "";
+	var profv = "";
+	var emptyProf = "";
 
-  // Generate HTML profile buttons
-  for(var keyi = 0; keyi < storageLen; keyi++)
-  {
+	// Generate HTML profile buttons
+	for(var keyi = 0; keyi < storageLen; keyi++)
+	{
 		if(localStorage.key(keyi).substring(0,11) === profkeyprefix)
 		{
-		profileId = localStorage.key(keyi);
-		profv = localStorage.getItem(localStorage.key(keyi));
-		profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='contents profcontents'>" +
-			"<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>" +
-			"<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>" +
-			"<p class='minitext'>" + localStorage.getItem(profileId) + "</p>" +
-			"</div></div>";
-		count++;
+			profileId = localStorage.key(keyi);
+			profv = localStorage.getItem(localStorage.key(keyi));
+			profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='contents profcontents'>" +
+				"<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>" +
+				"<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>" +
+				"<p class='minitext'>" + localStorage.getItem(profileId) + "</p>" +
+				"</div></div>";
+			count++;
 		}
-  }
+	}
 
-  // Generate empty profile blanks
-  for(var i = 0; i < maxNum - count; i++){
+	// Generate empty profile blanks
+	for(var i = 0; i < maxNum - count; i++){
 		emptyProf += "<div class='mid' id='profileempty'><div class='contents'><p>No Profile</p></div></div>";
-  }
+	}
 
-  // Load HTML
-  document.getElementById("profilecol").innerHTML = "<div class='sectionhead' id='profhead'><p>Profiles</p></div>" + profileList + emptyProf;
+	// Load HTML
+	document.getElementById("profilecol").innerHTML = "<div class='sectionhead' id='profhead'><p>Profiles</p></div>" + profileList + emptyProf;
 }
 
 /* Load at beginning */

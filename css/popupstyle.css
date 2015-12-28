@@ -5,6 +5,7 @@
  * Stylesheet for popup
  */
 
+/* Window and Overall */
 html,body{
 	width:600px;
 	height:250px;
@@ -45,9 +46,6 @@ h1{
 ::selection{
 	background-color:transparent;
 }
-.minitext{
-	font-size:60%;
-}
 
 /* Buttons layout and general appearance */
 #buttons{
@@ -61,17 +59,17 @@ h1{
 	align-items:center;
 	justify-content:center;
 	border:white solid;
-	border-width:1px 0px 1px 0px;
+	border-width:1px 0px;
 	width:100%;
 	text-align:center;
 	-webkit-transition:background-color 0.2s linear;
 	transition:background-color 0.2s linear;
 }
-tr{
-	height:100%;
-}
 table{
 	height:300px;
+}
+tr{
+	height:100%;
 }
 td{
 	height:100%;
@@ -114,6 +112,7 @@ td{
 }
 p.minitext{
 	margin-bottom:10%;
+	font-size:60%;
 }
 
 /* Respective button styles */

@@ -57,7 +57,8 @@ function renderstatus(eventtype) {
 	}
 }
 
-/* Profiles Management */
+/** Profile Management **/
+var maxNum = 3; //maximum number of profiles saved
 
 /* Add profile delete button listeners */
 function removeProfileListener() {
@@ -67,7 +68,6 @@ function removeProfileListener() {
 	}
 }
 
-var maxNum = 3; //maximum number of profiles saved
 // loading and reloading profile items
 function loadProfiles() {
 	var profileList = "";
@@ -191,6 +191,8 @@ function deletep(e) {
 		renderstatus('prem');
 	}
 }
+
+/** Domain Management **/
 
 /* Add domain delete button listeners */
 function removeDomainListener() {

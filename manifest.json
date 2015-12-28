@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "AlphaText - Customize online text for readability",
+  "name": "AlphaText - Customize text for readability",
   "short_name": "AlphaText",
   "description": "Enhance online articles' readability with customizations",
   "version": "0.1",

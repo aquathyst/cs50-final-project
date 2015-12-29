@@ -30,9 +30,6 @@ function fadeOut() {
 
 	fadingid = window.setInterval(redOpac,50);
 }
-function clearstatus() {
-	window.setTimeout(fadeOut,1200);
-}
 function fadesetup() {
 	// Reset timers
 	if(fadingid !== null) {
@@ -46,7 +43,7 @@ function fadesetup() {
 	statusElem.style.opacity = 1;
 
 	// Set eventual fade out
-	fadeoutid = window.setTimeout(clearstatus,1500);
+	fadeoutid = window.setTimeout(fadeOut,2000);
 }
 function renderstatuscol(color) {
 	switch(color){
@@ -156,7 +153,7 @@ function makeCSS(pnum) {
 		lheight = values[2];
 
 		// Generate CSS string
-		var csstemp = "body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li{" +
+		var csstemp = "body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li,body.alphatextcustomp td{" +
 			"font-size:" + fsize + " !important;}" +
 			"body.alphatextcustomp *{" +
 			"font-family:" + ffamily + "," + fallbackfont(ffamily) + " !important;" +
@@ -199,7 +196,6 @@ function makeCSS(pnum) {
 
 /* Adapt and inject a style profile */
 function adoptp(profile) {
-
 	// Remove .alphatextcustomq if needed
 	chrome.tabs.executeScript(null,{code:"document.body.classList.remove('alphatextcustomq');"});
 	// Put in .alphatextcustomp if needed
@@ -232,7 +228,6 @@ function adoptp3(e){adoptp(3);}
 
 /* Quick Styles */
 function qsset(e) {
-
 	// Put in .alphatextcustomq if needed
 	chrome.tabs.executeScript(null,
 		{code:"document.body.classList.add('alphatextcustomq');"});
@@ -248,7 +243,7 @@ function qsset(e) {
 	}
 	else{
 		if(fsize !== "null"){
-			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li{font-size:"+fsize+" !important;}"});
+			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li,body.alphatextcustomq td{font-size:"+fsize+" !important;}"});
 		}
 		if(ffamily !== "null"){
 			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{font-family:"+ffamily+" !important;}"});
@@ -398,41 +393,34 @@ function checkurldomain() {
 }
 
 /* Profiles Management */
-var count = 0; // to record the number of profiles saved
-var maxNum = 3; // maximum number of profiles saved
-
 // loading and reloading profile items
 function loadProfiles() {
-	var profileList = "";
-	var profkeyprefix = "profileItem";
-	var storageLen = localStorage.length;
-	var profileId = "";
-	var profv = "";
-	var emptyProf = "";
+	var profileList = '';
+	var profkeyprefix = 'profileItem';
+	var profkey = '';
 
-	// Generate HTML profile buttons
-	for(var keyi = 0; keyi < storageLen; keyi++)
-	{
-		if(localStorage.key(keyi).substring(0,11) === profkeyprefix)
-		{
-			profileId = localStorage.key(keyi);
-			profv = localStorage.getItem(localStorage.key(keyi));
-			profileList += "<div class='mid' id='" + profileId + "' value='" + localStorage.getItem(profileId) + "'><div class='contents profcontents'>" +
+	// Go through the three possible profiles
+	for(var profnum = 1; profnum <= 3; profnum++){
+		// Make key
+		profkey = profkeyprefix + profnum.toString(10);
+		
+		// Generate HTML profile buttons
+		if(localStorage.getItem(profkey) !== null){
+			// Profile block
+			profileList += "<div class='mid' id='" + profkey + "' value='" + localStorage.getItem(profkey) + "'><div class='contents profcontents'>" +
 				"<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>" +
-				"<p class='profnum'>Profile " + localStorage.key(keyi).substring(11) + "</p>" +
-				"<p class='minitext'>" + localStorage.getItem(profileId) + "</p>" +
+				"<p class='profnum'>Profile " + profnum.toString(10) + "</p>" +
+				"<p class='minitext'>" + localStorage.getItem(profkey) + "</p>" +
 				"</div></div>";
-			count++;
+		}
+		else{
+			// Empty block
+			profileList += "<div class='mid' id='profileempty'><div class='contents'><p>No Profile " + profnum.toString(10) + "</p></div></div>";
 		}
 	}
 
-	// Generate empty profile blanks
-	for(var i = 0; i < maxNum - count; i++){
-		emptyProf += "<div class='mid' id='profileempty'><div class='contents'><p>No Profile</p></div></div>";
-	}
-
 	// Load HTML
-	document.getElementById("profilecol").innerHTML = "<div class='sectionhead' id='profhead'><p>Profiles</p></div>" + profileList + emptyProf;
+	document.getElementById("profilecol").innerHTML = "<div class='sectionhead' id='profhead'><p>Profiles</p></div>" + profileList;
 }
 
 /* Load at beginning */

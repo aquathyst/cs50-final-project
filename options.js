@@ -32,12 +32,6 @@ function pfadeOut() {
 function dfadeOut() {
 	fadeOut('d');
 }
-function pclearstatus(){
-	window.setTimeout(pfadeOut,1200);
-}
-function dclearstatus(){
-	window.setTimeout(dfadeOut,1200);
-}
 function fadesetup(which) {
 	// Reset timers
 	if(fadingid[which] !== null) {
@@ -51,7 +45,7 @@ function fadesetup(which) {
 	statusElem[which].style.opacity = 1;
 
 	// Set eventual fade out
-	fadeoutid[which] = (which === 'd') ? window.setTimeout(dclearstatus,1500):window.setTimeout(pclearstatus,1500);
+	fadeoutid[which] = (which === 'd') ? window.setTimeout(dfadeOut,2000) : window.setTimeout(pfadeOut,2000);
 }
 function renderstatuscol(statust,color) {
 	switch(color){
@@ -125,35 +119,34 @@ function removeProfileListener() {
 
 // loading and reloading profile items
 function loadProfiles() {
-	var profileList = "";
-	var profkeyprefix="profileItem";
-	var storageLen = localStorage.length;
-	var profileId = "";
-	var profv = "";
+	var profileList = '';
+	var profkeyprefix = 'profileItem';
+	var profkey = '';
+	var profv = '';
 	var profvarray = ['','',''];
-	var profiletext = "";
+	var profiletext = '';
 
-	// Generate HTML list
-	for(var keyi = 0; keyi < storageLen; keyi++)
-	{
-		if(localStorage.key(keyi).substring(0,11) === profkeyprefix)
-		{
-			profileId = localStorage.key(keyi);
-			profv = localStorage.getItem(localStorage.key(keyi));
-
+	// Go through the three possible profiles
+	for(var profnum = 1; profnum <= 3; profnum++){
+		// Make key
+		profkey = profkeyprefix + profnum.toString(10);
+		
+		// Generate HTML profile buttons
+		if(localStorage.getItem(profkey) !== null){
+			profv = localStorage.getItem(profkey);
 			profvarray = profv.split(" - ");
 			profiletext = '<br/>Font Size: ' + profvarray[0] + '<br/>Font Style: ' + profvarray[1] + '<br/>Line Height: ' + profvarray[2];
 
-			profileList += "<div class='profs' id='" + profileId + "' value='" + profv + "'>" +
-				"<img id= '" + profileId + "_delete' class='delbutton' title='Delete' src='images/delete.png' alt='del'/>" +
-				"<b> Profile " + profileId.substring(11) + "</b>: " +
+			profileList += "<div class='profs' id='" + profkey + "' value='" + profv + "'>" +
+				"<img id= '" + profkey + "_delete' class='delbutton' title='Delete' src='images/delete.png' alt='del'/>" +
+				"<b> Profile " + profnum + "</b>: " +
 				profiletext +
 				"</div><br/>";
 		}
 	}
 
 	// Empty
-	if (profileList === "")
+	if (profileList === '')
 	{
 		profileList = 'No Profile';
 	}

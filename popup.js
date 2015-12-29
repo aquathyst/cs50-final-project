@@ -10,19 +10,57 @@ var activep = null;
 var saved = false;
 
 /* Render status text */
+var fadingid = null;
+var fadeoutid = null;
+var opac = 1;
+var statusElem = document.getElementById('status'); // the status element
+function fadeOut() {
+	// Reduce opacity every time interval
+	opac = 1;
+	function redOpac() {
+		opac -= 0.1;
+		statusElem.style.opacity = opac;
+
+		// Disappear finally
+		if(opac <= 0) {
+			statusElem.innerText = '';
+			window.clearInterval(fadingid);
+		}
+	}
+
+	fadingid = window.setInterval(redOpac,50);
+}
+function clearstatus() {
+	window.setTimeout(fadeOut,1200);
+}
+function fadesetup() {
+	// Reset timers
+	if(fadingid !== null) {
+		window.clearInterval(fadingid);
+	}
+	if(fadeoutid !== null) {
+		window.clearInterval(fadeoutid);
+	}
+	
+	// Reset opacity
+	statusElem.style.opacity = 1;
+
+	// Set eventual fade out
+	fadeoutid = window.setTimeout(clearstatus,1500);
+}
 function renderstatuscol(color) {
 	switch(color){
 		case 'red':
-			document.getElementById('status').className = 'statusred';
+			statusElem.className = 'statusred';
 			break;
 		case 'yellow':
-			document.getElementById('status').className = 'statusyellow';
+			statusElem.className = 'statusyellow';
 			break;
 		case 'green':
-			document.getElementById('status').className = 'statusgreen';
+			statusElem.className = 'statusgreen';
 			break;
 		default:
-			document.getElementById('status').className = '';
+			statusElem.className = '';
 			break;
 	}
 }
@@ -30,47 +68,58 @@ function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'off':
 			renderstatuscol('yellow');
-			document.getElementById("status").innerText = 'All styles removed.';
+			statusElem.innerText = 'All styles removed.';
+			fadesetup();
 			break;
 		case 'adoptp':
 			renderstatuscol('green');
-			document.getElementById("status").innerText = 'Profile ' + activep + ' activated!';
+			statusElem.innerText = 'Profile ' + activep + ' activated!';
+			fadesetup();
 			break;
 		case 'error':
 			renderstatuscol('red');
-			document.getElementById("status").innerText = 'Error!';
+			statusElem.innerText = 'Error!';
+			fadesetup();
 			break;
 		case 'save':
 			renderstatuscol('green');
-			document.getElementById("status").innerText = 'Domain saved to always use Profile ' + activep + ' by default.';
+			statusElem.innerText = 'Domain saved to always use Profile ' + activep + ' by default.';
+			fadesetup();
 			break;
 		case 'unsave':
 			renderstatuscol('yellow');
-			document.getElementById("status").innerText = 'Domain save removed.';
+			statusElem.innerText = 'Domain save removed.';
+			fadesetup();
 			break;
 		case 'quickstyleset':
 			renderstatuscol('green');
-			document.getElementById("status").innerText = 'Quick style set successfully!';
+			statusElem.innerText = 'Quick style set successfully!';
+			fadesetup();
 			break;
 		case 'emptyquickstyleset':
 			renderstatuscol('red');
-			document.getElementById("status").innerText = 'Choose some styles to apply!';
+			statusElem.innerText = 'Choose some styles to apply!';
+			fadesetup();
 			break;
 		case 'saveautop':
 			renderstatuscol('green');
-			document.getElementById("status").innerText = 'Profile ' + activep + ' activated automatically on this domain!';
+			statusElem.innerText = 'Profile ' + activep + ' activated automatically on this domain!';
+			fadesetup();
 			break;
 		case 'domautonoprof':
 			renderstatuscol('red');
-			document.getElementById("status").innerText = 'Domain saved, but profile does not exist!';
+			statusElem.innerText = 'Domain saved, but profile does not exist!';
+			fadesetup();
 			break;
 		case 'noproftosave':
 			renderstatuscol('red');
-			document.getElementById("status").innerText = 'Choose a profile first.';
+			statusElem.innerText = 'Choose a profile first.';
+			fadesetup();
 			break;
 		default:
 			renderstatuscol('');
-			document.getElementById("status").innerText = String(eventtype);
+			statusElem.innerText = String(eventtype);
+			fadesetup();
 			break;
 	}
 }

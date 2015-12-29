@@ -7,9 +7,10 @@
 
 /* Status text */
 #domstatus,#profstatus{
-	font-size:110%;
+	font-size:115%;
  	color:#606060;
  	margin-top:10px;
+ 	height:18px;
 }
 #domstatus.statusred,#profstatus.statusred{
 	color:#DF4646;

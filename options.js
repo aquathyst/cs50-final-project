@@ -6,6 +6,53 @@
  */
 
 /* Render status text */
+var fadingid = {'p':null,'d':null};
+var fadeoutid = {'p':null,'d':null};
+var opac = {'p':1,'d':1};
+var statusElem = {'p':document.getElementById("profstatus"),'d':document.getElementById("domstatus")}; // the status elements
+function fadeOut(which) {
+	// Reduce opacity every time interval
+	opac[which] = 1;
+	function redOpac() {
+		opac[which] -= 0.1;
+		statusElem[which].style.opacity = opac[which];
+
+		// Disappear finally
+		if(opac[which] <= 0) {
+			statusElem[which].innerText = '';
+			window.clearInterval(fadingid[which]);
+		}
+	}
+
+	fadingid[which] = window.setInterval(redOpac,50);
+}
+function pfadeOut() {
+	fadeOut('p');
+}
+function dfadeOut() {
+	fadeOut('d');
+}
+function pclearstatus(){
+	window.setTimeout(pfadeOut,1200);
+}
+function dclearstatus(){
+	window.setTimeout(dfadeOut,1200);
+}
+function fadesetup(which) {
+	// Reset timers
+	if(fadingid[which] !== null) {
+		window.clearInterval(fadingid[which]);
+	}
+	if(fadeoutid[which] !== null) {
+		window.clearInterval(fadeoutid[which]);
+	}
+	
+	// Reset opacity
+	statusElem[which].style.opacity = 1;
+
+	// Set eventual fade out
+	fadeoutid[which] = (which === 'd') ? window.setTimeout(dclearstatus,1500):window.setTimeout(pclearstatus,1500);
+}
 function renderstatuscol(statust,color) {
 	switch(color){
 		case 'red':
@@ -26,33 +73,41 @@ function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'padd':
 			renderstatuscol('profstatus','green');
-			document.getElementById("profstatus").innerText = 'Profile saved';
+			statusElem.p.innerText = 'Profile saved';
+			fadesetup('p');
 			break;
 		case 'prem':
 			renderstatuscol('profstatus','yellow');
-			document.getElementById("profstatus").innerText = 'Profile removed';
+			statusElem.p.innerText = 'Profile removed';
+			fadesetup('p');
 			break;
 		case 'psamep':
 			renderstatuscol('profstatus','red');
-			document.getElementById("profstatus").innerText = 'Same profile exists';
+			statusElem.p.innerText = 'Same profile exists';
+			fadesetup('p');
 			break;
 		case 'pmorethan3':
 			renderstatuscol('profstatus','red');
-			document.getElementById("profstatus").innerText = 'You can only add 3 profiles';
+			statusElem.p.innerText = 'You can only add 3 profiles';
+			fadesetup('p');
 			break;
 		case 'pnostorage':
 			renderstatuscol('profstatus','red');
-			document.getElementById("profstatus").innerText = 'Sorry! Your browser does not support local storage.';
+			statusElem.p.innerText = 'Sorry! Your browser does not support local storage.';
+			fadesetup('p');
 			break;
 		case 'deletedom':
 			renderstatuscol('domstatus','yellow');
-			document.getElementById("domstatus").innerText = 'Domain removed.';
+			statusElem.d.innerText = 'Domain removed.';
+			fadesetup('d');
 			break;
 		default:
 			renderstatuscol('domstatus','');
 			renderstatuscol('profstatus','');
-			document.getElementById("domstatus").innerText = String(eventtype);
-			document.getElementById("profstatus").innerText = '';
+			statusElem.d.innerText = String(eventtype);
+			statusElem.p.innerText = '';
+			fadesetup('d');
+			fadesetup('p');
 			break;
 	}
 }

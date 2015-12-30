@@ -63,9 +63,14 @@ function renderstatuscol(color) {
 }
 function renderstatus(eventtype) {
 	switch(eventtype){
-		case 'off':
-			renderstatuscol('yellow');
-			statusElem.innerText = 'All styles removed.';
+		case 'quickstyleset':
+			renderstatuscol('green');
+			statusElem.innerText = 'Quick style set successfully!';
+			fadesetup();
+			break;
+		case 'emptyquickstyleset':
+			renderstatuscol('red');
+			statusElem.innerText = 'Choose some styles to apply!';
 			fadesetup();
 			break;
 		case 'adoptp':
@@ -73,9 +78,9 @@ function renderstatus(eventtype) {
 			statusElem.innerText = 'Profile ' + activep + ' activated!';
 			fadesetup();
 			break;
-		case 'error':
-			renderstatuscol('red');
-			statusElem.innerText = 'Error!';
+		case 'off':
+			renderstatuscol('yellow');
+			statusElem.innerText = 'All styles removed.';
 			fadesetup();
 			break;
 		case 'save':
@@ -88,14 +93,9 @@ function renderstatus(eventtype) {
 			statusElem.innerText = 'Domain save removed.';
 			fadesetup();
 			break;
-		case 'quickstyleset':
-			renderstatuscol('green');
-			statusElem.innerText = 'Quick style set successfully!';
-			fadesetup();
-			break;
-		case 'emptyquickstyleset':
+		case 'noproftosave':
 			renderstatuscol('red');
-			statusElem.innerText = 'Choose some styles to apply!';
+			statusElem.innerText = 'Choose a profile first.';
 			fadesetup();
 			break;
 		case 'saveautop':
@@ -108,9 +108,10 @@ function renderstatus(eventtype) {
 			statusElem.innerText = 'Domain saved, but profile does not exist!';
 			fadesetup();
 			break;
-		case 'noproftosave':
+		case 'error':
+			console.log('AlphaText Error!');
 			renderstatuscol('red');
-			statusElem.innerText = 'Choose a profile first.';
+			statusElem.innerText = 'Error!';
 			fadesetup();
 			break;
 		default:
@@ -128,7 +129,7 @@ var css3 = "";
 
 /* Prepare fallback fonts for CSS */
 function fallbackfont(font) {
-	if(font === 'Cambria' || font === 'Garamond' || font === 'Georgia' || font === 'Lucida Grande' || font === 'Times New Roman'){
+	if(font === 'Cambria' || font === 'Garamond' || font === 'Georgia' || font === 'Times New Roman'){
 		return 'serif';
 	}
 	else{
@@ -263,6 +264,10 @@ function toggle(e) {
 			"document.body.classList.remove('alphatextcustomp');" +
 			"document.body.classList.remove('alphatextcustomq');"
 		});
+
+	// Reset active profile tracker
+	activep = null;
+	
 	renderstatus('off');
 }
 
@@ -407,7 +412,7 @@ function loadProfiles() {
 		// Generate HTML profile buttons
 		if(localStorage.getItem(profkey) !== null){
 			// Profile block
-			profileList += "<div class='mid' id='" + profkey + "' value='" + localStorage.getItem(profkey) + "'><div class='contents profcontents'>" +
+			profileList += "<div class='mid profilesbuttons' id='" + profkey + "' value='" + localStorage.getItem(profkey) + "'><div class='contents profcontents'>" +
 				"<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>" +
 				"<p class='profnum'>Profile " + profnum.toString(10) + "</p>" +
 				"<p class='minitext'>" + localStorage.getItem(profkey) + "</p>" +
@@ -425,6 +430,8 @@ function loadProfiles() {
 
 /* Load at beginning */
 document.addEventListener('DOMContentLoaded',function() {
+	// Log start in console
+	console.log('AlphaText started.');
 
 	// Save current url and domain
 	checkurldomain();

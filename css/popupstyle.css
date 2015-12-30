@@ -13,6 +13,9 @@ html,body{
 html{
 	cursor:default;
 }
+.profilesbuttons,#setstyle,#options,#off,#savepage,#unsavepage{
+	cursor:pointer;
+}
 body{
 	overflow:hidden;
 	margin:0px auto;

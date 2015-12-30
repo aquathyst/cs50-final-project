@@ -107,7 +107,7 @@ function renderstatus(eventtype) {
 }
 
 /** Profile Management **/
-var maxNum = 3; //maximum number of profiles saved
+var maxNum = 3; // maximum number of profiles saved
 
 /* Add profile delete button listeners */
 function removeProfileListener() {

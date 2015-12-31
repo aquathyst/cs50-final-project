@@ -231,8 +231,8 @@ p.minitext{
 
 /* Dark theme CSS */
 body.darktheme{
-	background-color:#383838;
+	background-color:#383838 !important;
 }
 body.darktheme #buttons td>div{
-	border-color:#383838;
+	border-color:#383838 !important;
 }

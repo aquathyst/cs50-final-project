@@ -286,17 +286,17 @@ function qsset(e) {
 	var lheight = document.getElementById("line_height").value;
 	
 	// Set properties if not empty
-	if(fsize === "null" && ffamily === "null" && lheight === "null"){
+	if(fsize === 'null' && ffamily === 'null' && lheight === 'null'){
 		renderstatus('emptyquickstyleset');
 	}
 	else{
-		if(fsize !== "null"){
+		if(fsize !== 'null'){
 			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li,body.alphatextcustomq td{font-size:" + fsize + " !important;}"});
 		}
-		if(ffamily !== "null"){
+		if(ffamily !== 'null'){
 			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{font-family:" + ffamily + " !important;}"});
 		}
-		if(lheight !== "null"){
+		if(lheight !== 'null'){
 			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{line-height:" + lheight + " !important;}"});
 		}
 		renderstatus('quickstyleset');
@@ -399,12 +399,12 @@ function checkurldomain() {
 
 		// Find start
 		var start = null;
-		if(taburl.indexOf("http://") === 0)
+		if(taburl.indexOf('http://') === 0)
 		{
 			// HTTP
 			start = 7;
 		}
-		else if(taburl.indexOf("https://") === 0)
+		else if(taburl.indexOf('https://') === 0)
 		{
 			// HTTPS
 			start = 8;

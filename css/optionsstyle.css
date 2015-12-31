@@ -42,7 +42,39 @@
 	width:150px;
 }
 
-/* Delete Button */
-.delbutton:hover{
+/* Button cursor*/
+.delbutton,.darkthemeset,button{
 	cursor:pointer;
+}
+.delbutton::selection,.darkthemeset *::selection,button::selection{
+	background-color:transparent;
+}
+
+/* Dark theme toggle button */
+.darkthemeset{
+	width:150px;
+	height:60px;
+	color:#FFFFFF;
+	font-size:110%;
+}
+span#darkonoff{
+	display:inline;
+}
+#darkturnoff{
+	background-color:#404040;
+}
+#darkturnoff:hover{
+	background-color:#606060;
+}
+#darkturnoff:active{
+	background-color:#303030;
+}
+#darkturnon{
+	background-color:#BFBFBF;
+}
+#darkturnon:hover{
+	background-color:#D8D8D8;
+}
+#darkturnon:active{
+	background-color:#AAAAAA;
 }

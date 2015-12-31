@@ -70,7 +70,9 @@ h1{
 	transition:background-color 0.2s linear;
 }
 table{
+	width:98%;
 	height:400px;
+	margin:0 auto;
 }
 tr{
 	height:100%;
@@ -225,4 +227,12 @@ p.minitext{
 /* Dropdowns */
 #font_size,#font_family,#line_height,#pnum{
 	width:100px;
+}
+
+/* Dark theme CSS */
+body.darktheme{
+	background-color:#383838;
+}
+body.darktheme #buttons td>div{
+	border-color:#383838;
 }

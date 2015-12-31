@@ -66,3 +66,8 @@ a.menu:hover{
 .delbutton:hover{
 	opacity:1;
 }
+
+/* Dark theme CSS */
+body.darktheme{
+	background-color:#383838;
+}

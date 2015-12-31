@@ -303,6 +303,34 @@ function deleted(e) {
 	}
 }
 
+/* Check and initiate dark theme */
+function darkthemeCheck() {
+	if(localStorage.getItem('darktheme') === 'on'){
+		document.body.classList.add('darktheme');
+		document.getElementById("darkonoff").innerText = 'on';
+		document.getElementsByClassName("darkthemeset")[0].id = 'darkturnon';
+	}
+	else{
+		document.body.classList.remove('darktheme');
+		document.getElementById("darkonoff").innerText = 'off';
+		document.getElementsByClassName("darkthemeset")[0].id = 'darkturnoff';
+	}
+}
+
+/* Toggle dark theme */
+function toggleDark(e) {
+	// Toggle setting
+	if(localStorage.getItem('darktheme') !== 'on'){
+		localStorage.setItem('darktheme','on');
+	}
+	else{
+		localStorage.setItem('darktheme','off');
+	}
+
+	// Re-check and adjust
+	darkthemeCheck()
+}
+
 /* Load at beginning */
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -312,4 +340,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// Add Profile
 	document.querySelector("#addProfile").addEventListener('click', clickAddButton);
+
+	// Light or dark theme setting
+	document.querySelector(".darkthemeset").addEventListener('click', toggleDark);
+
+	// Trigger dark theme if set
+	darkthemeCheck();
 });

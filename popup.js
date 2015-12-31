@@ -134,10 +134,10 @@ function renderstatus(eventtype) {
 function checksave(domtocheck) {
 	if(domtocheck !== null)
 	{
-		if(localStorage.getItem('dom: ' + tabdomain) !== null)
+		if(localStorage.getItem('dom: ' + domtocheck) !== null)
 		{
 			// Saved!
-			savebuttontext.innerText = 'Don\'t use on domain';
+			savebuttontext.innerText = 'Don\'t use Profile ' + localStorage.getItem('dom: ' + domtocheck).toString(10) + ' on domain';
 			savebuttonele.id = "unsavepage";
 		}
 		else
@@ -341,7 +341,7 @@ function togglesave(domtosave) {
 				saved = true;
 
 				// Update domain save button
-				savebuttontext.innerText = 'Don\'t use on domain';
+				savebuttontext.innerText = 'Don\'t use Profile ' + localStorage.getItem('dom: ' + domtosave).toString(10) + ' on domain';
 				savebuttonele.id = "unsavepage";
 
 				renderstatus('save');
@@ -463,6 +463,13 @@ function loadProfiles() {
 	document.getElementById("profilecol").innerHTML = "<div class='sectionhead' id='profhead'><p>Profiles</p></div>" + profileList;
 }
 
+/* Check and initiate dark theme */
+function darkthemeCheck() {
+	if(localStorage.getItem('darktheme') === 'on'){
+		document.body.classList.add('darktheme');
+	}
+}
+
 /* Load at beginning */
 document.addEventListener('DOMContentLoaded',function() {
 	// Log start in console
@@ -498,4 +505,7 @@ document.addEventListener('DOMContentLoaded',function() {
 
 	// Quick Style Set
 	document.querySelector('#setstyle').addEventListener('click',qsset);
+
+	// Trigger dark theme if set
+	darkthemeCheck();
 });

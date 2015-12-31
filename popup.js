@@ -9,6 +9,14 @@
 var activep = null;
 var saved = false;
 
+/* Save button elements */
+var savebuttonele = document.getElementsByClassName("savebutton")[0];
+var savebuttontext = document.getElementById("savetext");
+
+/* Variables to track url and domain */
+var taburl = null;
+var tabdomain = null;
+
 /* Render status text */
 var fadingid = null;
 var fadeoutid = null;
@@ -122,6 +130,39 @@ function renderstatus(eventtype) {
 	}
 }
 
+/* Check domain was saved by user, and adjust save button */
+function checksave(domtocheck) {
+	if(domtocheck !== null)
+	{
+		if(localStorage.getItem('dom: ' + tabdomain) !== null)
+		{
+			// Saved!
+			savebuttontext.innerText = 'Don\'t use on domain';
+			savebuttonele.id = "unsavepage";
+		}
+		else
+		{
+			// Not saved yet
+			if(activep !== null){
+				// Save button
+				savebuttontext.innerText = 'Always use profile ' + activep + ' on domain';
+				savebuttonele.id = "savepage";
+			}
+			else{
+				// No profile to save...
+				savebuttontext.innerText = 'Choose a profile first to save to domain.';
+				savebuttonele.id = "nopsavepage";
+			}
+		}
+	}
+	else
+	{
+		// Domain not applicable
+		savebuttontext.innerText = 'Cannot save on domain';
+		savebuttonele.id = "cantsave";
+	}
+}
+
 /* CSS profiles */
 var css1 = "";
 var css2 = "";
@@ -198,9 +239,11 @@ function makeCSS(pnum) {
 /* Adapt and inject a style profile */
 function adoptp(profile) {
 	// Remove .alphatextcustomq if needed
-	chrome.tabs.executeScript(null,{code:"document.body.classList.remove('alphatextcustomq');"});
+	chrome.tabs.executeScript(null,
+		{code:"document.body.classList.remove('alphatextcustomq');"});
 	// Put in .alphatextcustomp if needed
-	chrome.tabs.executeScript(null,{code:"document.body.classList.add('alphatextcustomp');"});
+	chrome.tabs.executeScript(null,
+		{code:"document.body.classList.add('alphatextcustomp');"});
 
 	// Insert CSS profile
 	switch(profile){
@@ -220,6 +263,10 @@ function adoptp(profile) {
 			return;
 	}
 	activep = profile;
+
+	// Update domain save button
+	checksave(tabdomain);
+
 	renderstatus('adoptp');
 }
 // Functions for event call
@@ -244,13 +291,13 @@ function qsset(e) {
 	}
 	else{
 		if(fsize !== "null"){
-			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li,body.alphatextcustomq td{font-size:"+fsize+" !important;}"});
+			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li,body.alphatextcustomq td{font-size:" + fsize + " !important;}"});
 		}
 		if(ffamily !== "null"){
-			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{font-family:"+ffamily+" !important;}"});
+			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{font-family:" + ffamily + " !important;}"});
 		}
 		if(lheight !== "null"){
-			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{line-height:"+lheight+" !important;}"});
+			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{line-height:" + lheight + " !important;}"});
 		}
 		renderstatus('quickstyleset');
 	}
@@ -268,6 +315,9 @@ function toggle(e) {
 	// Reset active profile tracker
 	activep = null;
 	
+	// Update domain save button
+	checksave(tabdomain);
+
 	renderstatus('off');
 }
 
@@ -276,79 +326,64 @@ function openoptions(e) {
 	chrome.runtime.openOptionsPage();
 }
 
-/* Variables to track url and domain */
-var taburl = null;
-var tabdomain = null;
-
 /* Saving domain*/
 function togglesave(domtosave) {
-	if(domtosave !== null)
+	if(savebuttonele.id !== 'nopsavepage')
 	{
-		if(saved === false)
+		// Only work if there is a profile
+		if(domtosave !== null)
 		{
-			// Save!
-			if(activep !== null) {
+			if(saved === false)
+			{
+				// Save!
 				var ptosave = activep;
 				localStorage.setItem('dom: ' + tabdomain,ptosave);
 				saved = true;
-				document.getElementById("savetext").innerText = 'Don\'t use on domain';
-				document.getElementById("savepage").id = "unsavepage";
+
+				// Update domain save button
+				savebuttontext.innerText = 'Don\'t use on domain';
+				savebuttonele.id = "unsavepage";
+
 				renderstatus('save');
 			}
-			else{
-				// But no profile to save with...
-				renderstatus('noproftosave');
+			else
+			{
+				// Unsave!
+				localStorage.removeItem('dom: ' + tabdomain);
+				saved = false;
+				
+				// Update domain save button
+				checksave(tabdomain);
+
+				renderstatus('unsave');
 			}
-		}
-		else
-		{
-			// Unsave!
-			localStorage.removeItem('dom: ' + tabdomain);
-			saved = false;
-			document.getElementById("savetext").innerText = 'Always use profile on domain';
-			document.getElementById("unsavepage").id = "savepage";
-			renderstatus('unsave');
 		}
 	}
 }
 // Function for event call
 function savee(e){togglesave(tabdomain);}
 
-/* Check if the domain was saved by user, and load necessary code */
-function checksave(domtocheck) {
-	if(domtocheck !== null)
-	{
-		if(localStorage.getItem('dom: ' + tabdomain) !== null)
-		{
-			// Saved!
-			var savedp = null;
-			if(localStorage.getItem('profileItem' + localStorage.getItem('dom: ' + tabdomain)) !== null) {
-				//  Adopt saved profile
-				savedp = parseInt(localStorage.getItem('dom: ' + tabdomain),10);
-				adoptp(savedp);
-				renderstatus('saveautop');
-			}
-			else
-			{
-				// Domain saved to use a profile but it no longer exists
-				renderstatus('domautonoprof');
-			}
-			// Adjust state and button
-			saved = true;
-			document.getElementById("savetext").innerText = 'Don\'t use on domain';
-			document.getElementById("savepage").id = "unsavepage";
+/* Check if the domain was saved by user, adopt profile if so, and load necessary code */
+function checksaveadopt(domtocheck) {
+	
+	// Check and adust button
+	checksave(domtocheck);
+	
+	// Adopt profile if saved
+	if(domtocheck !== null && localStorage.getItem('dom: ' + tabdomain) !== null){
+		saved = true;
+		var savedp = null;
+		if(localStorage.getItem('profileItem' + localStorage.getItem('dom: ' + tabdomain)) !== null) {
+			//  Adopt saved profile
+			savedp = parseInt(localStorage.getItem('dom: ' + tabdomain),10);
+			adoptp(savedp);
+			renderstatus('saveautop');
 		}
 		else
 		{
-			// Not saved yet
-			document.getElementById("savetext").innerText = 'Always use profile on domain';
+			// Domain saved to use a profile but it no longer exists
+			renderstatus('domautonoprof');
 		}
-	}
-	else
-	{
-		// Domain not applicable
-		document.getElementById("savetext").innerText = 'Cannot save on domain';
-		document.getElementById("savepage").id = "cantsave";
 	}
 }
 
@@ -393,7 +428,7 @@ function checkurldomain() {
 		}
 
 		// Check if saved
-		checksave(tabdomain);
+		checksaveadopt(tabdomain);
 	});
 }
 

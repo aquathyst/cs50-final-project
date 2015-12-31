@@ -61,10 +61,10 @@ span#darkonoff{
 	display:inline;
 }
 #darkturnoff{
-	background-color:#404040;
+	background-color:#585858;
 }
 #darkturnoff:hover{
-	background-color:#606060;
+	background-color:#646464;
 }
 #darkturnoff:active{
 	background-color:#303030;

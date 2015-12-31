@@ -70,4 +70,5 @@ a.menu:hover{
 /* Dark theme CSS */
 body.darktheme{
 	background-color:#383838 !important;
+	color:#CCCCCC !important;
 }

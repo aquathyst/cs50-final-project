@@ -307,13 +307,13 @@ function deleted(e) {
 function darkthemeCheck() {
 	if(localStorage.getItem('darktheme') === 'on'){
 		document.body.classList.add('darktheme');
-		document.getElementById("darkonoff").innerText = 'on';
-		document.getElementsByClassName("darkthemeset")[0].id = 'darkturnon';
+		document.getElementById("darkonoff").innerText = 'off';
+		document.getElementsByClassName("darkthemeset")[0].id = 'darkturnoff';
 	}
 	else{
 		document.body.classList.remove('darktheme');
-		document.getElementById("darkonoff").innerText = 'off';
-		document.getElementsByClassName("darkthemeset")[0].id = 'darkturnoff';
+		document.getElementById("darkonoff").innerText = 'on';
+		document.getElementsByClassName("darkthemeset")[0].id = 'darkturnon';
 	}
 }
 

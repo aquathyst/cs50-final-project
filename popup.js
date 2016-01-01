@@ -76,11 +76,6 @@ function renderstatus(eventtype) {
 			statusElem.innerText = 'Quick style set successfully!';
 			fadesetup();
 			break;
-		case 'emptyquickstyleset':
-			renderstatuscol('red');
-			statusElem.innerText = 'Choose some styles to apply!';
-			fadesetup();
-			break;
 		case 'adoptp':
 			renderstatuscol('green');
 			statusElem.innerText = 'Profile ' + activep + ' activated!';
@@ -99,11 +94,6 @@ function renderstatus(eventtype) {
 		case 'unsave':
 			renderstatuscol('yellow');
 			statusElem.innerText = 'Domain save removed.';
-			fadesetup();
-			break;
-		case 'noproftosave':
-			renderstatuscol('red');
-			statusElem.innerText = 'Choose a profile first.';
 			fadesetup();
 			break;
 		case 'saveautop':
@@ -274,22 +264,36 @@ function adoptp1(e){adoptp(1);}
 function adoptp2(e){adoptp(2);}
 function adoptp3(e){adoptp(3);}
 
-/* Quick Styles */
-function qsset(e) {
-	// Put in .alphatextcustomq if needed
-	chrome.tabs.executeScript(null,
-		{code:"document.body.classList.add('alphatextcustomq');"});
-
-	// Get inputs
-	var fsize = document.getElementById("font_size").value;
-	var ffamily = document.getElementById("font_family").value;
-	var lheight = document.getElementById("line_height").value;
-	
-	// Set properties if not empty
-	if(fsize === 'null' && ffamily === 'null' && lheight === 'null'){
-		renderstatus('emptyquickstyleset');
+/* Quick Styles check set button */
+function checkquick(e) {
+	var buttonset = document.getElementsByClassName('setbutton')[0];
+	if(document.getElementById("font_size").value === 'null' && document.getElementById("font_family").value === 'null' && document.getElementById("line_height").value === 'null'){
+		// Inactivate if not empty
+		if(buttonset.id !== 'setnull'){
+			buttonset.id = 'setnull';
+		}
 	}
 	else{
+		// Activate button
+		if(buttonset.id !== 'setstyle'){
+			buttonset.id = 'setstyle';
+		}
+	}
+}
+
+/* Quick Styles Set*/
+function qsset(e) {
+	if(document.getElementsByClassName('setbutton')[0].id === 'setstyle'){
+		// Put in .alphatextcustomq if needed
+		chrome.tabs.executeScript(null,
+			{code:"document.body.classList.add('alphatextcustomq');"});
+
+		// Get inputs
+		var fsize = document.getElementById("font_size").value;
+		var ffamily = document.getElementById("font_family").value;
+		var lheight = document.getElementById("line_height").value;
+		
+		// Set properties if not empty
 		if(fsize !== 'null'){
 			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li,body.alphatextcustomq td{font-size:" + fsize + " !important;}"});
 		}
@@ -303,7 +307,7 @@ function qsset(e) {
 	}
 }
 
-/* Toggle Off */
+/* Switch Off */
 function toggle(e) {
 	// Remove all styles
 	chrome.tabs.executeScript(null,
@@ -365,7 +369,6 @@ function savee(e){togglesave(tabdomain);}
 
 /* Check if the domain was saved by user, adopt profile if so, and load necessary code */
 function checksaveadopt(domtocheck) {
-	
 	// Check and adust button
 	checksave(domtocheck);
 	
@@ -504,7 +507,14 @@ document.addEventListener('DOMContentLoaded',function() {
 	}
 
 	// Quick Style Set
-	document.querySelector('#setstyle').addEventListener('click',qsset);
+	document.getElementsByClassName('setbutton')[0].addEventListener('click',qsset);
+	checkquick(null);
+
+	// Set button activation listener
+	var selectoptions = document.querySelectorAll('select#font_size,select#font_family,select#line_height')
+	for(var i = 0, len = selectoptions.length; i < len ; i++){
+		selectoptions[i].addEventListener('change',checkquick);
+	}
 
 	// Trigger dark theme if set
 	darkthemeCheck();

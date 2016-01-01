@@ -34,7 +34,7 @@ h1{
 }
 #status{
 	font-size:110%;
-	color:#606060;
+	color:#909090;
 	margin:10px;
 	height:25px;
 }
@@ -164,10 +164,12 @@ p.minitext{
 
 #cantsave{
 	background-color:#707070;
+	color:#C0C0C0;
 }
 
 #nopsavepage{
 	background-color:#7595A3;
+	color:#C0C0C0;
 }
 
 #profileItem1,#profileItem2,#profileItem3{
@@ -196,16 +198,24 @@ p.minitext{
 	background-color:#5ECEBB;
 }
 
-#setstyle{
-	background-color:#53AD9C;
+.setbutton{
 	font-size:115%;
 	font-weight:bold;
+}
+
+#setstyle{
+	background-color:#53AD9C;
 }
 #setstyle:hover{
 	background-color:#63CDAC;
 }
 #setstyle:active{
 	background-color:#239D7C;
+}
+
+#setnull{
+	background-color:#579580;
+	color:#C0C0C0;
 }
 
 /* Button section heads */

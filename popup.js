@@ -331,11 +331,11 @@ function openoptions(e) {
 }
 
 /* Saving domain*/
-function togglesave(domtosave) {
+function togglesave(e) {
 	if(savebuttonele.id !== 'nopsavepage')
 	{
 		// Only work if there is a profile
-		if(domtosave !== null)
+		if(tabdomain !== null)
 		{
 			if(saved === false)
 			{
@@ -345,7 +345,7 @@ function togglesave(domtosave) {
 				saved = true;
 
 				// Update domain save button
-				savebuttontext.innerText = 'Don\'t use Profile ' + localStorage.getItem('dom: ' + domtosave).toString(10) + ' on domain';
+				savebuttontext.innerText = 'Don\'t use Profile ' + localStorage.getItem('dom: ' + tabdomain).toString(10) + ' on domain';
 				savebuttonele.id = "unsavepage";
 
 				renderstatus('save');
@@ -364,8 +364,6 @@ function togglesave(domtosave) {
 		}
 	}
 }
-// Function for event call
-function savee(e){togglesave(tabdomain);}
 
 /* Check if the domain was saved by user, adopt profile if so, and load necessary code */
 function checksaveadopt(domtocheck) {
@@ -489,7 +487,7 @@ document.addEventListener('DOMContentLoaded',function() {
 
 	// Save domain
 	if(document.querySelector("#savepage,#unsavepage") !== null) {
-		document.querySelector("#savepage,#unsavepage").addEventListener('click',savee);
+		document.querySelector("#savepage,#unsavepage").addEventListener('click',togglesave);
 	}
 
 	// Load profile buttons

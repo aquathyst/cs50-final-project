@@ -6,102 +6,99 @@
  */
 
 /* Render status text */
-var fadingid = {'p':null,'d':null};
-var fadeoutid = {'p':null,'d':null};
-var opac = {'p':1,'d':1};
-var statusElem = {'p':document.getElementById("profstatus"),'d':document.getElementById("domstatus")}; // the status elements
-function fadeOut(which) {
+var fadingid = null;
+var fadeoutid = null;
+var opac = 1;
+var statusElem = document.getElementById('status'); // the status element
+function fadeOut() {
 	// Reduce opacity every time interval
-	opac[which] = 1;
+	opac = 1;
 	function redOpac() {
-		opac[which] -= 0.1;
-		statusElem[which].style.opacity = opac[which];
+		opac -= 0.1;
+		statusElem.style.opacity = opac;
 
 		// Disappear finally
-		if(opac[which] <= 0) {
-			statusElem[which].innerText = '';
-			window.clearInterval(fadingid[which]);
+		if(opac <= 0) {
+			statusElem.innerText = '';
+			window.clearInterval(fadingid);
 		}
 	}
 
-	fadingid[which] = window.setInterval(redOpac,50);
+	fadingid = window.setInterval(redOpac,50);
 }
-function pfadeOut() {
-	fadeOut('p');
-}
-function dfadeOut() {
-	fadeOut('d');
-}
-function fadesetup(which) {
+function fadesetup() {
 	// Reset timers
-	if(fadingid[which] !== null) {
-		window.clearInterval(fadingid[which]);
+	if(fadingid !== null) {
+		window.clearInterval(fadingid);
 	}
-	if(fadeoutid[which] !== null) {
-		window.clearInterval(fadeoutid[which]);
+	if(fadeoutid !== null) {
+		window.clearInterval(fadeoutid);
 	}
 	
 	// Reset opacity
-	statusElem[which].style.opacity = 1;
+	statusElem.style.opacity = 1;
 
 	// Set eventual fade out
-	fadeoutid[which] = (which === 'd') ? window.setTimeout(dfadeOut,2000) : window.setTimeout(pfadeOut,2000);
+	fadeoutid = window.setTimeout(fadeOut,2000);
 }
-function renderstatuscol(statust,color) {
+function renderstatuscol(color) {
 	switch(color){
 		case 'red':
-			document.getElementById(statust).className = 'statusred';
+			statusElem.className = 'statusred';
 			break;
 		case 'yellow':
-			document.getElementById(statust).className = 'statusyellow';
+			statusElem.className = 'statusyellow';
 			break;
 		case 'green':
-			document.getElementById(statust).className = 'statusgreen';
+			statusElem.className = 'statusgreen';
 			break;
 		default:
-			document.getElementById(statust).className = '';
+			statusElem.className = '';
 			break;
 	}
 }
 function renderstatus(eventtype) {
 	switch(eventtype){
 		case 'padd':
-			renderstatuscol('profstatus','green');
-			statusElem.p.innerText = 'Profile saved';
-			fadesetup('p');
+			renderstatuscol('green');
+			statusElem.innerText = 'Profile saved';
+			fadesetup();
 			break;
 		case 'prem':
-			renderstatuscol('profstatus','yellow');
-			statusElem.p.innerText = 'Profile removed';
-			fadesetup('p');
+			renderstatuscol('yellow');
+			statusElem.innerText = 'Profile removed';
+			fadesetup();
 			break;
 		case 'psamep':
-			renderstatuscol('profstatus','red');
-			statusElem.p.innerText = 'Same profile exists';
-			fadesetup('p');
+			renderstatuscol('red');
+			statusElem.innerText = 'Same profile exists';
+			fadesetup();
 			break;
 		case 'pmorethan3':
-			renderstatuscol('profstatus','red');
-			statusElem.p.innerText = 'You can only add 3 profiles';
-			fadesetup('p');
+			renderstatuscol('red');
+			statusElem.innerText = 'You can only add 3 profiles';
+			fadesetup();
 			break;
 		case 'pnostorage':
-			renderstatuscol('profstatus','red');
-			statusElem.p.innerText = 'Sorry! Your browser does not support local storage.';
-			fadesetup('p');
+			renderstatuscol('red');
+			statusElem.innerText = 'Sorry! Your browser does not support local storage.';
+			fadesetup();
 			break;
 		case 'deletedom':
-			renderstatuscol('domstatus','yellow');
-			statusElem.d.innerText = 'Domain removed.';
-			fadesetup('d');
+			renderstatuscol('yellow');
+			statusElem.innerText = 'Domain removed.';
+			fadesetup();
+			break;
+		case 'error':
+			console.log('AlphaText Error!');
+			renderstatuscol('red');
+			statusElem.innerText = 'Error!';
+			fadesetup();
 			break;
 		default:
-			renderstatuscol('domstatus','');
-			renderstatuscol('profstatus','');
-			statusElem.d.innerText = String(eventtype);
-			statusElem.p.innerText = '';
-			fadesetup('d');
-			fadesetup('p');
+			renderstatuscol('');
+			statusElem.innerText = String(eventtype);
+			fadesetup();
 			break;
 	}
 }

@@ -10,14 +10,13 @@ body{
 	font-family:'Roboto',Helvetica,Arial,sans-serif;
 	background-color:#FFFFFF;
 	color:#202020;
-	font-size:80%;
 }
 h1,h2,h3{
 	margin:0px;
 }
 h1{
 	font-weight:normal;
-	color:#808080;
+	color:#AAAAAA;
 	text-align:center;
 	font-size:180%;
 }
@@ -57,18 +56,8 @@ a.menu:hover{
 	color:#A09050;
 }
 
-/* Delete button */
-.delbutton{
-	height:10px;
-	width:10px;
-	opacity:0.6;
-}
-.delbutton:hover{
-	opacity:1;
-}
-
 /* Dark theme CSS */
 body.darktheme{
-	background-color:#383838 !important;
-	color:#CCCCCC !important;
+	background-color:#383838;
+	color:#CCCCCC;
 }

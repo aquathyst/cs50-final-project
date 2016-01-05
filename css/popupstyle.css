@@ -18,9 +18,9 @@ html{
 }
 body{
 	overflow:hidden;
-	margin:0px auto;
-	padding:0px;
-	background:white;
+	margin:0 auto;
+	padding:0;
+	background:#FFFFFF;
 	text-align:center;
 	font-family:'Roboto',Helvetica,Arial,sans-serif;
 	font-size:110%;
@@ -62,15 +62,14 @@ h1{
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	border:white solid;
-	border-width:1px 0px;
+	border:solid #FFFFFF;
+	border-width:1px 0;
 	width:100%;
-	text-align:center;
 	-webkit-transition:background-color 0.2s linear;
 	transition:background-color 0.2s linear;
 }
 table{
-	width:98%;
+	width:99%;
 	height:400px;
 	margin:0 auto;
 }
@@ -82,14 +81,14 @@ td{
 	width:25%;
 	margin:0;
 	padding:0;
-	border:0px;
+	border:none;
 }
 #buttons .big{
 	height:33.3%;
 }
 #buttons .mid{
 	height:26%;
-	padding:5% 0px;
+	padding:5% 0;
 }
 #buttons .small{
 	height:19.5%;
@@ -104,17 +103,14 @@ td{
 #buttons .profim{
 	width:50px;
 }
+.contents p{
+	margin-top:0;
+}
 #buttons p{
 	display:block;
 }
-.contents{
-	display:block;
-}
-.contents p{
-	margin-top:0px;
-}
 .profcontents p{
-	margin:0px 0px 2% 0px;
+	margin:0 0 2% 0;
 }
 p.minitext{
 	margin-bottom:10%;
@@ -218,6 +214,10 @@ p.minitext{
 	color:#C0C0C0;
 }
 
+#cantsave img,#nopsavepage img{
+	opacity:0.5;
+}
+
 /* Button section heads */
 .sectionhead{
 	height:22%;
@@ -241,7 +241,7 @@ p.minitext{
 
 /* Dark theme CSS */
 body.darktheme{
-	background-color:#383838 !important;
+	background-color:#383838;
 }
 body.darktheme #buttons td>div{
 	border-color:#383838 !important;

@@ -5,57 +5,280 @@
  * Stylesheet for options
  */
 
-/* Status text */
-#domstatus,#profstatus{
-	font-size:115%;
- 	color:#606060;
- 	margin-top:10px;
- 	height:18px;
+/* General things */
+html,body{
+	width:800px;
+	overflow:scroll;
 }
-#domstatus.statusred,#profstatus.statusred{
-	color:#DF4646;
+body{
+	background:#FFFFFF;
+	text-align:center;
+	margin:8px 0;
 }
-#domstatus.statusyellow,#profstatus.statusyellow{
-	color:#C29117;
+html{
+	cursor:default;
 }
-#domstatus.statusgreen,#profstatus.statusgreen{
-	color:#198C19;
+.delwrapper,#addProfile,.darkthemeset{
+	cursor:pointer;
+}
+::selection{
+	background-color:transparent;
+}
+a{
+	color:#FFFFFF;
+}
+h1{
+	-webkit-margin-before:0.67em;
+    -webkit-margin-after:0.67em;
+}
+#addProfileDropdowns,.deldiv,.ddeldiv{
+	text-align:left;
 }
 
-/* Profile and domain lists */
-#profiles,#domlist{
-	color:#995500;
+/* Status text */
+#status{
+	font-size:105%;
+	color:#909090;
+	padding:10px 0;
+	height:100%;
+	width:100%;
 }
-#domlist a{
-	text-decoration:none;
-	color:#995500;
+#status.statusred{
+	color:#FF6666;
 }
-#domlist a:hover{
-	color:#BB8822;
+#status.statusyellow{
+	color:#E2B137;
 }
-#addProfile{
-	margin-top:10px;
+#status.statusgreen{
+	color:#39AC39;
+}
+
+/* Buttons layout and styles */
+#buttons{	
+	margin:0 auto;
+	padding:0;
+	color:#FFFFFF;
+	display:inline;
+	font-size:110%;
+}
+#buttons p{
+	padding:0;
+}
+#buttons td>div{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	border:solid #FFFFFF;
+	border-width:1px 0;
+	width:100%;
+	margin:0;
+	-webkit-transition:background-color 0.2s linear;
+	transition:background-color 0.2s linear;
+}
+table#bigtable{
+	height:450px;
+	width:99%;
+	margin:0 auto;
+}
+#headrow{
+	height:15%;
+}
+#stuffrow{
+	height:75%;
+}
+#statusrow{
+	height:10%;
+}
+#bigtable tr,#bigtable td{
+	margin:0;
+	padding:0;
+	border:none;
+}
+td#profilecol1,td#profilecol2{
+	width:25%;
+}
+td#domaincol{
+	width:35%;
+}
+td#themecol{
+	width:15%;
+}
+
+/* Button section heads */
+#buttons .sectionhead {
+    height:100%;
+    border:none;
+}
+#headrow p{
+	font-size:125%;
+	font-weight:bold;
+	padding:0.5% 2%;
+	line-height:1.2;
+}
+#profheaddiv{
+	background-color:#B99F03;
+}
+#domheaddiv{
+	background-color:#2E72B7;
+}
+#theheaddiv{
+	background-color:#A45B72;
+}
+
+/* General contents */
+#buttons div.subhead{
+	font-size:115%;
+	font-weight:bold;
+	font-style:italic;
+	height:15%;
+}
+.delbutton{
+	height:30px;
+	width:30px;
+	margin:0;
+	padding:0;
+	display:inline;
+	float:left;
+}
+#buttons p{
+	display:block;
+}
+#buttons .contentsAlt{
+	display:inline;
+}
+.placeholder{
+	opacity:0.5;
+}
+#buttons div.delwrapper{
+	height:100%;
+	width:30px;
+	margin-right:10px;
+	float:left;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	background-color:rgba(255,255,255,0.15);
+	-webkit-transition:background-color 0.2s linear;
+	transition:background-color 0.2s linear;
+}
+#buttons div.delwrapper:hover{
+	background-color:rgba(255,255,255,0.25);
+}
+#buttons div.delwrapper:active{
+	background-color:rgba(255,255,255,0.05);
 }
 
 /* Dropdowns */
 #font_size,#font_family,#line_height{
-	width:150px;
+	width:90%;
 }
 
-/* Button cursor*/
-.delbutton,.darkthemeset,button{
-	cursor:pointer;
+/* Profiles section */
+/* Part 1 */
+#newprofilehead{
+	background-color:#F5AB2E;
 }
-.delbutton::selection,.darkthemeset *::selection,button::selection{
-	background-color:transparent;
+#addProfileDropdowns{
+	height:65%;
+	background-color:#D0C072;
+	white-space:nowrap;
+	overflow:hidden;
+	line-height:1.2;
+}
+#addProfileDropdowns>.contentsAlt{
+	width:100%;
+	padding:5%;
+}
+#addProfileDropdowns span{
+	font-size:115%;
+}
+#addProfile{
+	height:20%;
+	font-size:110%;
+	font-weight:bold;
+	background-color:#D58B2E;
+}
+#addProfile:hover{
+	background-color:#E0983A;
+}
+#addProfile:active{
+	background-color:#B57517;
+}
+/* Part 2 */
+#savedprofileshead{
+	background-color:#879E48;
+}
+.deldiv,.deldivnull{
+	height:28.33%;
+}
+#buttons .deldiv{
+	display:block;
+	background-color:#CFC546;
+}
+#buttons .deldiv:hover{
+	background-color:#D6C913;
+}
+.deldivnull{
+	background-color:#A8A579;
+}
+.deldivnull:hover{
+	background-color:#B8B58D;
+}
+.deldivnull .profiledetails{
+	opacity:0.7;
+}
+.profiledetails{
+	height:100%;
+	margin:2% 0;
+	overflow:hidden;
+}
+.profiledetails>b{
+	font-size:110%;
+}
+
+/* Domains section */
+#saveddomainshead{
+	background-color:#0073E6;
+}
+#buttons #domainbigwrapper{
+	overflow:scroll;
+	height:85%;
+	background-color:#7CB0C2;
+	display:block;
+}
+#buttons .ddeldiv{
+	width:100%;
+	height:30px;
+	overflow:hidden;
+	background-color:#23A9FC;
+	-webkit-transition:background-color 0.2s linear;
+	transition:background-color 0.2s linear;
+}
+#buttons .ddeldiv:hover{
+	background-color:#38B6FF;
+}
+.domwrapper{
+	line-height:30px;
+	white-space:nowrap;
+	overflow:hidden;
+}
+
+/* Theme section */
+#darkthemehead{
+	background-color:#A14583;
+}
+.darkthemeset{
+	height:15%;
+}
+#themecolplaceholder{
+	height:70%;
+	background-color:#978097;
 }
 
 /* Dark theme toggle button */
 .darkthemeset{
-	width:150px;
-	height:60px;
-	color:#FFFFFF;
-	font-size:110%;
+	font-size:105%;
+	font-weight:bold;
 }
 span#darkonoff{
 	display:inline;

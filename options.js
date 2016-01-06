@@ -89,6 +89,16 @@ function renderstatus(eventtype) {
 			statusElem.innerText = 'Domain removed.';
 			fadesetup();
 			break;
+		case 'darkgoon':
+			renderstatuscol('green');
+			statusElem.innerText = 'Dark theme on!';
+			fadesetup();
+			break;
+		case 'darkgooff':
+			renderstatuscol('green');
+			statusElem.innerText = 'Dark theme off!';
+			fadesetup();
+			break;
 		case 'error':
 			console.log('AlphaText Error!');
 			renderstatuscol('red');
@@ -133,7 +143,7 @@ function loadProfiles() {
 			profv = localStorage.getItem(profkey);
 			profvarray = profv.split(" - ");
 			profileList += '<div class="deldiv"><div class="contentsAlt">' +
-				'<div id="' + profkey + '_delete" class="delwrapper"><img class="delbutton" title="Delete" src="images/delete_n.png" alt="del" id="' + profkey + '_deletealt"/></div>' +
+				'<div id="' + profkey + '_delete" class="delwrapper"><img class="delbutton" title="Delete" src="images/delete_n.png" alt="del" id="' + profkey + '_delalt"/></div>' +
 				'<div class="profiledetails">' +
 				'<b>Profile ' + profnum + '</b>' +
 				'<br/><em>Font Size</em>: ' + profvarray[0] +
@@ -142,7 +152,7 @@ function loadProfiles() {
 				'</div></div></div>';
 		}
 		else{
-			profileList += '<div class="deldivnull"><div class="contentsAlt"><div class="profiledetails">' +
+			profileList += '<div class="deldivnull placeholder"><div class="contentsAlt"><div class="profiledetails">' +
 				'No Profile ' + profnum +
 				'</div></div></div>';
 		}
@@ -220,7 +230,7 @@ function clickAddButton(e) {
 var eleId = "";
 function deletep(e) {
 	eleId = e.target.id;
-	if (eleId.substring(0,11) === "profileItem" && (eleId.substring(eleId.length - 7, eleId.length) === "_delete" || eleId.substring(eleId.length - 10, eleId.length) === "_deletealt")) {
+	if (eleId.substring(0,11) === "profileItem" && (eleId.substring(eleId.length - 7, eleId.length) === "_delete" || eleId.substring(eleId.length - 7, eleId.length) === "_delalt")) {
 		var idToDelete = eleId.substring(0,12);
 		
 		// Remove profile
@@ -256,7 +266,7 @@ function loadDomains() {
 			var dom = localStorage.key(keyi).substring(5);
 			var pro = localStorage.getItem(localStorage.key(keyi));
 			domainList += '<div class="ddeldiv"><div class="contentsAlt">' +
-				'<div id="' + dom + '_delete" class="delwrapper"><img class="delbutton" title="Delete" src="images/delete_n.png" alt="del" id="' + dom + '_deletealt"/></div>' +
+				'<div id="' + dom + '_delete" class="delwrapper"><img class="delbutton" title="Delete" src="images/delete_n.png" alt="del" id="' + dom + '_delalt"/></div>' +
 				'<span class="domwrapper">' +
 				'<b><a href="http://' + dom + '" class="domlistdom" target="_blank">' + dom + '</a></b> (Profile ' + pro + ')' +
 				'</span></div></div>';
@@ -281,22 +291,16 @@ var domToDelete = "";
 function deleted(e) {
 	deleId = e.target.id;
 	
-	if (deleId.substring(deleId.length - 10, deleId.length) === "_deletealt") {
-		domToDelete = 'dom: ' + deleId.substring(0, deleId.length - 10);
-	}
-	else if (deleId.substring(deleId.length - 7, deleId.length) === "_delete") {
+	if (deleId.substring(deleId.length - 7, deleId.length) === "_delete" || deleId.substring(deleId.length - 7, deleId.length) === "_delalt") {
 		domToDelete = 'dom: ' + deleId.substring(0, deleId.length - 7);
-	}
-	else{
-		return;
-	}
 
-	// Remove profile
-	localStorage.removeItem(domToDelete);
+		// Remove profile
+		localStorage.removeItem(domToDelete);
 
-	// Reload list and render status text
-	loadDomains();
-	renderstatus('deletedom');
+		// Reload list and render status text
+		loadDomains();
+		renderstatus('deletedom');
+	}
 }
 
 /* Check and initiate dark theme */
@@ -317,10 +321,14 @@ function darkthemeCheck() {
 function toggleDark(e) {
 	// Toggle setting
 	if(localStorage.getItem('darktheme') !== 'on'){
+		// Turn on!
 		localStorage.setItem('darktheme','on');
+		renderstatus('darkgoon');
 	}
 	else{
+		// Turn off!
 		localStorage.setItem('darktheme','off');
+		renderstatus('darkgooff');
 	}
 
 	// Re-check and adjust

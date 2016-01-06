@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded',function() {
 	checkquick(null);
 
 	// Set button activation listener
-	var selectoptions = document.querySelectorAll('select#font_size,select#font_family,select#line_height')
+	var selectoptions = document.querySelectorAll('select#font_size,select#font_family,select#line_height');
 	for(var i = 0, len = selectoptions.length; i < len ; i++){
 		selectoptions[i].addEventListener('change',checkquick);
 	}

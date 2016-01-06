@@ -37,11 +37,12 @@ h1{
 
 /* Status text */
 #status{
-	font-size:105%;
+	font-size:125%;
 	color:#909090;
-	padding:10px 0;
+	padding:0;
 	height:100%;
 	width:100%;
+	line-height:100%;
 }
 #status.statusred{
 	color:#FF6666;
@@ -110,26 +111,25 @@ td#themecol{
     border:none;
 }
 #headrow p{
-	font-size:125%;
+	font-size:135%;
 	font-weight:bold;
-	padding:0.5% 2%;
-	line-height:1.2;
+	margin:0;
+	padding:2%;
+	line-height:120%;
 }
 #profheaddiv{
-	background-color:#B99F03;
+	background-color:#D29E00;
 }
 #domheaddiv{
-	background-color:#2E72B7;
+	background-color:#1471B6;
 }
 #theheaddiv{
-	background-color:#A45B72;
+	background-color:#C63960;
 }
 
 /* General contents */
 #buttons div.subhead{
 	font-size:115%;
-	font-weight:bold;
-	font-style:italic;
 	height:15%;
 }
 .delbutton{
@@ -147,7 +147,7 @@ td#themecol{
 	display:inline;
 }
 .placeholder{
-	opacity:0.5;
+	opacity:0.7;
 }
 #buttons div.delwrapper{
 	height:100%;
@@ -162,7 +162,7 @@ td#themecol{
 	transition:background-color 0.2s linear;
 }
 #buttons div.delwrapper:hover{
-	background-color:rgba(255,255,255,0.25);
+	background-color:rgba(255,255,255,0.30);
 }
 #buttons div.delwrapper:active{
 	background-color:rgba(255,255,255,0.05);
@@ -170,59 +170,60 @@ td#themecol{
 
 /* Dropdowns */
 #font_size,#font_family,#line_height{
-	width:90%;
+	width:80%;
 }
 
 /* Profiles section */
 /* Part 1 */
 #newprofilehead{
-	background-color:#F5AB2E;
+	background-color:#D1B616;
 }
 #addProfileDropdowns{
 	height:65%;
-	background-color:#D0C072;
+	background-color:#DDC76C;
 	white-space:nowrap;
 	overflow:hidden;
-	line-height:1.2;
+	line-height:120%;
 }
 #addProfileDropdowns>.contentsAlt{
 	width:100%;
-	padding:5%;
+	padding:3% 5%;
 }
 #addProfileDropdowns span{
 	font-size:115%;
+	line-height:150%;
 }
 #addProfile{
 	height:20%;
 	font-size:110%;
 	font-weight:bold;
-	background-color:#D58B2E;
+	background-color:#CF9712;
 }
 #addProfile:hover{
-	background-color:#E0983A;
+	background-color:#E1A413;
 }
 #addProfile:active{
-	background-color:#B57517;
+	background-color:#B68410;
 }
 /* Part 2 */
 #savedprofileshead{
-	background-color:#879E48;
+	background-color:#8F9823;
 }
 .deldiv,.deldivnull{
 	height:28.33%;
 }
 #buttons .deldiv{
 	display:block;
-	background-color:#CFC546;
+	background-color:#AFB726;
 }
 #buttons .deldiv:hover{
-	background-color:#D6C913;
+	background-color:#BAC21B;
 }
 .deldivnull{
-	background-color:#A8A579;
+	background-color:#B4BA98;
 }
 .deldivnull:hover{
-	background-color:#B8B58D;
+	background-color:#C4C8AE;
 }
 .deldivnull .profiledetails{
 	opacity:0.7;
@@ -238,24 +239,24 @@ td#themecol{
 
 /* Domains section */
 #saveddomainshead{
-	background-color:#0073E6;
+	background-color:#0095E6;
 }
 #buttons #domainbigwrapper{
 	overflow:scroll;
 	height:85%;
-	background-color:#7CB0C2;
+	background-color:rgba(175,206,240,0.7);
 	display:block;
 }
 #buttons .ddeldiv{
 	width:100%;
 	height:30px;
 	overflow:hidden;
-	background-color:#23A9FC;
+	background-color:#00C6FF;
 	-webkit-transition:background-color 0.2s linear;
 	transition:background-color 0.2s linear;
 }
 #buttons .ddeldiv:hover{
-	background-color:#38B6FF;
+	background-color:#39CFFB;
 }
 .domwrapper{
 	line-height:30px;
@@ -266,46 +267,55 @@ p#emptydomlist{
 	font-size:110%;
 	text-align:center;
 	width:100%;
-	color:rgba(255,255,255,0.5);
+	opacity:0.9;
 }
 
 /* Theme section */
 #darkthemehead{
-	background-color:#A14583;
+	background-color:#AF5480;
 }
 .darkthemeset{
-	height:15%;
+	height:30%;
+}
+.darkthemeset p{
+	line-height:110%;
 }
 #themecolplaceholder{
-	height:70%;
-	background-color:#978097;
+	height:55%;
+	background-color:#B5A4A8;
 }
 
 /* Dark theme toggle button */
 .darkthemeset{
-	font-size:105%;
+	font-size:100%;
 	font-weight:bold;
+}
+.darkthemeset p{
+	margin:0;
 }
 span#darkonoff{
 	display:inline;
 }
 #darkturnoff{
-	background-color:#585858;
-}
-#darkturnoff:hover{
 	background-color:#646464;
 }
+#darkturnoff:hover{
+	background-color:#7A7A7A;
+}
 #darkturnoff:active{
-	background-color:#303030;
+	background-color:#595959;
 }
 #darkturnon{
-	background-color:#BFBFBF;
+	background-color:#A0A0A0;
 }
 #darkturnon:hover{
-	background-color:#D8D8D8;
+	background-color:#B4B4B4;
 }
 #darkturnon:active{
-	background-color:#AAAAAA;
+	background-color:#9E9E9E;
+}
+#darkicon{
+	width:40px;
 }
 
 /* Dark theme CSS */

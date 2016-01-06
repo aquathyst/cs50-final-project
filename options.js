@@ -9,7 +9,7 @@
 var fadingid = null;
 var fadeoutid = null;
 var opac = 1;
-var statusElem = document.getElementById('status'); // the status element
+var statusElem = document.getElementById('status');
 function fadeOut() {
 	// Reduce opacity every time interval
 	opac = 1;
@@ -108,7 +108,7 @@ var maxNum = 3; // maximum number of profiles saved
 
 /* Add profile delete button listeners */
 function removeProfileListener() {
-	var deles = document.querySelectorAll("#profiles .delbutton");
+	var deles = document.querySelectorAll("#profilecol2 .delwrapper");
 	for (var i = 0, len = deles.length; i < len; i++) {
 		deles[i].addEventListener('click', deletep);
 	}
@@ -121,7 +121,7 @@ function loadProfiles() {
 	var profkey = '';
 	var profv = '';
 	var profvarray = ['','',''];
-	var profiletext = '';
+	var sectionheadhtml = '<div class="subhead" id="savedprofileshead"><div class="contents"><p>Saved profiles</p></div></div>';
 
 	// Go through the three possible profiles
 	for(var profnum = 1; profnum <= 3; profnum++){
@@ -132,24 +132,24 @@ function loadProfiles() {
 		if(localStorage.getItem(profkey) !== null){
 			profv = localStorage.getItem(profkey);
 			profvarray = profv.split(" - ");
-			profiletext = '<br/>Font Size: ' + profvarray[0] + '<br/>Font Style: ' + profvarray[1] + '<br/>Line Height: ' + profvarray[2];
-
-			profileList += "<div class='profs' id='" + profkey + "' value='" + profv + "'>" +
-				"<img id= '" + profkey + "_delete' class='delbutton' title='Delete' src='images/delete.png' alt='del'/>" +
-				"<b> Profile " + profnum + "</b>: " +
-				profiletext +
-				"</div><br/>";
+			profileList += '<div class="deldiv"><div class="contentsAlt">' +
+				'<div id="' + profkey + '_delete" class="delwrapper"><img class="delbutton" title="Delete" src="images/delete_n.png" alt="del" id="' + profkey + '_deletealt"/></div>' +
+				'<div class="profiledetails">' +
+				'<b>Profile ' + profnum + '</b>' +
+				'<br/><em>Font Size</em>: ' + profvarray[0] +
+				'<br/><em>Font Style</em>: ' + profvarray[1] +
+				'<br/><em>Line Height</em>: ' + profvarray[2] + 
+				'</div></div></div>';
+		}
+		else{
+			profileList += '<div class="deldivnull"><div class="contentsAlt"><div class="profiledetails">' +
+				'No Profile ' + profnum +
+				'</div></div></div>';
 		}
 	}
 
-	// Empty
-	if (profileList === '')
-	{
-		profileList = 'No Profile';
-	}
-
 	// Load HTML
-	document.getElementById("profiles").innerHTML = profileList;
+	document.getElementById("profilecol2").innerHTML = sectionheadhtml + profileList;
 
 	// Add listener
 	removeProfileListener();
@@ -169,11 +169,6 @@ function profileExists(fs, ff, lh) {
 	}
 	// Absent
 	return false;
-}
-
-/* to remove profile item */
-function removeProfile(eid) {
-	localStorage.removeItem(eid);
 }
 
 /* Figure out what is the next profile number to be saved to */
@@ -225,11 +220,11 @@ function clickAddButton(e) {
 var eleId = "";
 function deletep(e) {
 	eleId = e.target.id;
-	if (eleId.substring(0,11) === "profileItem" && eleId.substring(eleId.length - 7, eleId.length) === "_delete") {
-		var idToDelete = eleId.substring(0, eleId.length - 7);
+	if (eleId.substring(0,11) === "profileItem" && (eleId.substring(eleId.length - 7, eleId.length) === "_delete" || eleId.substring(eleId.length - 10, eleId.length) === "_deletealt")) {
+		var idToDelete = eleId.substring(0,12);
 		
 		// Remove profile
-		removeProfile(idToDelete);
+		localStorage.removeItem(idToDelete);
 
 		// Reload list and render status text
 		loadProfiles();
@@ -241,7 +236,7 @@ function deletep(e) {
 
 /* Add domain delete button listeners */
 function removeDomainListener() {
-	var delesd = document.querySelectorAll("#domlist .delbutton");
+	var delesd = document.querySelectorAll(".ddeldiv .delwrapper");
 	for (var i = 0, lend = delesd.length; i < lend; i++) {
 		delesd[i].addEventListener('click', deleted);
 	}
@@ -260,44 +255,48 @@ function loadDomains() {
 		{
 			var dom = localStorage.key(keyi).substring(5);
 			var pro = localStorage.getItem(localStorage.key(keyi));
-			domainList += "<div class='doms'>" +
-				"<img class='delbutton' title='Delete' src='images/delete.png' alt='del' id='" + dom + "_delete'/> " +
-				"<b><a href='http://" + dom + "' class='domlistdom' target='_blank'>" + dom + "</a></b> (Profile " + pro + ")" +
-				"</div>";
+			domainList += '<div class="ddeldiv"><div class="contentsAlt">' +
+				'<div id="' + dom + '_delete" class="delwrapper"><img class="delbutton" title="Delete" src="images/delete_n.png" alt="del" id="' + dom + '_deletealt"/></div>' +
+				'<span class="domwrapper">' +
+				'<b><a href="http://' + dom + '" class="domlistdom" target="_blank">' + dom + '</a></b> (Profile ' + pro + ')' +
+				'</span></div></div>';
 		}
 	}
 	
 	// If empty
 	if(domainList === ""){
-		domainList = "No domains saved";
+		domainList = '<p id="emptydomlist">No domains saved</p>';
 	}
 
 	// Load HTML
-	document.getElementById("domlist").innerHTML = domainList;
+	document.getElementById("domainbigwrapper").innerHTML = domainList;
 
 	// Add listener
 	removeDomainListener();
 }
 
-/* to remove domain item */
-function removeDomain(ditem) {
-	localStorage.removeItem(ditem);
-}
-
 /* to handle domain removal */
 var deleId = "";
+var domToDelete = "";
 function deleted(e) {
 	deleId = e.target.id;
-	if (deleId.substring(deleId.length - 7, deleId.length) === "_delete") {
-		var domToDelete = 'dom: ' + deleId.substring(0, deleId.length - 7);
-		
-		// Remove profile
-		removeDomain(domToDelete);
-
-		// Reload list and render status text
-		loadDomains();
-		renderstatus('deletedom');
+	
+	if (deleId.substring(deleId.length - 10, deleId.length) === "_deletealt") {
+		domToDelete = 'dom: ' + deleId.substring(0, deleId.length - 10);
 	}
+	else if (deleId.substring(deleId.length - 7, deleId.length) === "_delete") {
+		domToDelete = 'dom: ' + deleId.substring(0, deleId.length - 7);
+	}
+	else{
+		return;
+	}
+
+	// Remove profile
+	localStorage.removeItem(domToDelete);
+
+	// Reload list and render status text
+	loadDomains();
+	renderstatus('deletedom');
 }
 
 /* Check and initiate dark theme */
@@ -325,7 +324,7 @@ function toggleDark(e) {
 	}
 
 	// Re-check and adjust
-	darkthemeCheck()
+	darkthemeCheck();
 }
 
 /* Load at beginning */

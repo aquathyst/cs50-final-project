@@ -21,7 +21,7 @@ var tabdomain = null;
 var fadingid = null;
 var fadeoutid = null;
 var opac = 1;
-var statusElem = document.getElementById('status'); // the status element
+var statusElem = document.getElementById('status');
 function fadeOut() {
 	// Reduce opacity every time interval
 	opac = 1;

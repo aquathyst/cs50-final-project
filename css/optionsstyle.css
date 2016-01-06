@@ -262,6 +262,12 @@ td#themecol{
 	white-space:nowrap;
 	overflow:hidden;
 }
+p#emptydomlist{
+	font-size:110%;
+	text-align:center;
+	width:100%;
+	color:rgba(255,255,255,0.5);
+}
 
 /* Theme section */
 #darkthemehead{
@@ -300,4 +306,9 @@ span#darkonoff{
 }
 #darkturnon:active{
 	background-color:#AAAAAA;
+}
+
+/* Dark theme CSS */
+body.darktheme div{
+	border-color:#383838 !important;
 }

@@ -284,6 +284,9 @@ function loadDomains() {
 	// Add listener
 	removeDomainListener();
 }
+function reloadDomOnChange(e) {
+	loadDomains();
+}
 
 /* to handle domain removal */
 var deleId = "";
@@ -347,6 +350,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// Light or dark theme setting
 	document.querySelector(".darkthemeset").addEventListener('click', toggleDark);
+
+	// Listen for storage changes and update domain list
+	window.addEventListener('storage',reloadDomOnChange);
 
 	// Trigger dark theme if set
 	darkthemeCheck();

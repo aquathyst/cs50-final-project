@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Log start in console
 	console.log('AlphaText Options started.');
 
-	/* Load the lists and add listeners */
+	// Load the lists and add listeners
 	loadProfiles();
 	loadDomains();
 

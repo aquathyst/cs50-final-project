@@ -5,18 +5,6 @@
  * Javascript for popup
  */
 
-/* Variables to track active profile and saved state */
-var activep = null;
-var saved = false;
-
-/* Save button elements */
-var savebuttonele = document.getElementsByClassName("savebutton")[0];
-var savebuttontext = document.getElementById("savetext");
-
-/* Variables to track url and domain */
-var taburl = null;
-var tabdomain = null;
-
 /* Render status text */
 var fadingid = null;
 var fadeoutid = null;
@@ -99,17 +87,11 @@ function renderstatus(eventtype) {
 		case 'saveautop':
 			renderstatuscol('green');
 			statusElem.innerText = 'Profile ' + activep + ' activated automatically on this domain!';
-			fadesetup();
+			window.setTimeout(fadesetup,1000);
 			break;
 		case 'domautonoprof':
 			renderstatuscol('red');
 			statusElem.innerText = 'Domain saved, but profile does not exist!';
-			fadesetup();
-			break;
-		case 'error':
-			console.log('AlphaText Error!');
-			renderstatuscol('red');
-			statusElem.innerText = 'Error!';
 			fadesetup();
 			break;
 		default:
@@ -119,6 +101,18 @@ function renderstatus(eventtype) {
 			break;
 	}
 }
+
+/* Variables to track active profile and saved state */
+var activep = null;
+var saved = false;
+
+/* Save button elements */
+var savebuttonele = document.getElementsByClassName("savebutton")[0];
+var savebuttontext = document.getElementById("savetext");
+
+/* Variables to track url and domain */
+var taburl = null;
+var tabdomain = null;
 
 /* Check domain was saved by user, and adjust save button */
 function checksave(domtocheck) {
@@ -135,7 +129,7 @@ function checksave(domtocheck) {
 			// Not saved yet
 			if(activep !== null){
 				// Save button
-				savebuttontext.innerText = 'Always use profile ' + activep + ' on domain';
+				savebuttontext.innerText = 'Always use Profile ' + activep + ' on domain';
 				savebuttonele.id = "savepage";
 			}
 			else{
@@ -260,12 +254,12 @@ function adoptp(profile) {
 	renderstatus('adoptp');
 }
 // Functions for event call
-function adoptp1(e){adoptp(1);}
-function adoptp2(e){adoptp(2);}
-function adoptp3(e){adoptp(3);}
+function adoptp1(){adoptp(1);}
+function adoptp2(){adoptp(2);}
+function adoptp3(){adoptp(3);}
 
 /* Quick Styles check set button */
-function checkquick(e) {
+function checkquick() {
 	var buttonset = document.getElementsByClassName('setbutton')[0];
 	if(document.getElementById("font_size").value === 'null' && document.getElementById("font_family").value === 'null' && document.getElementById("line_height").value === 'null'){
 		// Inactivate if not empty
@@ -282,7 +276,7 @@ function checkquick(e) {
 }
 
 /* Quick Styles Set*/
-function qsset(e) {
+function qsset() {
 	if(document.getElementsByClassName('setbutton')[0].id === 'setstyle'){
 		// Put in .alphatextcustomq if needed
 		chrome.tabs.executeScript(null,
@@ -308,7 +302,7 @@ function qsset(e) {
 }
 
 /* Switch Off */
-function toggle(e) {
+function toggle() {
 	// Remove all styles
 	chrome.tabs.executeScript(null,
 		{code:
@@ -326,12 +320,12 @@ function toggle(e) {
 }
 
 /* Open options panel */
-function openoptions(e) {
+function openoptions() {
 	chrome.runtime.openOptionsPage();
 }
 
 /* Saving domain*/
-function togglesave(e) {
+function togglesave() {
 	if(savebuttonele.id !== 'nopsavepage')
 	{
 		// Only work if there is a profile

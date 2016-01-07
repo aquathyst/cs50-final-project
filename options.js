@@ -99,12 +99,6 @@ function renderstatus(eventtype) {
 			statusElem.innerText = 'Dark theme off!';
 			fadesetup();
 			break;
-		case 'error':
-			console.log('AlphaText Error!');
-			renderstatuscol('red');
-			statusElem.innerText = 'Error!';
-			fadesetup();
-			break;
 		default:
 			renderstatuscol('');
 			statusElem.innerText = String(eventtype);
@@ -191,7 +185,7 @@ function nextNum() {
 }
 
 /* click event to add profile */
-function clickAddButton(e) {
+function clickAddButton() {
 	var fsize = document.getElementById("font_size").value;
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
@@ -230,6 +224,7 @@ function clickAddButton(e) {
 var eleId = "";
 function deletep(e) {
 	eleId = e.target.id;
+	
 	if (eleId.substring(0,11) === "profileItem" && (eleId.substring(eleId.length - 7, eleId.length) === "_delete" || eleId.substring(eleId.length - 7, eleId.length) === "_delalt")) {
 		var idToDelete = eleId.substring(0,12);
 		
@@ -318,7 +313,7 @@ function darkthemeCheck() {
 }
 
 /* Toggle dark theme */
-function toggleDark(e) {
+function toggleDark() {
 	// Toggle setting
 	if(localStorage.getItem('darktheme') !== 'on'){
 		// Turn on!

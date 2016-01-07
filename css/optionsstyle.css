@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2015 Holly Zhou and Peter Wang. All rights reserved.
+ * Copyright (C) 2015-2016 Holly Zhou and Peter Wang. All rights reserved.
  *
- * AlphaText--Extension for online text readability
+ * AlphaText - Customize text for readability
  * Stylesheet for options
  */
 
@@ -23,9 +23,6 @@ html{
 }
 ::selection{
 	background-color:transparent;
-}
-a{
-	color:#FFFFFF;
 }
 h1{
 	-webkit-margin-before:0.67em;
@@ -168,11 +165,6 @@ td#themecol{
 	background-color:rgba(255,255,255,0.05);
 }
 
-/* Dropdowns */
-#font_size,#font_family,#line_height{
-	width:80%;
-}
-
 /* Profiles section */
 /* Part 1 */
 #newprofilehead{
@@ -192,6 +184,9 @@ td#themecol{
 #addProfileDropdowns span{
 	font-size:115%;
 	line-height:150%;
+}
+#font_size,#font_family,#line_height{
+	width:80%;
 }
 #addProfile{
 	height:20%;
@@ -263,11 +258,14 @@ td#themecol{
 	white-space:nowrap;
 	overflow:hidden;
 }
+#buttons .domwrapper a{
+	color:#FFFFFF;
+}
 p#emptydomlist{
 	font-size:110%;
 	text-align:center;
 	width:100%;
-	opacity:0.9;
+	opacity:0.7;
 }
 
 /* Theme section */

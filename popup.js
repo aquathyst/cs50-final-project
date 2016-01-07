@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2015 Holly Zhou and Peter Wang. All rights reserved.
+ * Copyright (C) 2015-2016 Holly Zhou and Peter Wang. All rights reserved.
  *
- * AlphaText--Extension for online text readability
+ * AlphaText - Customize text for readability
  * Javascript for popup
  */
 
@@ -178,7 +178,7 @@ function makeCSS(pnum) {
 	var ffamily = "";
 	var lheight = "";
 
-	if (fontvalue!==null){
+	if (fontvalue !== null){
 		values = fontvalue.split(" - ");
 		fsize = values[0];
 		ffamily = values[1];

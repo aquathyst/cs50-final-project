@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2015 Holly Zhou and Peter Wang. All rights reserved.
+ * Copyright (C) 2015-2016 Holly Zhou and Peter Wang. All rights reserved.
  *
- * AlphaText--Extension for online text readability
+ * AlphaText - Customize text for readability
  * Javascript for options
  */
 
@@ -153,8 +153,8 @@ function loadProfiles() {
 		}
 		else{
 			profileList += '<div class="deldivnull placeholder"><div class="contentsAlt"><div class="profiledetails">' +
-				'No Profile ' + profnum +
-				'</div></div></div>';
+				'<b>No Profile ' + profnum +
+				'</b></div></div></div>';
 		}
 	}
 
@@ -337,6 +337,8 @@ function toggleDark(e) {
 
 /* Load at beginning */
 document.addEventListener('DOMContentLoaded', function() {
+	// Log start in console
+	console.log('AlphaText Options started.');
 
 	/* Load the lists and add listeners */
 	loadProfiles();

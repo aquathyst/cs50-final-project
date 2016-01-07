@@ -16,30 +16,30 @@ function fadeOut() {
 	function redOpac() {
 		opac -= 0.1;
 		statusElem.style.opacity = opac;
-
+		
 		// Disappear finally
 		if(opac <= 0) {
 			statusElem.innerText = '';
-			window.clearInterval(fadingid);
+			clearInterval(fadingid);
 		}
 	}
 
-	fadingid = window.setInterval(redOpac,50);
+	fadingid = setInterval(redOpac,50);
 }
 function fadesetup() {
 	// Reset timers
 	if(fadingid !== null) {
-		window.clearInterval(fadingid);
+		clearInterval(fadingid);
 	}
 	if(fadeoutid !== null) {
-		window.clearInterval(fadeoutid);
+		clearInterval(fadeoutid);
 	}
 	
 	// Reset opacity
 	statusElem.style.opacity = 1;
 
 	// Set eventual fade out
-	fadeoutid = window.setTimeout(fadeOut,2000);
+	fadeoutid = setTimeout(fadeOut,2000);
 }
 function renderstatuscol(color) {
 	switch(color){
@@ -87,18 +87,63 @@ function renderstatus(eventtype) {
 		case 'saveautop':
 			renderstatuscol('green');
 			statusElem.innerText = 'Profile ' + activep + ' activated automatically on this domain!';
-			window.setTimeout(fadesetup,1000);
+			setTimeout(fadesetup,1000);
 			break;
 		case 'domautonoprof':
 			renderstatuscol('red');
 			statusElem.innerText = 'Domain saved, but profile does not exist!';
-			window.setTimeout(fadesetup,1000);
+			setTimeout(fadesetup,1000);
+			break;
+		case 'datacorrupt':
+			renderstatuscol('red');
+			statusElem.innerText = 'Error: Storage data corrupted!';
+			setTimeout(fadesetup,1000);
 			break;
 		default:
 			renderstatuscol('');
 			statusElem.innerText = String(eventtype);
 			fadesetup();
 			break;
+	}
+}
+
+/* Check storage integrity */
+function checkstorage() {
+	var checkkey = '';
+	var checkval = '';
+	var errorcount = 0;
+
+	// Check each item
+	for (var i = 0, storelen = localStorage.length ; i < storelen ; i++) {
+		checkkey = localStorage.key(i);
+		checkval = localStorage.getItem(checkkey);
+		if (/^profileItem[1-3]$/.test(checkkey)){
+			if (!/^\d+px - [a-zA-z ]+ - \d(\.\d)?$/.test(checkval)){
+				console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: profile)');
+				errorcount ++;
+			}
+		}
+		else if (/^dom: .+$/.test(checkkey)){
+			if (!/^[1-3]$/.test(checkval)){
+				console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: domain)');
+				errorcount ++;
+			}
+		}
+		else if (/^darktheme$/.test(checkkey)){
+			if(!/^(on|off)$/.test(checkval)){
+				console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: dark theme)');
+				errorcount ++;
+			}
+		}
+		else{
+			console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: unknown)');
+			errorcount ++;
+		}
+	}
+
+	// Report via status if any errors were detected
+	if (errorcount > 0) {
+		renderstatus('datacorrupt');
 	}
 }
 
@@ -148,9 +193,9 @@ function checksave(domtocheck) {
 }
 
 /* CSS profiles */
-var css1 = "";
-var css2 = "";
-var css3 = "";
+var css1 = '';
+var css2 = '';
+var css3 = '';
 
 /* Prepare fallback fonts for CSS */
 function fallbackfont(font) {
@@ -206,13 +251,13 @@ function makeCSS(pnum) {
 		switch(pnum)
 		{
 			case 1:
-				css1 = "";
+				css1 = '';
 				break;
 			case 2:
-				css2 = "";
+				css2 = '';
 				break;
 			case 3:
-				css3 = "";
+				css3 = '';
 				break;
 			default:
 				break;
@@ -335,7 +380,7 @@ function togglesave() {
 			{
 				// Save!
 				var ptosave = activep;
-				localStorage.setItem('dom: ' + tabdomain,ptosave);
+				localStorage.setItem('dom: ' + tabdomain, ptosave);
 				saved = true;
 
 				// Update domain save button
@@ -433,7 +478,7 @@ function loadProfiles() {
 	var profileList = '';
 	var profkeyprefix = 'profileItem';
 	var profkey = '';
-
+	
 	// Go through the three possible profiles
 	for(var profnum = 1; profnum <= 3; profnum++){
 		// Make key
@@ -466,9 +511,12 @@ function darkthemeCheck() {
 }
 
 /* Load at beginning */
-document.addEventListener('DOMContentLoaded',function() {
+document.addEventListener('DOMContentLoaded', function() {
 	// Log start in console
 	console.log('AlphaText started.');
+
+	// Check storage
+	checkstorage();
 
 	// Save current url and domain
 	checkurldomain();

@@ -20,26 +20,26 @@ function fadeOut() {
 		// Disappear finally
 		if(opac <= 0) {
 			statusElem.innerText = '';
-			window.clearInterval(fadingid);
+			clearInterval(fadingid);
 		}
 	}
 
-	fadingid = window.setInterval(redOpac,50);
+	fadingid = setInterval(redOpac,50);
 }
 function fadesetup() {
 	// Reset timers
 	if(fadingid !== null) {
-		window.clearInterval(fadingid);
+		clearInterval(fadingid);
 	}
 	if(fadeoutid !== null) {
-		window.clearInterval(fadeoutid);
+		clearInterval(fadeoutid);
 	}
 	
 	// Reset opacity
 	statusElem.style.opacity = 1;
 
 	// Set eventual fade out
-	fadeoutid = window.setTimeout(fadeOut,2000);
+	fadeoutid = setTimeout(fadeOut,2000);
 }
 function renderstatuscol(color) {
 	switch(color){
@@ -99,11 +99,56 @@ function renderstatus(eventtype) {
 			statusElem.innerText = 'Dark theme off!';
 			fadesetup();
 			break;
+		case 'datacorrupt':
+			renderstatuscol('red');
+			statusElem.innerText = 'Error: Storage data corrupted!';
+			setTimeout(fadesetup,1000);
+			break;
 		default:
 			renderstatuscol('');
 			statusElem.innerText = String(eventtype);
 			fadesetup();
 			break;
+	}
+}
+
+/* Check storage integrity */
+function checkstorage() {
+	var checkkey = '';
+	var checkval = '';
+	var errorcount = 0;
+
+	// Check each item
+	for (var i = 0, storelen = localStorage.length ; i < storelen ; i++) {
+		checkkey = localStorage.key(i);
+		checkval = localStorage.getItem(checkkey);
+		if (/^profileItem[1-3]$/.test(checkkey)){
+			if (!/^\d+px - [a-zA-z ]+ - \d(\.\d)?$/.test(checkval)){
+				console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: profile)');
+				errorcount ++;
+			}
+		}
+		else if (/^dom: .+$/.test(checkkey)){
+			if (!/^[1-3]$/.test(checkval)){
+				console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: domain)');
+				errorcount ++;
+			}
+		}
+		else if (/^darktheme$/.test(checkkey)){
+			if(!/^(on|off)$/.test(checkval)){
+				console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: dark theme)');
+				errorcount ++;
+			}
+		}
+		else{
+			console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: unknown)');
+			errorcount ++;
+		}
+	}
+
+	// Report via status if any errors were detected
+	if (errorcount > 0) {
+		renderstatus('datacorrupt');
 	}
 }
 
@@ -221,9 +266,8 @@ function clickAddButton() {
 }
 
 /* to handle profile deletion */
-var eleId = "";
 function deletep(e) {
-	eleId = e.target.id;
+	var eleId = e.target.id;
 	
 	if (eleId.substring(0,11) === "profileItem" && (eleId.substring(eleId.length - 7, eleId.length) === "_delete" || eleId.substring(eleId.length - 7, eleId.length) === "_delalt")) {
 		var idToDelete = eleId.substring(0,12);
@@ -281,10 +325,9 @@ function loadDomains() {
 }
 
 /* to handle domain removal */
-var deleId = "";
-var domToDelete = "";
 function deleted(e) {
-	deleId = e.target.id;
+	var deleId = e.target.id;
+	var domToDelete = '';
 	
 	if (deleId.substring(deleId.length - 7, deleId.length) === "_delete" || deleId.substring(deleId.length - 7, deleId.length) === "_delalt") {
 		domToDelete = 'dom: ' + deleId.substring(0, deleId.length - 7);
@@ -334,6 +377,9 @@ function toggleDark() {
 document.addEventListener('DOMContentLoaded', function() {
 	// Log start in console
 	console.log('AlphaText Options started.');
+
+	// Check storage
+	checkstorage();
 
 	// Load the lists and add listeners
 	loadProfiles();

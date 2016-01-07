@@ -92,7 +92,7 @@ function renderstatus(eventtype) {
 		case 'domautonoprof':
 			renderstatuscol('red');
 			statusElem.innerText = 'Domain saved, but profile does not exist!';
-			fadesetup();
+			window.setTimeout(fadesetup,1000);
 			break;
 		default:
 			renderstatuscol('');

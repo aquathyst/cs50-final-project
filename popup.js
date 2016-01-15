@@ -210,8 +210,7 @@ function fallbackfont(font) {
 /* Make CSS */
 function makeCSS(pnum) {
 	// Get saved info
-	var eleId = "profileItem" + pnum;
-	var fontvalue = localStorage.getItem(eleId);
+	var fontvalue = localStorage.getItem("profileItem" + pnum);
 	var values = "";
 	var fsize = "";
 	var ffamily = "";
@@ -528,9 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.querySelector("#off").addEventListener('click',toggle);
 
 	// Save domain
-	if(document.querySelector("#savepage,#unsavepage") !== null) {
-		document.querySelector("#savepage,#unsavepage").addEventListener('click',togglesave);
-	}
+	savebuttonele.addEventListener('click',togglesave);
 
 	// Load profile buttons
 	loadProfiles();

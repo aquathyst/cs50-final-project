@@ -153,7 +153,6 @@ function checkstorage() {
 }
 
 /** Profile Management **/
-var maxNum = 3; // maximum number of profiles saved
 
 /* Add profile delete button listeners */
 function removeProfileListener() {
@@ -207,10 +206,8 @@ function loadProfiles() {
 /* to check if a set of styles already exists; if it exists then return true; else return false */
 // fs = font size; ff = font family; lh = line height
 function profileExists(fs, ff, lh) {
-	for (var i = 1; i <= maxNum; i++) {
-		var profileId = "profileItem" + i;
-		var profileValue = fs + " - " + ff + " - " + lh;
-		if (localStorage.getItem(profileId) === profileValue) 
+	for (var i = 1; i <= 3; i++) {
+		if (localStorage.getItem("profileItem" + i) === fs + " - " + ff + " - " + lh) 
 		{  
 			// Present
 			return true;
@@ -222,7 +219,7 @@ function profileExists(fs, ff, lh) {
 
 /* Figure out what is the next profile number to be saved to */
 function nextNum() {
-	for (var i = 1; i < 4; i++) {
+	for (var i = 1; i <= 3; i++) {
     	if (localStorage.getItem('profileItem' + i) === null)
     		return i;
   	}
@@ -235,12 +232,13 @@ function clickAddButton() {
 	var ffamily = document.getElementById("font_family").value;
 	var lheight = document.getElementById("line_height").value;
 	var profNum = nextNum();
+	var profile_name = '';
 
 	// need to check if HTML5 local storage supported
 	if (typeof(Storage) !== "undefined") {
 		if (profNum !== 'MAX') {
 			if (profileExists(fsize, ffamily, lheight) === false) {
-				var profile_name = "profileItem" + profNum;
+				profile_name = "profileItem" + profNum;
 				localStorage.setItem(profile_name, fsize + " - " + ffamily + " - " + lheight);
 				loadProfiles();
 				// Profile saved
@@ -268,9 +266,10 @@ function clickAddButton() {
 /* to handle profile deletion */
 function deletep(e) {
 	var eleId = e.target.id;
-	
+	var idToDelete = '';
+
 	if (eleId.substring(0,11) === "profileItem" && (eleId.substring(eleId.length - 7, eleId.length) === "_delete" || eleId.substring(eleId.length - 7, eleId.length) === "_delalt")) {
-		var idToDelete = eleId.substring(0,12);
+		idToDelete = eleId.substring(0,12);
 		
 		// Remove profile
 		localStorage.removeItem(idToDelete);
@@ -296,14 +295,16 @@ function loadDomains() {
 	var domainList = "";
 	var domkeyprefix = "dom: ";
 	var storagelength = localStorage.length;
+	var dom = '';
+	var pro = '';
 
 	// Generate HTML
 	for(var keyi = 0; keyi < storagelength; keyi++)
 	{
 		if(localStorage.key(keyi).substring(0,5) === domkeyprefix)
 		{
-			var dom = localStorage.key(keyi).substring(5);
-			var pro = localStorage.getItem(localStorage.key(keyi));
+			dom = localStorage.key(keyi).substring(5);
+			pro = localStorage.getItem(localStorage.key(keyi));
 			domainList += '<div class="ddeldiv"><div class="contentsAlt">' +
 				'<div id="' + dom + '_delete" class="delwrapper"><img class="delbutton" title="Delete" src="images/delete_n.png" alt="del" id="' + dom + '_delalt"/></div>' +
 				'<span class="domwrapper">' +

@@ -8,7 +8,9 @@
 /* General things */
 html,body{
 	width:800px;
-	overflow:scroll;
+}
+html{
+	overflow:auto;
 }
 body{
 	background:#FFFFFF;
@@ -237,7 +239,8 @@ td#themecol{
 	background-color:#0095E6;
 }
 #buttons #domainbigwrapper{
-	overflow:scroll;
+	overflow-y:scroll;
+	overflow-x:hidden;
 	height:85%;
 	background-color:rgba(175,206,240,0.7);
 	display:block;

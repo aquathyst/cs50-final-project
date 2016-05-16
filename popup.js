@@ -99,6 +99,14 @@ function renderstatus(eventtype) {
 			statusElem.innerText = 'Error: Storage data corrupted!';
 			setTimeout(fadesetup,1000);
 			break;
+		case 'ADVoptCol':
+			renderstatuscol('green');
+			statusElem.innerText = 'Color optimization enabled!';
+			break;
+		case 'ADVremImg':
+			renderstatuscol('green');
+			statusElem.innerText = 'Multimedia removed!';
+			break;
 		default:
 			renderstatuscol('');
 			statusElem.innerText = String(eventtype);
@@ -135,6 +143,12 @@ function checkstorage() {
 				errorcount ++;
 			}
 		}
+		else if (/^visitcount$/.test(checkkey)){
+			if(!/^[0-9]+$/.test(checkval)){
+				console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: visit counts)');
+				errorcount ++;
+			}
+		}
 		else{
 			console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: unknown)');
 			errorcount ++;
@@ -161,16 +175,13 @@ var tabdomain = null;
 
 /* Check domain was saved by user, and adjust save button */
 function checksave(domtocheck) {
-	if(domtocheck !== null)
-	{
-		if(localStorage.getItem('dom: ' + domtocheck) !== null)
-		{
+	if(domtocheck !== null){
+		if(localStorage.getItem('dom: ' + domtocheck) !== null){
 			// Saved!
 			savebuttontext.innerText = 'Don\'t use Profile ' + localStorage.getItem('dom: ' + domtocheck).toString(10) + ' on domain';
 			savebuttonele.id = "unsavepage";
 		}
-		else
-		{
+		else{
 			// Not saved yet
 			if(activep !== null){
 				// Save button
@@ -178,14 +189,13 @@ function checksave(domtocheck) {
 				savebuttonele.id = "savepage";
 			}
 			else{
-				// No profile to save...
+				// No profile to save
 				savebuttontext.innerText = 'Choose a profile first to save to domain.';
 				savebuttonele.id = "nopsavepage";
 			}
 		}
 	}
-	else
-	{
+	else{
 		// Domain not applicable
 		savebuttontext.innerText = 'Cannot save on domain';
 		savebuttonele.id = "cantsave";
@@ -223,15 +233,14 @@ function makeCSS(pnum) {
 		lheight = values[2];
 
 		// Generate CSS string
-		var csstemp = "body.alphatextcustomp p,body.alphatextcustomp a,body.alphatextcustomp li,body.alphatextcustomp td{" +
+		var csstemp = "body.alphatextp p,body.alphatextp a,body.alphatextp li,body.alphatextp td{" +
 			"font-size:" + fsize + " !important;}" +
-			"body.alphatextcustomp *{" +
+			"body.alphatextp *{" +
 			"font-family:" + ffamily + "," + fallbackfont(ffamily) + " !important;" +
 			"line-height:" + lheight + " !important;}";
 
 		// Save into css vars
-		switch(pnum)
-		{
+		switch(pnum){
 			case 1:
 				css1 = csstemp;
 				break;
@@ -266,12 +275,12 @@ function makeCSS(pnum) {
 
 /* Adapt and inject a style profile */
 function adoptp(profile) {
-	// Remove .alphatextcustomq if needed
+	// Remove .alphatextq if needed
 	chrome.tabs.executeScript(null,
-		{code:"document.body.classList.remove('alphatextcustomq');"});
-	// Put in .alphatextcustomp if needed
+		{code:"document.body.classList.remove('alphatextq');"});
+	// Put in .alphatextp if needed
 	chrome.tabs.executeScript(null,
-		{code:"document.body.classList.add('alphatextcustomp');"});
+		{code:"document.body.classList.add('alphatextp');"});
 
 	// Insert CSS profile
 	switch(profile){
@@ -291,6 +300,10 @@ function adoptp(profile) {
 			return;
 	}
 	activep = profile;
+
+	// Log active profile on HTML DOM in case of next control panel launch
+	chrome.tabs.executeScript(null,
+		{code:"document.body.classList.remove('alphatextPtag1','alphatextPtag2','alphatextPtag3');document.body.classList.add('alphatextPtag" + profile + "');"});
 
 	// Update domain save button
 	checksave(tabdomain);
@@ -322,9 +335,9 @@ function checkquick() {
 /* Quick Styles Set*/
 function qsset() {
 	if(document.getElementsByClassName('setbutton')[0].id === 'setstyle'){
-		// Put in .alphatextcustomq if needed
+		// Put in .alphatextq if needed
 		chrome.tabs.executeScript(null,
-			{code:"document.body.classList.add('alphatextcustomq');"});
+			{code:"document.body.classList.add('alphatextq');"});
 
 		// Get inputs
 		var fsize = document.getElementById("font_size").value;
@@ -333,33 +346,29 @@ function qsset() {
 		
 		// Set properties if not empty
 		if(fsize !== 'null'){
-			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq p,body.alphatextcustomq a,body.alphatextcustomq li,body.alphatextcustomq td{font-size:" + fsize + " !important;}"});
+			chrome.tabs.insertCSS(null,{code:"body.alphatextq p,body.alphatextq a,body.alphatextq li,body.alphatextq td{font-size:" + fsize + " !important;}"});
 		}
 		if(ffamily !== 'null'){
-			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{font-family:" + ffamily + " !important;}"});
+			chrome.tabs.insertCSS(null,{code:"body.alphatextq *{font-family:" + ffamily + " !important;}"});
 		}
 		if(lheight !== 'null'){
-			chrome.tabs.insertCSS(null,{code:"body.alphatextcustomq *{line-height:" + lheight + " !important;}"});
+			chrome.tabs.insertCSS(null,{code:"body.alphatextq *{line-height:" + lheight + " !important;}"});
 		}
 		renderstatus('quickstyleset');
 	}
 }
 
 /* Switch Off */
-function toggle() {
+function disableall() {
 	// Remove all styles
 	chrome.tabs.executeScript(null,
 		{code:
-			"document.body.classList.remove('alphatextcustomp');" +
-			"document.body.classList.remove('alphatextcustomq');"
+			"document.body.classList.remove('alphatextp','alphatextq','alphatexta1','alphatexta2','alphatextPtag1','alphatextPtag2','alphatextPtag3');"
 		});
-
 	// Reset active profile tracker
 	activep = null;
-	
 	// Update domain save button
 	checksave(tabdomain);
-
 	renderstatus('off');
 }
 
@@ -368,17 +377,14 @@ function openoptions() {
 	chrome.runtime.openOptionsPage();
 }
 
-/* Saving domain*/
+/* Saving domain */
 function togglesave() {
-	if(savebuttonele.id !== 'nopsavepage')
-	{
+	if(savebuttonele.id !== 'nopsavepage'){
 		// Only work if there is a profile
-		if(tabdomain !== null)
-		{
-			if(saved === false)
-			{
+		if(tabdomain !== null){
+			if(saved === false){
 				// Save!
-				var ptosave = activep;
+				var ptosave = String(activep);
 				localStorage.setItem('dom: ' + tabdomain, ptosave);
 				saved = true;
 
@@ -388,8 +394,7 @@ function togglesave() {
 
 				renderstatus('save');
 			}
-			else
-			{
+			else{
 				// Unsave!
 				localStorage.removeItem('dom: ' + tabdomain);
 				saved = false;
@@ -429,43 +434,33 @@ function checksaveadopt(domtocheck) {
 /* Get url and domain of website, and see if it was saved */
 function checkurldomain() {
 	chrome.tabs.query({'active':true,'currentWindow':true},function(tab){
-
 		// Getting URL
 		taburl = tab[0].url;
-
 		// End of domain
 		var end = taburl.indexOf('/',8); 
-
 		// Find start
 		var start = null;
-		if(taburl.indexOf('http://') === 0)
-		{
+		if(taburl.indexOf('http://') === 0){
 			// HTTP
 			start = 7;
 		}
-		else if(taburl.indexOf('https://') === 0)
-		{
+		else if(taburl.indexOf('https://') === 0){
 			// HTTPS
 			start = 8;
 		}
-		else
-		{
+		else{
 			// Not HTTP or HTTPS
 			tabdomain = null;
 			checksave(tabdomain);
 			return;
 		}
-		
 		// In case the ending / cannot be found
-		if(end !== -1)
-		{
+		if(end !== -1){
 			tabdomain = taburl.substring(start,end);
 		}
-		else
-		{
+		else{
 			tabdomain = taburl.substring(start);
 		}
-
 		// Check if saved
 		checksaveadopt(tabdomain);
 	});
@@ -509,29 +504,111 @@ function darkthemeCheck() {
 	}
 }
 
+
+/** Advanced functions **/
+/* Show advanced buttons*/
+function showAdvancedFeatures() {
+	if(document.getElementById("advtable").classList.contains('hiddenadv')){
+		// Extend!
+		document.getElementById("advtable").classList.remove('hiddenadv');
+		document.querySelector("table").classList.add('extended')
+		document.documentElement.classList.add('extended');
+		document.body.classList.add('extended');
+		document.getElementById("menubutton").classList.add('flipped');
+	}
+	else{
+		// Shrink!
+		document.getElementById("advtable").classList.add('hiddenadv');
+		document.querySelector("table").classList.remove('extended')
+		document.documentElement.classList.remove('extended');
+		document.body.classList.remove('extended');
+		document.getElementById("menubutton").classList.remove('flipped');
+	}
+}
+
+/* Optimize colors */
+var optColcss = "body.alphatexta1 *{background:transparent !important;background-color:#FFF !important;color:#181818 !important;text-shadow:none !important;border-color:transparent !important;box-shadow:none !important}body.alphatexta1 a{text-decoration:underline !important;}";
+function optCol() {
+	// Put in .alphatexta1 if necessary
+	chrome.tabs.executeScript(null,
+		{code:"document.body.classList.add('alphatexta1');"});
+
+	// Insert CSS
+	chrome.tabs.insertCSS(null,{code:optColcss});
+	renderstatus('ADVoptCol');
+}
+
+/* Reduce clutter by removing media */
+var remImgcss = "body.alphatexta2 img,body.alphatexta2 iframe,body.alphatexta2 svg,body.alphatexta2 button,body.alphatexta2 object{display:none !important;}body.alphatexta2 *{background-image:none !important;";
+function remImg() {
+	// Put in .alphatexta2 if necessary
+	chrome.tabs.executeScript(null,
+		{code:"document.body.classList.add('alphatexta2');"});
+
+	// Insert CSS
+	chrome.tabs.insertCSS(null,{code:remImgcss});
+	renderstatus('ADVremImg');
+}
+
+/** Review popup **/
+var visitcount = null;
+
+/* Initiate popup */
+function reviewpopupini() {
+	// TODO
+}
+
+/* Check count and initiate popup if appropriate */
+function reviewpopup() {
+	visitc = localStorage.getItem("visitcount");
+
+	if (visitc == null) {
+		localStorage.setItem("visitcount","1");
+	}
+	else {
+		visitcint = parseInt(visitc);
+		if (visitcint == 20) {
+			reviewpopupini();
+		}
+		else {
+			visitcint ++;
+			localStorage.setItem("visitcount",String(visitcint));
+		}
+	}
+}
+
 /* Load at beginning */
 document.addEventListener('DOMContentLoaded', function() {
 	// Log start in console
 	console.log('AlphaText started.');
-
 	// Check storage
 	checkstorage();
-
 	// Save current url and domain
 	checkurldomain();
 
 	// Options
 	document.querySelector("#options").addEventListener('click',openoptions);
-
-	// Off toggle
-	document.querySelector("#off").addEventListener('click',toggle);
-
+	// Off
+	document.querySelector("#off").addEventListener('click',disableall);
 	// Save domain
 	savebuttonele.addEventListener('click',togglesave);
 
+	// Check if a profile is already active
+	var Ptagfound = false;
+	chrome.tabs.executeScript(null,{code:
+		"var outp = null;" +
+		"for(var p = 1; p < 4 ; p++){" +
+		"if(document.body.classList.contains('alphatextPtag'+String(p))){" +
+		"outp = p;break;}};outp;"},
+		function(outpres){
+			if(outpres[0]!=null){
+				activep = outpres[0];
+				checksave(tabdomain);
+			}
+		});
+
 	// Load profile buttons
 	loadProfiles();
-	
 	// Profiles
 	if(document.querySelector("#profileItem1") !== null) {
 		document.querySelector("#profileItem1").addEventListener('click',adoptp1); // 1
@@ -546,13 +623,22 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Quick Style Set
 	document.getElementsByClassName('setbutton')[0].addEventListener('click',qsset);
 	checkquick(null);
-
 	// Set button activation listener
 	var selectoptions = document.querySelectorAll('select#font_size,select#font_family,select#line_height');
 	for(var i = 0, len = selectoptions.length; i < len ; i++){
 		selectoptions[i].addEventListener('change',checkquick);
 	}
 
+	/// Advanced features
+	// Expand control panel
+	document.querySelector("#openadv").addEventListener('click',showAdvancedFeatures);
+	// Color optimization
+	document.querySelector("#optcol").addEventListener('click',optCol);
+	// Image removal
+	document.querySelector("#remimg").addEventListener('click',remImg);
+
 	// Trigger dark theme if set
 	darkthemeCheck();
+	// Set review popup
+	reviewpopup();
 });

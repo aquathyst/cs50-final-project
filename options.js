@@ -140,6 +140,12 @@ function checkstorage() {
 				errorcount ++;
 			}
 		}
+		else if (/^visitcount$/.test(checkkey)){
+			if(!/^[0-9]+$/.test(checkval)){
+				console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: visit counts)');
+				errorcount ++;
+			}
+		}
 		else{
 			console.error('AlphaText: Storage data corrupted! (' + checkkey + ', ' + checkval + '; type: unknown)');
 			errorcount ++;
@@ -184,9 +190,9 @@ function loadProfiles() {
 				'<div id="' + profkey + '_delete" class="delwrapper"><img class="delbutton" title="Delete" src="images/delete_n.png" alt="del" id="' + profkey + '_delalt"/></div>' +
 				'<div class="profiledetails">' +
 				'<b>Profile ' + profnum + '</b>' +
-				'<br/><em>Font Size</em>: ' + profvarray[0] +
-				'<br/><em>Font Style</em>: ' + profvarray[1] +
-				'<br/><em>Line Height</em>: ' + profvarray[2] + 
+				'<br/>Font Size: ' + profvarray[0] +
+				'<br/>Font Style: ' + profvarray[1] +
+				'<br/>Line Height: ' + profvarray[2] + 
 				'</div></div></div>';
 		}
 		else{
@@ -315,7 +321,7 @@ function loadDomains() {
 	
 	// If empty
 	if(domainList === ""){
-		domainList = '<p id="emptydomlist">No domains saved</p>';
+		domainList = '<p id="emptydomlist"><br/>No domains saved</p>';
 	}
 
 	// Load HTML

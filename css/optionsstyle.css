@@ -7,7 +7,7 @@
 
 /* General things */
 html,body{
-	width:800px;
+	width:805px;
 }
 html{
 	overflow:auto;
@@ -15,7 +15,6 @@ html{
 body{
 	background:#FFFFFF;
 	text-align:center;
-	margin:8px 0;
 }
 html{
 	cursor:default;
@@ -25,10 +24,6 @@ html{
 }
 ::selection{
 	background-color:transparent;
-}
-h1{
-	-webkit-margin-before:0.67em;
-    -webkit-margin-after:0.67em;
 }
 #addProfileDropdowns,.deldiv,.ddeldiv{
 	text-align:left;
@@ -68,26 +63,30 @@ h1{
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	border:solid #FFFFFF;
-	border-width:1px 0;
+	box-sizing:border-box;
+	border:solid 2px #FFFFFF;
 	width:100%;
+	padding:0px 3px 3px 3px;
 	margin:0;
 	-webkit-transition:background-color 0.2s linear;
 	transition:background-color 0.2s linear;
 }
 table#bigtable{
-	height:450px;
-	width:99%;
+	height:445px;
+	width:800px;
+	padding:0;
 	margin:0 auto;
+	border:none;
+	border-collapse:collapse;
 }
 #headrow{
-	height:15%;
+	height:75px;
 }
 #stuffrow{
-	height:75%;
+	height:330px;
 }
 #statusrow{
-	height:10%;
+	height:40px;
 }
 #bigtable tr,#bigtable td{
 	margin:0;
@@ -95,19 +94,18 @@ table#bigtable{
 	border:none;
 }
 td#profilecol1,td#profilecol2{
-	width:25%;
+	width:200px;
 }
 td#domaincol{
-	width:35%;
+	width:280px;
 }
 td#themecol{
-	width:15%;
+	width:120px;
 }
 
 /* Button section heads */
 #buttons .sectionhead {
-    height:100%;
-    border:none;
+    height:75px;
 }
 #headrow p{
 	font-size:135%;
@@ -129,7 +127,7 @@ td#themecol{
 /* General contents */
 #buttons div.subhead{
 	font-size:115%;
-	height:15%;
+	height:60px;
 }
 .delbutton{
 	height:30px;
@@ -149,7 +147,7 @@ td#themecol{
 	opacity:0.7;
 }
 #buttons div.delwrapper{
-	height:100%;
+	height:86px;
 	width:30px;
 	margin-right:10px;
 	float:left;
@@ -173,7 +171,7 @@ td#themecol{
 	background-color:#D1B616;
 }
 #addProfileDropdowns{
-	height:65%;
+	height:210px;
 	background-color:#DDC76C;
 	white-space:nowrap;
 	overflow:hidden;
@@ -191,7 +189,7 @@ td#themecol{
 	width:80%;
 }
 #addProfile{
-	height:20%;
+	height:60px;
 	font-size:110%;
 	font-weight:bold;
 	background-color:#CF9712;
@@ -207,7 +205,8 @@ td#themecol{
 	background-color:#8F9823;
 }
 .deldiv,.deldivnull{
-	height:28.33%;
+	height:90px;
+	padding:0;
 }
 #buttons .deldiv{
 	display:block;
@@ -241,7 +240,7 @@ td#themecol{
 #buttons #domainbigwrapper{
 	overflow-y:scroll;
 	overflow-x:hidden;
-	height:85%;
+	height:270px;
 	background-color:rgba(175,206,240,0.7);
 	display:block;
 }
@@ -276,13 +275,13 @@ p#emptydomlist{
 	background-color:#AF5480;
 }
 .darkthemeset{
-	height:30%;
+	height:100px;
 }
 .darkthemeset p{
 	line-height:110%;
 }
 #themecolplaceholder{
-	height:55%;
+	height:170px;
 	background-color:#B5A4A8;
 }
 

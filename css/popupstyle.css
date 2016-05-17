@@ -16,7 +16,13 @@ html.extended,body.extended{
 html{
 	cursor:default;
 }
-.profilesbuttons,#setstyle,#options,#off,#savepage,#unsavepage,#openadv,#optcol,#remimg{
+.profilesbuttons,
+#setstyle,
+#options,
+#off,
+#savepage,#unsavepage,
+#openadv,#optcol,#remimg,
+.revbutton{
 	cursor:pointer;
 }
 body{
@@ -303,4 +309,83 @@ body.darktheme #buttons td>div{
 }
 body.darktheme h1{
 	box-shadow:0px 0px 10px rgba(0,0,0,1);
+}
+
+/* Review popup */
+div#popup{
+	position:fixed;
+	height:300px;
+	width:500px;
+	left:52.5px;
+	top:85px;
+	background-color:#F0F0F0;
+	box-shadow:0px 0px 15px #808080;
+	z-index:1;
+	box-sizing:border-box;
+	padding:25px;
+	visibility:hidden;
+	opacity:0;
+	-webkit-transition:all 0.5s linear;
+	transition:all 0.5s linear;
+	color:#FFFFFF;
+}
+div#popup>p{
+	color:#685838;
+	font-weight:bold;
+	font-size:20px;
+}
+div#popup.showpopup{
+	visibility:visible !important;
+	opacity:1 !important;
+}
+.revbutton{
+	font-size:18px;
+	height:25px;
+	width:200px;
+	padding:10px;
+	/*margin:15px auto;*/
+	margin-top:-12.5px;
+	margin-left:-100px;
+	position:fixed;
+	left:50%;
+	box-shadow:0px 0px 20px #808080;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	-webkit-transition:margin 0.1s linear,box-shadow 0.1s linear,height 0.1s linear,width 0.1s linear;
+	transition:margin 0.1s linear,box-shadow 0.1s linear,height 0.1s linear,width 0.1s linear;
+}
+.revbutton:hover{
+	box-shadow:0px 0px 40px #808080;
+	height:26.25px;
+	width:210px;
+	margin-top:-13.125px;
+	margin-left:-105px;
+}
+.revbutton:active{
+	box-shadow:0px 0px 5px #808080;
+	height:23.75px;
+	width:190px;
+	margin-top:-11.875px;
+	margin-left:-95px;
+}
+#revSure{
+	top:38%;
+	background-color:#3CB63C;
+}
+#revLater{
+	top:50%;
+	background-color:#DFBB2D;
+}
+#revNever{
+	top:62%;
+	background-color:#4D88DF;
+}
+#revbuttonwrapper,#popup p{
+	display:block;
+	position:static;
+}
+div#popup a{
+	color:#FFFFFF;
+	text-decoration:none;
 }

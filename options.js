@@ -23,7 +23,6 @@ function fadeOut() {
 			clearInterval(fadingid);
 		}
 	}
-
 	fadingid = setInterval(redOpac,50);
 }
 function fadesetup() {
@@ -226,10 +225,10 @@ function profileExists(fs, ff, lh) {
 /* Figure out what is the next profile number to be saved to */
 function nextNum() {
 	for (var i = 1; i <= 3; i++) {
-    	if (localStorage.getItem('profileItem' + i) === null)
-    		return i;
-  	}
-  	return 'MAX';
+		if (localStorage.getItem('profileItem' + i) === null)
+			return i;
+	}
+	return 'MAX';
 }
 
 /* click event to add profile */

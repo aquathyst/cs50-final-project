@@ -23,7 +23,6 @@ function fadeOut() {
 			clearInterval(fadingid);
 		}
 	}
-
 	fadingid = setInterval(redOpac,50);
 }
 function fadesetup() {
@@ -256,8 +255,7 @@ function makeCSS(pnum) {
 	}
 	else{
 		// Not present or valid style set profile
-		switch(pnum)
-		{
+		switch(pnum){
 			case 1:
 				css1 = '';
 				break;
@@ -382,15 +380,14 @@ function togglesave() {
 	if(savebuttonele.id !== 'nopsavepage'){
 		// Only work if there is a profile
 		if(tabdomain !== null){
-			if(saved === false){
+			if(!saved){
 				// Save!
 				var ptosave = String(activep);
 				localStorage.setItem('dom: ' + tabdomain, ptosave);
 				saved = true;
 
 				// Update domain save button
-				savebuttontext.innerText = 'Don\'t use Profile ' + localStorage.getItem('dom: ' + tabdomain).toString(10) + ' on domain';
-				savebuttonele.id = "unsavepage";
+				checksave(tabdomain);
 
 				renderstatus('save');
 			}
@@ -410,17 +407,14 @@ function togglesave() {
 
 /* Check if the domain was saved by user, adopt profile if so, and load necessary code */
 function checksaveadopt(domtocheck) {
-	// Check and adust button
+	// Check and adjust button
 	checksave(domtocheck);
 	
-	// Adopt profile if saved
+	// Notify adopted profile if saved
 	if(domtocheck !== null && localStorage.getItem('dom: ' + tabdomain) !== null){
 		saved = true;
-		var savedp = null;
 		if(localStorage.getItem('profileItem' + localStorage.getItem('dom: ' + tabdomain)) !== null) {
-			//  Adopt saved profile
-			savedp = parseInt(localStorage.getItem('dom: ' + tabdomain),10);
-			adoptp(savedp);
+			// Adopted saved profile
 			renderstatus('saveautop');
 		}
 		else
@@ -431,8 +425,9 @@ function checksaveadopt(domtocheck) {
 	}
 }
 
-/* Get url and domain of website, and see if it was saved */
-function checkurldomain() {
+// Grab domain, check save and adjust save button
+function domCheck() {
+	// Grab the domain of the tab's url
 	chrome.tabs.query({'active':true,'currentWindow':true},function(tab){
 		// Getting URL
 		taburl = tab[0].url;
@@ -451,7 +446,7 @@ function checkurldomain() {
 		else{
 			// Not HTTP or HTTPS
 			tabdomain = null;
-			checksave(tabdomain);
+			checksave(null);
 			return;
 		}
 		// In case the ending / cannot be found
@@ -461,8 +456,23 @@ function checkurldomain() {
 		else{
 			tabdomain = taburl.substring(start);
 		}
-		// Check if saved
-		checksaveadopt(tabdomain);
+	
+		if(tabdomain){
+		// Check if a profile has been auto adopted
+		chrome.tabs.executeScript(null,{code:
+			"var outp = null;" +
+			"for(var p = 1; p < 4 ; p++){" +
+			"if(document.body.classList.contains('alphatextPtag'+String(p))){" +
+			"outp = p;break;}};outp;"},
+			function(outpres){
+				if(outpres[0] !== null){
+					activep = outpres[0];
+					saved = true;
+				}
+				// Check and adjust save button
+				checksaveadopt(tabdomain);
+			});
+		}
 	});
 }
 
@@ -499,11 +509,10 @@ function loadProfiles() {
 
 /* Check and initiate dark theme */
 function darkthemeCheck() {
-	if(localStorage.getItem('darktheme') === 'on'){
+	if(localStorage.getItem('darktheme') == 'on'){
 		document.body.classList.add('darktheme');
 	}
 }
-
 
 /** Advanced functions **/
 /* Show advanced buttons*/
@@ -511,7 +520,7 @@ function showAdvancedFeatures() {
 	if(document.getElementById("advtable").classList.contains('hiddenadv')){
 		// Extend!
 		document.getElementById("advtable").classList.remove('hiddenadv');
-		document.querySelector("table").classList.add('extended')
+		document.querySelector("table").classList.add('extended');
 		document.documentElement.classList.add('extended');
 		document.body.classList.add('extended');
 		document.getElementById("menubutton").classList.add('flipped');
@@ -519,7 +528,7 @@ function showAdvancedFeatures() {
 	else{
 		// Shrink!
 		document.getElementById("advtable").classList.add('hiddenadv');
-		document.querySelector("table").classList.remove('extended')
+		document.querySelector("table").classList.remove('extended');
 		document.documentElement.classList.remove('extended');
 		document.body.classList.remove('extended');
 		document.getElementById("menubutton").classList.remove('flipped');
@@ -551,29 +560,55 @@ function remImg() {
 }
 
 /** Review popup **/
-var visitcount = null;
+var visitc = null;
+
+/* Popup buttons */
+function revClose() {
+	document.getElementById('popup').classList.remove('showpopup');
+}
+function revStop() {
+	localStorage.setItem("visitcount","999");
+	revClose();
+}
+function revLater() {
+	localStorage.setItem("visitcount","10");
+	revClose();
+}
 
 /* Initiate popup */
+function showpopup() {
+	// Show popup
+	document.getElementById('popup').classList.add('showpopup');
+	// Set event listeners for buttons;
+	document.querySelector("#revSure").addEventListener('click',revStop);
+	document.querySelector("#revNever").addEventListener('click',revStop);
+	document.querySelector("#revLater").addEventListener('click',revLater);
+}
 function reviewpopupini() {
-	// TODO
+	setTimeout(showpopup,200);
 }
 
 /* Check count and initiate popup if appropriate */
 function reviewpopup() {
+	// Get count as string
 	visitc = localStorage.getItem("visitcount");
-
-	if (visitc == null) {
-		localStorage.setItem("visitcount","1");
+	if (visitc === null) {
+		// First visit
+		localStorage.setItem("visitcount","0");
 	}
-	else {
-		visitcint = parseInt(visitc);
-		if (visitcint == 20) {
-			reviewpopupini();
-		}
-		else {
-			visitcint ++;
-			localStorage.setItem("visitcount",String(visitcint));
-		}
+	else if (visitc == '20'){
+		// Count reached
+		reviewpopupini();
+	}
+	else if (visitc == '999'){
+		// Done or declined
+		return;
+	}
+	else{
+		// Increment
+		var visitcnew = parseInt(visitc,10);
+		visitcnew ++;
+		localStorage.setItem("visitcount",String(visitcnew));
 	}
 }
 
@@ -583,8 +618,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	console.log('AlphaText started.');
 	// Check storage
 	checkstorage();
-	// Save current url and domain
-	checkurldomain();
+	// Check url and save
+	domCheck();
 
 	// Options
 	document.querySelector("#options").addEventListener('click',openoptions);
@@ -592,20 +627,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.querySelector("#off").addEventListener('click',disableall);
 	// Save domain
 	savebuttonele.addEventListener('click',togglesave);
-
-	// Check if a profile is already active
-	var Ptagfound = false;
-	chrome.tabs.executeScript(null,{code:
-		"var outp = null;" +
-		"for(var p = 1; p < 4 ; p++){" +
-		"if(document.body.classList.contains('alphatextPtag'+String(p))){" +
-		"outp = p;break;}};outp;"},
-		function(outpres){
-			if(outpres[0]!=null){
-				activep = outpres[0];
-				checksave(tabdomain);
-			}
-		});
 
 	// Load profile buttons
 	loadProfiles();

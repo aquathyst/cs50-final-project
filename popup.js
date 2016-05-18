@@ -465,7 +465,14 @@ function domCheck() {
 			"if(document.body.classList.contains('alphatextPtag'+String(p))){" +
 			"outp = p;break;}};outp;"},
 			function(outpres){
-				if(outpres[0] !== null){
+				if(outpres === undefined){
+					// Script not allowed on website
+					tabdomain = null;
+					checksave(null);
+					return;
+				}
+				else if(outpres[0] !== null){
+					// Confirmed
 					activep = outpres[0];
 					saved = true;
 				}

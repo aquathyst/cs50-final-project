@@ -10,7 +10,7 @@
 		<!--Review Pop-up-->
 		<div id="popup">
 			<p>Enjoying AlphaText? Rate and give us a review on the Chrome Web Store!</p>
-			
+
 			<div id="revbuttonwrapper">
 				<a class="revbutton" href="https://chrome.google.com/webstore/detail/alphatext-make-text-reada/lpcaoilgpobajbkiamaojipjddpkkida/reviews" target="_blank" id="revSure">
 					<span>Sure!</span>
@@ -25,7 +25,7 @@
 		</div>
 
 		<h1>AlphaText &#8212; Quick Control Panel</h1>
-		
+
 		<!--Button array-->
 		<div id="buttons">
 			<table id="controlpanel"><tr id="maintable">
@@ -115,14 +115,37 @@
 
 			</tr>
 			<tr id="advtable" class="hiddenadv">
-				<td colspan="3">
+				<td colspan="2">
+					<div class="advdivcus" id="optcuscol"><div class="contents">
+						<p>Optimizing background:</p>
+						<select id="optBG">
+							<option value="white">White</option>
+							<option value="offwhite">Off-white</option>
+							<option value="beige">Beige</option>
+							<option value="grey">Grey</option>
+							<option value="darkgrey">Dark grey</option>
+							<option value="black">Black</option>
+						</select>
+						<p>Optimizing text color:</p>
+						<select id="optTC">
+							<option value="black">Black</option>
+							<option value="darkgrey">Dark grey</option>
+							<option value="grey">Grey</option>
+							<option value="brown">Brown</option>
+							<option value="offwhite">Off-white</option>
+							<option value="white">White</option>
+						</select>
+						<img alt=">" id="cusToRight" src="images/right.png"/>
+					</div></div>
+				</td>
+				<td colspan="2">
 					<div class="advdiv" id="optcol"><div class="contents">
 						<img src="images/color.png" alt="Optimize colors"/>
 						<p>Optimize color</p>
 						<p class="minitext">Optimize colors of text, background, etc. for reading</p>
 					</div></div>
 				</td>
-				<td colspan="3">
+				<td colspan="2">
 					<div class="advdiv" id="remimg"><div class="contents">
 						<img src="images/hidemedia.png" alt="Hide media"/>
 						<p>Hide multimedia</p>
@@ -132,11 +155,11 @@
 			</tr></table>
 
 		</div>
-		
+
 		<!-- Status text -->
 		<p id="status"></p>
 		<noscript>Sorry, Javascript must be enabled for AlphaText to work!</noscript>
-		
+
 		<!-- Javascripts -->
 		<script src="popup.js"></script>
 	</body>

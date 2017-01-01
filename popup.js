@@ -16,7 +16,7 @@ function fadeOut() {
 	function redOpac() {
 		opac -= 0.1;
 		statusElem.style.opacity = opac;
-		
+
 		// Disappear finally
 		if(opac <= 0) {
 			statusElem.innerText = '';
@@ -33,7 +33,7 @@ function fadesetup() {
 	if(fadeoutid !== null) {
 		clearInterval(fadeoutid);
 	}
-	
+
 	// Reset opacity
 	statusElem.style.opacity = 1;
 
@@ -341,7 +341,7 @@ function qsset() {
 		var fsize = document.getElementById("font_size").value;
 		var ffamily = document.getElementById("font_family").value;
 		var lheight = document.getElementById("line_height").value;
-		
+
 		// Set properties if not empty
 		if(fsize !== 'null'){
 			chrome.tabs.insertCSS(null,{code:"body.alphatextq p,body.alphatextq a,body.alphatextq li,body.alphatextq td{font-size:" + fsize + " !important;}"});
@@ -395,7 +395,7 @@ function togglesave() {
 				// Unsave!
 				localStorage.removeItem('dom: ' + tabdomain);
 				saved = false;
-				
+
 				// Update domain save button
 				checksave(tabdomain);
 
@@ -409,7 +409,7 @@ function togglesave() {
 function checksaveadopt(domtocheck) {
 	// Check and adjust button
 	checksave(domtocheck);
-	
+
 	// Notify adopted profile if saved
 	if(domtocheck !== null && localStorage.getItem('dom: ' + tabdomain) !== null){
 		saved = true;
@@ -432,7 +432,7 @@ function domCheck() {
 		// Getting URL
 		taburl = tab[0].url;
 		// End of domain
-		var end = taburl.indexOf('/',8); 
+		var end = taburl.indexOf('/',8);
 		// Find start
 		var start = null;
 		if(taburl.indexOf('http://') === 0){
@@ -456,7 +456,7 @@ function domCheck() {
 		else{
 			tabdomain = taburl.substring(start);
 		}
-	
+
 		if(tabdomain){
 		// Check if a profile has been auto adopted
 		chrome.tabs.executeScript(null,{code:
@@ -489,12 +489,12 @@ function loadProfiles() {
 	var profileList = '';
 	var profkeyprefix = 'profileItem';
 	var profkey = '';
-	
+
 	// Go through the three possible profiles
 	for(var profnum = 1; profnum <= 3; profnum++){
 		// Make key
 		profkey = profkeyprefix + profnum.toString(10);
-		
+
 		// Generate HTML profile buttons
 		if(localStorage.getItem(profkey) !== null){
 			// Profile block
@@ -543,8 +543,25 @@ function showAdvancedFeatures() {
 }
 
 /* Optimize colors */
-var optColcss = "body.alphatexta1 *{background:transparent !important;background-color:#FFF !important;color:#181818 !important;text-shadow:none !important;border-color:transparent !important;box-shadow:none !important}body.alphatexta1 a{text-decoration:underline !important;}";
+/* Color-CSS translator */
+var colTrans={
+	"black":"#000",
+	"darkgrey":"#303030",
+	"grey":"#909090",
+	"offwhite":"#F8F8F8",
+	"white":"#FFF",
+	"beige":"#F8F5DD",
+	"brown":"#4D2B0D"
+};
+var optColBG="";
+var optColTC="";
+var optColcss ="";
 function optCol() {
+	// Get values and build CSS
+	optColBG=document.getElementById("optBG").value.toString();
+	optColTC=document.getElementById("optTC").value.toString();
+	optColcss = "body.alphatexta1 *{background:" + colTrans[optColBG] + " !important;color:" + colTrans[optColTC] + " !important;text-shadow:none !important;border-color:transparent !important;box-shadow:none !important}body.alphatexta1 a{text-decoration:underline !important;}";
+
 	// Put in .alphatexta1 if necessary
 	chrome.tabs.executeScript(null,
 		{code:"document.body.classList.add('alphatexta1');"});
@@ -555,7 +572,7 @@ function optCol() {
 }
 
 /* Reduce clutter by removing media */
-var remImgcss = "body.alphatexta2 img,body.alphatexta2 iframe,body.alphatexta2 svg,body.alphatexta2 button,body.alphatexta2 object{display:none !important;}body.alphatexta2 *{background-image:none !important;";
+var remImgcss = "body.alphatexta2 img,body.alphatexta2 iframe,body.alphatexta2 svg,body.alphatexta2 object,body.alphatexta2 i{display:none !important;}body.alphatexta2 *{background-image:none !important;";
 function remImg() {
 	// Put in .alphatexta2 if necessary
 	chrome.tabs.executeScript(null,

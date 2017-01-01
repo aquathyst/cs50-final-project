@@ -127,7 +127,7 @@ td{
 #buttons .small{
 	height:80px;
 }
-#buttons .advdiv{
+#buttons .advdiv,#buttons .advdivcus{
 	height:120px;
 }
 
@@ -277,6 +277,30 @@ p{
 }
 .advdiv:active{
 	background-color:#1A8CFF;
+}
+
+.advdivcus{
+	background-color:#5694CD;
+	position:relative;
+}
+
+#optcuscol .contents{
+	font-size:80%;
+}
+#optcuscol select{
+	width:80px;
+	margin:5px auto;
+	display:block;
+}
+#optcuscol p{
+	display:block;
+}
+#optcuscol #cusToRight{
+	height:100%;
+	width:10px;
+	position:absolute;
+	top:0;
+	right:3px;
 }
 
 /* Button section heads */

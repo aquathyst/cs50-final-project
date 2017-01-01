@@ -81,7 +81,7 @@ function preadoptp(targetTab,savedpn){
 	// Put in .alphatextp if needed
 	chrome.tabs.executeScript(targetTab,
 		{code:"document.body.classList.add('alphatextp');"});
-	
+
 	// Insert CSS profile
 	switch(savedpn){
 		case 1:
@@ -144,7 +144,7 @@ chrome.runtime.onMessage.addListener(
 			else{
 				console.error("AlphaText: Profile "+String(savedpn)+" saved but it no longer exists!");
 			}
-			
+
 			// Adjust browser icon
 			chrome.browserAction.setIcon({path:proficonpath(parseInt(savedp,10)),tabId:parseInt(sender.tab.id)});
 		}

@@ -33,7 +33,7 @@ function fadesetup() {
 	if(fadeoutid !== null) {
 		clearInterval(fadeoutid);
 	}
-	
+
 	// Reset opacity
 	statusElem.style.opacity = 1;
 
@@ -180,7 +180,7 @@ function loadProfiles() {
 	for(var profnum = 1; profnum <= 3; profnum++){
 		// Make key
 		profkey = profkeyprefix + profnum.toString(10);
-		
+
 		// Generate HTML profile buttons
 		if(localStorage.getItem(profkey) !== null){
 			profv = localStorage.getItem(profkey);
@@ -191,7 +191,7 @@ function loadProfiles() {
 				'<b>Profile ' + profnum + '</b>' +
 				'<br/>Font Size: ' + profvarray[0] +
 				'<br/>Font Style: ' + profvarray[1] +
-				'<br/>Line Height: ' + profvarray[2] + 
+				'<br/>Line Height: ' + profvarray[2] +
 				'</div></div></div>';
 		}
 		else{
@@ -212,8 +212,8 @@ function loadProfiles() {
 // fs = font size; ff = font family; lh = line height
 function profileExists(fs, ff, lh) {
 	for (var i = 1; i <= 3; i++) {
-		if (localStorage.getItem("profileItem" + i) === fs + " - " + ff + " - " + lh) 
-		{  
+		if (localStorage.getItem("profileItem" + i) === fs + " - " + ff + " - " + lh)
+		{
 			// Present
 			return true;
 		}
@@ -275,7 +275,7 @@ function deletep(e) {
 
 	if (eleId.substring(0,11) === "profileItem" && (eleId.substring(eleId.length - 7, eleId.length) === "_delete" || eleId.substring(eleId.length - 7, eleId.length) === "_delalt")) {
 		idToDelete = eleId.substring(0,12);
-		
+
 		// Remove profile
 		localStorage.removeItem(idToDelete);
 
@@ -317,7 +317,7 @@ function loadDomains() {
 				'</span></div></div>';
 		}
 	}
-	
+
 	// If empty
 	if(domainList === ""){
 		domainList = '<p id="emptydomlist"><br/>No domains saved</p>';
@@ -334,7 +334,7 @@ function loadDomains() {
 function deleted(e) {
 	var deleId = e.target.id;
 	var domToDelete = '';
-	
+
 	if (deleId.substring(deleId.length - 7, deleId.length) === "_delete" || deleId.substring(deleId.length - 7, deleId.length) === "_delalt") {
 		domToDelete = 'dom: ' + deleId.substring(0, deleId.length - 7);
 

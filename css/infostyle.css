@@ -5,7 +5,7 @@
  * Stylesheet for options, help, and about
  */
 
-/* Texts */
+/* Texts and bigger layout*/
 body{
 	font-family:'Roboto',Helvetica,Arial,sans-serif;
 	background-color:#FFFFFF;
@@ -13,23 +13,37 @@ body{
 	margin:0;
 	padding:0;
 }
+.infotext{
+	position:relative;
+	top:50px;
+	z-index:-999;
+	padding-bottom:50px;
+}
 h2,h3,div.infotext p{
 	margin:0 10px 0 10px;
 	line-height:1.5;
 }
 div.infotext p{
-	font-size:140%;
+	font-size:125%;
 	text-indent:30px;
 }
+#menubar,h1{
+	background-color:#FFFFFF;
+}
 h1{
+	/* Header bar */
 	font-weight:normal;
 	color:#A0A0A0;
 	text-align:center;
 	font-size:180%;
-	/*height:30px;*/
+	height:30px;
 	padding:10px 0 10px 0;
 	margin:0 0 10px 0;
 	box-shadow:0px 0px 10px rgba(0,0,0,0.4);
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
 }
 h2{
 	font-weight:bold;
@@ -60,6 +74,11 @@ a{
 	display:block;
 	text-align:center;
 	box-shadow:0px 0px 10px rgba(0,0,0,0.4);
+	position:fixed;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:20px;
 }
 a.menu{
 	color:#909090;
@@ -81,4 +100,7 @@ body.darktheme{
 }
 body.darktheme h1,body.darktheme #menubar{
 	box-shadow:0px 0px 10px rgba(0,0,0,1);
+}
+body.darktheme #menubar,body.darktheme h1{
+	background-color:#383838;
 }

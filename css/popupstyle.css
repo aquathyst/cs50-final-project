@@ -344,7 +344,7 @@ div#popup{
 	top:85px;
 	background-color:#F0F0F0;
 	box-shadow:0px 0px 15px #808080;
-	z-index:1;
+	z-index:999;
 	box-sizing:border-box;
 	padding:25px;
 	visibility:hidden;
@@ -364,46 +364,35 @@ div#popup.showpopup{
 }
 .revbutton{
 	font-size:18px;
-	height:25px;
+	height:20px;
 	width:200px;
 	padding:10px;
 	/*margin:15px auto;*/
-	margin-top:-12.5px;
+	/*margin-top:-12.5px;*/
 	margin-left:-100px;
 	position:fixed;
 	left:50%;
-	box-shadow:0px 0px 20px #808080;
+	box-shadow:0px 0px 10px #808080;
 	display:flex;
 	align-items:center;
 	justify-content:center;
 	-webkit-transition:margin 0.1s linear,box-shadow 0.1s linear,height 0.1s linear,width 0.1s linear;
 	transition:margin 0.1s linear,box-shadow 0.1s linear,height 0.1s linear,width 0.1s linear;
 }
-.revbutton:hover{
-	box-shadow:0px 0px 40px #808080;
-	height:26.25px;
-	width:210px;
-	margin-top:-13.125px;
-	margin-left:-105px;
-}
 .revbutton:active{
-	box-shadow:0px 0px 5px #808080;
-	height:23.75px;
-	width:190px;
-	margin-top:-11.875px;
-	margin-left:-95px;
+	box-shadow:0px 0px 15px #808080;
 }
 #revSure{
-	top:38%;
-	background-color:#3CB63C;
+	top:190px;
+	background-color:#5ABF5A;
 }
 #revLater{
-	top:50%;
-	background-color:#DFBB2D;
+	top:250px;
+	background-color:#5CBFE4;
 }
 #revNever{
-	top:62%;
-	background-color:#4D88DF;
+	top:310px;
+	background-color:#DC6592;
 }
 #revbuttonwrapper,#popup p{
 	display:block;

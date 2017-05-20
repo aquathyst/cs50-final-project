@@ -13,13 +13,13 @@
 
 			<div id="revbuttonwrapper">
 				<a class="revbutton" href="https://chrome.google.com/webstore/detail/alphatext-make-text-reada/lpcaoilgpobajbkiamaojipjddpkkida/reviews" target="_blank" id="revSure">
-					<span>Sure!</span>
+					<span>Sure</span>
 				</a>
 				<div class="revbutton" id="revLater">
-					<span>Nah, next time.</span>
+					<span>Next time</span>
 				</div>
 				<div class="revbutton" id="revNever">
-					<span>Don't ask again.</span>
+					<span>Don't ask again</span>
 				</div>
 			</div>
 		</div>
@@ -39,7 +39,8 @@
 				<td colspan="2">
 					<div class="sectionhead" id="qshead"><p>Quick Styles</p></div>
 					<div class="small quickstyles"><div class="contents">
-						Font Size:<br/>
+
+						<p>Size: </p>
 						<div id="fontsize">
 							<select id="font_size">
 								<option value="null">---</option>
@@ -53,9 +54,8 @@
 								<option value="32px">32</option>
 							</select>
 						</div>
-					</div></div>
-					<div class="small quickstyles"><div class="contents">
-						Font Style:<br/>
+						<br/>
+						<p>Font: </p>
 						<div id="fontfamily">
 							<select id="font_family">
 								<option value="null">---</option>
@@ -73,9 +73,8 @@
 								<option value="Times New Roman">Times New Roman</option>
 							</select>
 						</div>
-					</div></div>
-					<div class="small quickstyles"><div class="contents">
-						Line Height:<br/>
+						<br/>
+						<p>Height: </p>
 						<div id="lineheight">
 							<select id="line_height">
 								<option value="null">---</option>
@@ -86,72 +85,68 @@
 								<option value="3">3</option>
 							</select>
 						</div>
+
 					</div></div>
-					<div class="small setbutton" id="setnull"><div class="contents">
+					<div class="setbutton" id="setnull"><div class="contents">
 						Set
 					</div></div>
 				</td>
 
 				<!--Main buttons-->
 				<td colspan="2">
-					<div class="right" id="options"><div class="contents">
-						<img src="images/options.png" alt="Options"/>
-						<p>Options</p>
+					<div class="advdivcus" id="optcuscol"><div class="contents">
+						<p>BG: </p>
+						<select id="optBG">
+							<option value="offwhite">Off-white</option>
+							<option value="darkgrey">Dark grey</option>
+							<option value="beige">Beige</option>
+							<option value="white">White</option>
+							<option value="grey">Grey</option>
+							<option value="black">Black</option>
+						</select>
+						<br/>
+						<p>Text: </p>
+						<select id="optTC">
+							<option value="darkgrey">Dark grey</option>
+							<option value="offwhite">Off-white</option>
+							<option value="brown">Brown</option>
+							<option value="black">Black</option>
+							<option value="grey">Grey</option>
+							<option value="white">White</option>
+						</select>
 					</div></div>
-					<div class="right" id="off"><div class="contents">
-						<img src="images/off.png" alt="Remove Styles"/>
-						<p id="offtext">Remove all</p>
+
+					<div class="advdiv" id="optcol"><div class="contents">
+						<p>Adjust colors</p>
 					</div></div>
-					<div class="right savebutton" id="savepage"><div class="contents">
-						<img src="images/save.png" alt="Toggle Save"/>
-						<p id="savetext"></p>
-					</div></div>
-					<div class="right" id="openadv"><div class="contents">
-						<img src="images/adv.png" alt="Advanced Features"/>
-						<p id="advtext">Advanced features <sup id="beta">beta!</sup></p>
-						<img src="images/menu.png" alt="--" id="menubutton"/>
+
+					<div class="advdiv" id="remimg"><div class="contents">
+						<p>Hide media</p>
 					</div></div>
 				</td>
 
 			</tr>
-			<tr id="advtable" class="hiddenadv">
+			<tr id="advtable">
+
 				<td colspan="2">
-					<div class="advdivcus" id="optcuscol"><div class="contents">
-						<p>Optimizing background:</p>
-						<select id="optBG">
-							<option value="white">White</option>
-							<option value="offwhite">Off-white</option>
-							<option value="beige">Beige</option>
-							<option value="grey">Grey</option>
-							<option value="darkgrey">Dark grey</option>
-							<option value="black">Black</option>
-						</select>
-						<p>Optimizing text color:</p>
-						<select id="optTC">
-							<option value="black">Black</option>
-							<option value="darkgrey">Dark grey</option>
-							<option value="grey">Grey</option>
-							<option value="brown">Brown</option>
-							<option value="offwhite">Off-white</option>
-							<option value="white">White</option>
-						</select>
-						<img alt=">" id="cusToRight" src="images/right.png"/>
+					<div class="bott savebutton" id="savepage"><div class="contents">
+						<img class="bottimg" src="images/save.png" alt="Toggle Save"/>
+						<p id="savetext"></p>
 					</div></div>
 				</td>
 				<td colspan="2">
-					<div class="advdiv" id="optcol"><div class="contents">
-						<img src="images/color.png" alt="Optimize colors"/>
-						<p>Optimize color</p>
-						<p class="minitext">Optimize colors of text, background, etc. for reading</p>
+					<div class="bott" id="options"><div class="contents">
+						<img class="bottimg" src="images/options.png" alt="Options"/>
+						<p class="botttext">Options</p>
 					</div></div>
 				</td>
 				<td colspan="2">
-					<div class="advdiv" id="remimg"><div class="contents">
-						<img src="images/hidemedia.png" alt="Hide media"/>
-						<p>Hide multimedia</p>
-						<p class="minitext">Reduce clutter by hiding all images, videos, and other media</p>
+					<div class="bott" id="off"><div class="contents">
+						<img class="bottimg" src="images/off.png" alt="Remove Styles"/>
+						<p class="botttext" id="offtext">Clear all</p>
 					</div></div>
 				</td>
+
 			</tr></table>
 
 		</div>

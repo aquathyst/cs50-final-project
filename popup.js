@@ -177,26 +177,26 @@ function checksave(domtocheck) {
 	if(domtocheck !== null){
 		if(localStorage.getItem('dom: ' + domtocheck) !== null){
 			// Saved!
-			savebuttontext.innerText = 'Don\'t use Profile ' + localStorage.getItem('dom: ' + domtocheck).toString(10) + ' on domain';
+			savebuttontext.innerText = 'Unsave P' + localStorage.getItem('dom: ' + domtocheck).toString(10) + ' to site';
 			savebuttonele.id = "unsavepage";
 		}
 		else{
 			// Not saved yet
 			if(activep !== null){
 				// Save button
-				savebuttontext.innerText = 'Always use Profile ' + activep + ' on domain';
+				savebuttontext.innerText = 'Save P' + activep + ' to site';
 				savebuttonele.id = "savepage";
 			}
 			else{
 				// No profile to save
-				savebuttontext.innerText = 'Choose a profile first to save to domain.';
+				savebuttontext.innerText = 'Choose profile';
 				savebuttonele.id = "nopsavepage";
 			}
 		}
 	}
 	else{
 		// Domain not applicable
-		savebuttontext.innerText = 'Cannot save on domain';
+		savebuttontext.innerText = 'Can\'t save here!';
 		savebuttonele.id = "cantsave";
 	}
 }
@@ -498,15 +498,15 @@ function loadProfiles() {
 		// Generate HTML profile buttons
 		if(localStorage.getItem(profkey) !== null){
 			// Profile block
-			profileList += "<div class='mid profilesbuttons' id='" + profkey + "' value='" + localStorage.getItem(profkey) + "'><div class='contents profcontents'>" +
-				"<img src='"+chrome.extension.getURL('images/profile.png')+"' class='profim'/>" +
-				"<p class='profnum'>Profile " + profnum.toString(10) + "</p>" +
-				"<p class='minitext'>" + localStorage.getItem(profkey) + "</p>" +
+			profileList += "<div class='mid profilesbuttons' id='" + profkey + "' value='" + localStorage.getItem(profkey) + "'>" +
+				"<div class='contents profcontents'>" +
+					"<p class='profnum'>" + profnum.toString(10) + "</p>" +
+					"<p class='minitext'>" + localStorage.getItem(profkey) + "</p>" +
 				"</div></div>";
 		}
 		else{
 			// Empty block
-			profileList += "<div class='mid' id='profileempty'><div class='contents'><p>No Profile " + profnum.toString(10) + "</p></div></div>";
+			profileList += "<div class='mid' id='profileempty'><div class='contents profcontents'><p class='profnum'>" + profnum.toString(10) + "</p></div></div>";
 		}
 	}
 
@@ -522,25 +522,25 @@ function darkthemeCheck() {
 }
 
 /** Advanced functions **/
-/* Show advanced buttons*/
-function showAdvancedFeatures() {
-	if(document.getElementById("advtable").classList.contains('hiddenadv')){
-		// Extend!
-		document.getElementById("advtable").classList.remove('hiddenadv');
-		document.querySelector("table").classList.add('extended');
-		document.documentElement.classList.add('extended');
-		document.body.classList.add('extended');
-		document.getElementById("menubutton").classList.add('flipped');
-	}
-	else{
-		// Shrink!
-		document.getElementById("advtable").classList.add('hiddenadv');
-		document.querySelector("table").classList.remove('extended');
-		document.documentElement.classList.remove('extended');
-		document.body.classList.remove('extended');
-		document.getElementById("menubutton").classList.remove('flipped');
-	}
-}
+// /* Show advanced buttons*/
+// function showAdvancedFeatures() {
+// 	if(document.getElementById("advtable").classList.contains('hiddenadv')){
+// 		// Extend!
+// 		document.getElementById("advtable").classList.remove('hiddenadv');
+// 		document.querySelector("table").classList.add('extended');
+// 		document.documentElement.classList.add('extended');
+// 		document.body.classList.add('extended');
+// 		document.getElementById("menubutton").classList.add('flipped');
+// 	}
+// 	else{
+// 		// Shrink!
+// 		document.getElementById("advtable").classList.add('hiddenadv');
+// 		document.querySelector("table").classList.remove('extended');
+// 		document.documentElement.classList.remove('extended');
+// 		document.body.classList.remove('extended');
+// 		document.getElementById("menubutton").classList.remove('flipped');
+// 	}
+// }
 
 /* Optimize colors */
 /* Color-CSS translator */
@@ -675,8 +675,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	/// Advanced features
-	// Expand control panel
-	document.querySelector("#openadv").addEventListener('click',showAdvancedFeatures);
 	// Color optimization
 	document.querySelector("#optcol").addEventListener('click',optCol);
 	// Image removal

@@ -389,15 +389,15 @@ body.darktheme h1{
 /* Review popup */
 div#popup{
 	position:fixed;
-	height:300px;
-	width:500px;
-	left:52.5px;
-	top:85px;
+	height:200px;
+	width:290px;
+	left:50px;
+	top:75px;
 	background-color:#F0F0F0;
 	box-shadow:0px 0px 15px #808080;
 	z-index:999;
 	box-sizing:border-box;
-	padding:25px;
+	padding:20px;
 	visibility:hidden;
 	opacity:0;
 	-webkit-transition:all 0.5s linear;
@@ -405,22 +405,22 @@ div#popup{
 	color:#FFFFFF;
 }
 div#popup>p{
-	color:#685838;
+	color:#0F5D0B;
 	font-weight:bold;
-	font-size:20px;
+	font-size:15px;
 }
 div#popup.showpopup{
 	visibility:visible !important;
 	opacity:1 !important;
 }
 .revbutton{
-	font-size:18px;
+	font-size:15px;
 	height:20px;
-	width:200px;
-	padding:10px;
+	width:150px;
+	padding:5px;
 	/*margin:15px auto;*/
 	/*margin-top:-12.5px;*/
-	margin-left:-100px;
+	margin-left:-70px;
 	position:fixed;
 	left:50%;
 	box-shadow:0px 0px 10px #808080;
@@ -434,16 +434,16 @@ div#popup.showpopup{
 	box-shadow:0px 0px 15px #808080;
 }
 #revSure{
-	top:190px;
-	background-color:#5ABF5A;
+	top:150px;
+	background-color:#006BCF;
 }
 #revLater{
-	top:250px;
-	background-color:#5CBFE4;
+	top:185px;
+	background-color:#888C1E;
 }
 #revNever{
-	top:310px;
-	background-color:#DC6592;
+	top:220px;
+	background-color:#6A5E4E;
 }
 #revbuttonwrapper,#popup p{
 	display:block;

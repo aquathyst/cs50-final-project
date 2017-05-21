@@ -5,7 +5,7 @@
   "short_name": "AlphaText",
   "description": "Customize and change the appearance of online articles to enhance text readability",
   "author": "P. Wang & H. Zhou",
-  "version": "3.5",
+  "version": "3.6",
 
   "incognito": "spanning",
   "permissions": [
